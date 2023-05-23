@@ -1,0 +1,45 @@
+$component: componentClass("profilecard");
+$cmp-tokens: ();
+
+.#{$component}{
+    &--size-m{
+        max-width:265px;
+    }
+    &--size-s{
+        max-width:158px;
+    }
+    &__media{
+        img{
+            width:100%;
+        }
+    }
+    &--type2{
+        .#{$component}{
+            &__media{
+                max-width:84px;
+                position:relative;
+                overflow:hidden;
+                width:84px;
+                height:128px;
+                @include comicClipPath1;
+                .#{$component-prefix}img{
+                    height:100%;
+                    width:100%;
+                    position:absolute;
+                    top:0;
+                    right:0;
+                    left:0;
+                    img{
+                        object-fit:cover;
+                        object-position:top;
+                        height:100%;
+                        width:100%;
+                    }
+                }
+            }
+            &__meta{
+                width:max-content;
+            }
+        }
+    }
+}

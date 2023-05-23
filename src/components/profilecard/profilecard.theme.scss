@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+$component: componentClass("profilecard");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &--theme-alt2{
+        .#{$component}__meta-title{
+            color:tokenColor("set1","color1");
+        }
+    }
+}

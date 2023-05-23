@@ -40,6 +40,7 @@
 {% import 'components/treenav/treenav.njk' as TreeNav %}
 {% import 'components/stepindex/stepindex.njk' as StepIndex %}
 {% import 'components/imgstrip1/imgstrip1.njk' as ImgStrip1 %}
+{% import 'components/profilecard/profilecard.njk' as profileCard %}
 
 
 {% block head_css %}
@@ -142,6 +143,35 @@
                         {% include 'layouts/partials/richtext2.njk' %}
                     {% endset %}
                     {{ RichTextBlock1.content({"content" : richTextSample }) }}
+                {% endset %}
+                {% set roster %}
+                  {% set profileCardRoster %}
+                      {{profileCard.content( {"variations" : ["size-m"] } )}}
+                  {% endset %}
+                  {{
+                    GridList1.content(
+                      {
+                        "cols" : "col-6 col-md-3",
+                        "elements" : [
+                          {
+                            "content" : profileCardRoster
+                          },
+                          {
+                            "content" : profileCardRoster
+                          },
+                          {
+                            "content" : profileCardRoster
+                          },
+                          {
+                            "content" : profileCardRoster
+                          },
+                          {
+                            "content" : profileCardRoster
+                          }
+                        ]
+                      }
+                    )
+                  }}
                 {% endset %}
             {# End of content #}
 
@@ -284,6 +314,7 @@
                     { "content" : titleBannerContent },
                     { "content" : stepIndexContent },
                     { "content" : stepIndexContent2 },
+                    { "content" : roster },
                     { "content" : richTextBlock },
                     { "content" : imgStrip },
                     { "content" : imgStrip }

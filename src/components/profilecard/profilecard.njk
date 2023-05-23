@@ -1,0 +1,81 @@
+{% import 'components/img/img.njk' as img %}
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-profilecard' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations": [],
+        "metaTitleTag": "h6",
+        "metaSubTitleTag" : "p",
+        "alternative" : false,
+        "title" : "Sample title",
+        "eyeletTag" : "h3",
+        "subtitle" : "Subtitle • Qualification",
+        "img" : {
+            "mainSrc" : component_profilecard.imgPlaceholder
+        },
+        "layout" : "layout1",
+        "flipped" : false,
+        "hideMetaMobile" : false
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+    {% set metaTitleTag = obj.metaTitleTag or configDefault.metaTitleTag %}
+    {% set metaSubTitleTag = obj.metaSubTitleTag or configDefault.metaSubTitleTag %}
+    {% set title = obj.title or configDefault.title %}
+    {% set subtitle = obj.subtitle or configDefault.subtitle %}
+    {% set innerClasses = "d-flex flex-column justify-space-between" %}
+
+    {% if obj.alternative !== false %}
+        {% set innerClasses = "d-flex flex-row-reverse flex-nowrap" %}
+    {% endif %}
+
+    {% if obj.flipped == true %}
+        {% set innerClasses = "d-flex flex-row align-items-top gap-5" %}
+    {% endif %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    <div class="{{_className | join(" ")}}">
+        {% if obj.layout == "layout1" %}
+            <div class="{{componentClassName}}__inner {{innerClasses}}">
+                <div class="{{componentClassName}}__media">
+                    {% set imgParams = obj.img %}
+                    {% set imgParams = imgParams | setAttribute( "variations" , ["ratio-1"] ) %}
+                    {{
+                        img.content(imgParams)
+                    }}
+                </div>
+                <div class="{{componentClassName}}__meta {% if obj.alternative %}pt-0 pe-5{% elseif obj.flipped == false %}pt-4{%endif%}">
+                    {% if obj.eyelet %}
+                        <{{obj.eyeletTag}} class="{{componentClassName}}__meta-eyelet c-typo-style1-size-text-xs">{{obj.eyelet}}</{{obj.eyeletTag}}>
+                    {% endif %}
+                    <{{metaTitleTag}} class="{{componentClassName}}__meta-title c-typo-style1-size-text-m fw-bold">{{title}}</{{metaTitleTag}}>
+                    <{{metaSubTitleTag}} class="{{componentClassName}}__meta-subtitle c-typo-style1-size-text-m">{{subtitle}}</{{metaSubTitleTag}}>
+                </div>
+            </div>
+        {% elif obj.layout == "layout2" %}
+            <div class="{{componentClassName}}__inner d-flex flex-column text-center">
+                <div class="{{componentClassName}}__media mx-auto">
+                    {% set imgParams = obj.img %}
+                    {% set imgParams = imgParams | setAttribute( "variations" , ["ratio-1"] ) %}
+                    {{
+                        img.content(imgParams)
+                    }}
+                </div>
+                <div class="{{componentClassName}}__meta pt-4 {% if obj.hideMetaMobile == true %}d-none d-sm-block{% endif %}">
+                    <{{metaTitleTag}} class="{{componentClassName}}__meta-title c-typo-style1-size-text-m fw-bold">{{title}}</{{metaTitleTag}}>
+                    <{{metaSubTitleTag}} class="{{componentClassName}}__meta-subtitle c-typo-style1-size-text-s">{{subtitle}}</{{metaSubTitleTag}}>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+{% endmacro %}

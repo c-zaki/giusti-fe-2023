@@ -1,0 +1,50 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Profile card",
+  "isHome": false
+} %}
+
+{# Imports components #}
+{% import 'components/profilecard/profilecard.njk' as profileCard %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    <h3>Profile card medium</h3>
+    <br/>
+    {{profileCard.content( {"variations" : ["size-m"] } )}}
+    <br/><br/>
+    <h3>Profile card lazyloaded</h3>
+    <br/>
+    {{profileCard.content( {"lazyLoad" : true, "variations" : ["size-m"] } )}}
+    <br/><br/>
+    <h3>Profile card small</h3>
+    <br/>
+    {{profileCard.content( {"variations" : ["size-s"] } )}}
+    <br/><br/>
+    <h3>Profile card alternative</h3>
+    <br/><br/>
+    {{profileCard.content( {"variations" : ["type2"], "className" : ["d-inline-block"], "alternative" : true } ) }}
+    <br/><br/>
+    <h3>Flipped</h3>
+    <br/><br/>
+    {{profileCard.content( {"variations" : ["type2"], "className" : ["d-inline-block"], "flipped" : true } ) }}
+    <br/><br/>
+    <h3>Alternative 2</h3>
+    <br/><br/>
+    {{profileCard.content( { "layout": "layout2", "variations" : ["type2", "theme-alt2"], "className" : ["d-inline-block"], "alternative" : true } ) }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

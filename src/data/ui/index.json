@@ -38,6 +38,7 @@
         {"name" : "Off Canvas", "slug" : "offcanvasnav" },
         {"name" : "Pagination", "slug" : "pagination" },
         {"name" : "Profile Deets", "slug" : "profiledeets" },
+        {"name" : "Profile card", "slug" : "profilecard"},
         {"name" : "Picture card", "slug" : "picturecard1"},
         {"name" : "Pic stripe 1", "slug" : "picstripe1"},
         {"name" : "Quote box", "slug" : "quotebox"},
