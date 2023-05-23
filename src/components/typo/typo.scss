@@ -1,0 +1,315 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+
+$component: componentClass("typo");
+
+////////////////////////////////////////////////////
+// Generic font-size CSS utilities
+////////////////////////////////////////////////////
+
+@include c-typo-text-rules();
+@include c-typo-text-rules-responsive();
+
+
+////////////////////////////////////////////////////
+// Typography: Style1
+////////////////////////////////////////////////////
+
+  $style-name: "style1";
+
+
+  @each $typoStyle in map-get($zaux-styles-typography, $style-name) {
+    .#{$component}-#{$style-name}-size-#{map-get($typoStyle, "name")}{
+      @include c-typo-style(map-get($typoStyle, "name"), map-get($zaux-styles-typography, $style-name), "layout");
+    }
+    .#{$component}-#{$style-name}-#{map-get($typoStyle, "name")}{
+      @include c-typo-style(map-get($typoStyle, "name"), map-get($zaux-styles-typography, $style-name), "layout");
+    }
+  }
+
+  @each $typoStyle in map-get($zaux-styles-typography, $style-name) {
+    @each $k in tokenTypoBreakpoints() {
+      @include media-breakpoint-up($k){
+        .#{$component}-#{$style-name}-#{$k}-#{map-get($typoStyle, "name")}{
+          @include c-typo-style(map-get($typoStyle, "name"), map-get($zaux-styles-typography, $style-name));
+        }
+        .#{$component}-#{$style-name}-size-#{$k}-#{map-get($typoStyle, "name")}{
+          @include c-typo-style(map-get($typoStyle, "name"), map-get($zaux-styles-typography, $style-name), "layout");
+        }
+      }
+    }
+  }
+
+
+  [class*="#{$component}-"] {
+    @at-root .#{$zaux-system-classname-loaded} & {
+      transition: font-size $zaux-transition-1, line-height $zaux-transition-1;
+    }
+  }
+
+  [class*=#{$component}-block-#{$style-name}]:not([class*=--typo-alt]){
+
+    @include c-typo-style("text-m", map-get($zaux-styles-typography, $style-name), 'layout', false);
+
+    h1,h2{ 
+      @include c-typo-style("title-l", map-get($zaux-styles-typography, $style-name)); 
+      font-weight:$zaux-typo-fw-bold;
+    }
+    h3,h4,h5{ 
+      @include c-typo-style("text-l", map-get($zaux-styles-typography, $style-name));
+      font-weight:$zaux-typo-fw-regular;
+    }
+    h6{
+      @include c-typo-style("heading-s", map-get($zaux-styles-typography, $style-name));
+      font-weight:$zaux-typo-fw-regular;
+    }
+
+    h1,h2,h3,h4,h5,h6{
+      padding-top:tokenSpacer(6);
+      padding-bottom:tokenSpacer(5);
+      border-top-width:1px;
+    }
+
+    hr{
+      border:none;
+      border-top-width:1px;
+      margin-bottom: tokenSpacer(4);
+    }
+
+    blockquote{
+      padding:tokenSpacer(5);
+    }
+
+    p,
+    li {
+      @include c-typo-style("text-m", map-get($zaux-styles-typography, $style-name), "layout", false);
+
+      @media (max-width: #{tokenBreakpoint(_high-xs)}) {
+        word-break: break-word;
+      }
+    }
+
+    strong {
+      font-weight: $zaux-typo-fw-bold;
+    }
+
+    ul,
+    ol {
+      padding-left: tokenSpacer(4);
+      margin-bottom:tokenSpacer(6);
+    }
+
+    ul:last-child{
+      margin-bottom:0;
+    }
+
+    p:not(:last-child){
+      margin-bottom:tokenSpacer(7);
+    }
+
+    li:not(:last-child),
+    ul:not(:last-child),
+    ol:not(:last-child) {
+      margin-bottom: tokenSpacer(5);
+    }
+    
+    ul:not(:last-child),
+    ol:not(:last-child) {
+      margin-bottom:tokenSpacer(5);
+    }
+
+    ul ul,
+    ol ol {
+      padding-top: tokenSpacer(3);
+    }
+
+    ul li {
+      list-style-type: none;
+      &:before {
+        content: "•";
+        float: left;
+        line-height: 1.5em;
+        font-size: 1em;
+        margin-left: -1em;
+      }
+    }
+
+    @mixin typo-small{
+      h1,h2{
+        margin-bottom: tokenSpacer(4); 
+        @include c-typo-style("title-s", map-get($zaux-styles-typography, $style-name)); 
+      }
+      h3,h4,h5{ 
+        @include c-typo-style("text-m", map-get($zaux-styles-typography, $style-name));
+        margin-bottom: tokenSpacer(4);
+      }
+
+      h6{
+        @include c-typo-style("heading-s", map-get($zaux-styles-typography, $style-name));
+        margin-bottom:tokenSpacer(5);
+      }
+
+      blockquote{
+        padding:tokenSpacer(3);
+        @include c-typo-style("text-m", map-get($zaux-styles-typography, $style-name));
+      }
+
+      p,
+      li {
+        @include c-typo-style("text-m", map-get($zaux-styles-typography, $style-name), "layout", false);
+
+        @media (max-width: #{tokenBreakpoint(_high-xs)}) {
+          word-break: break-word;
+        }
+      }
+
+      strong {
+        font-weight: $zaux-typo-fw-bold;
+      }
+
+      p + ul{
+        margin-top:-#{tokenSpacer(2)};
+      }
+
+      ul,
+      ol {
+        padding-left: tokenSpacer(2);
+        margin-bottom:tokenSpacer(6);
+      }
+
+      ul:last-child{
+        margin-bottom:0;
+      }
+
+      p:not(:last-child){
+        margin-bottom:tokenSpacer(4);
+      }
+
+      li:not(:last-child),
+      ul:not(:last-child),
+      ol:not(:last-child) {
+        margin-bottom: tokenSpacer(0);
+      }
+      
+      ul:not(:last-child),
+      ol:not(:last-child) {
+        margin-bottom:tokenSpacer(2);
+      }
+
+      ul ul,
+      ol ol {
+        padding-top: tokenSpacer(2);
+      }
+
+      ul li {
+        list-style-type: none;
+        &:before {
+          content: "•";
+          float: left;
+          line-height: 1;
+          font-size: 1em;
+          margin-top: 0.2em;
+          margin-right: 0.5em;
+        }
+      }
+    }
+
+    &[class*=#{$style-name}--small]{
+      @include typo-small;
+    }
+
+    @include media-breakpoint-down("md"){
+      @include typo-small;
+    }
+
+  }
+
+  [class*=#{$component}-block-#{$style-name}--typo-alt1]{
+
+    @include c-typo-style("text-m", map-get($zaux-styles-typography, $style-name), 'layout', false);
+
+    h1,h2{ 
+      @include c-typo-style("title-l", map-get($zaux-styles-typography, $style-name)); 
+      font-weight:$zaux-typo-fw-bold;
+    }
+    h3,h4{ 
+      @include c-typo-style("title-m", map-get($zaux-styles-typography, $style-name));
+      font-weight:$zaux-typo-fw-regular;
+      padding:tokenSpacer(6) 0;
+    }
+    h5, h6{
+      @include c-typo-style("eyelet-m", map-get($zaux-styles-typography, $style-name));
+      padding:tokenSpacer(4) 0;
+      font-weight:$zaux-typo-fw-regular;
+      padding-bottom:0;
+    }
+
+    h1,h2,h3,h4,h5,h6{
+    }
+
+    hr{
+      border:none;
+      border-top-width:1px;
+      margin-bottom: tokenSpacer(4);
+    }
+
+    blockquote{
+      padding:tokenSpacer(5);
+    }
+
+    p,
+    li {
+      @include c-typo-style("text-m", map-get($zaux-styles-typography, $style-name), "layout", false);
+
+      @media (max-width: #{tokenBreakpoint(_high-xs)}) {
+        word-break: break-word;
+      }
+    }
+
+    strong {
+      font-weight: $zaux-typo-fw-bold;
+    }
+
+    ul,
+    ol {
+      padding-left: tokenSpacer(4);
+      margin-bottom:tokenSpacer(6);
+    }
+
+    ul:last-child{
+      margin-bottom:0;
+    }
+
+    p:not(:last-child){
+      margin-bottom:tokenSpacer(7);
+    }
+
+    li:not(:last-child),
+    ul:not(:last-child),
+    ol:not(:last-child) {
+      margin-bottom: tokenSpacer(5);
+    }
+    
+    ul:not(:last-child),
+    ol:not(:last-child) {
+      margin-bottom:tokenSpacer(5);
+    }
+
+    ul ul,
+    ol ol {
+      padding-top: tokenSpacer(3);
+    }
+
+    ul li {
+      list-style-type: none;
+      &:before {
+        content: "•";
+        float: left;
+        line-height: 1.5em;
+        font-size: 1em;
+        margin-left: -1em;
+      }
+    }
+
+  }

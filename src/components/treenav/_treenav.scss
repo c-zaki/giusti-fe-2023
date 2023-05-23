@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+$component: componentClass("treenav");
+$cmp-tokens: ();
+
+.#{$component}{
+    --head-maxh : 120px;
+
+    ul{
+        li{
+            padding: tokenSpacer(3) 0;
+            border-width:1px;
+        }
+    }
+
+    &__list{
+
+        border-bottom-width:1px;
+
+        &--sub1{
+            padding:tokenSpacer(2) 0;
+            padding-bottom:0;
+            border-bottom:none;
+            li{
+                &:last-child{
+                    padding-bottom:0;
+                    border-bottom:none;
+                }
+                > ul{
+                    li:last-child{
+                        padding-bottom:0;
+                        border-bottom:none;
+                    }
+                }
+            }
+        }
+        &--sub2{
+            padding:tokenSpacer(2) 0;
+            padding-bottom:0;
+            border-bottom:none;
+            li{
+                &:last-child{
+                    padding-bottom:0;
+                    border-bottom:none;
+                }
+                > ul{
+                    li:last-child{
+                        padding-bottom:0;
+                        border-bottom:none;
+                    }
+                }
+            }
+        }
+    }
+    &__head{
+        max-height:var(--head-maxh);
+    }
+    &__body{
+        position:relative;
+        .#{$component}__deco{
+            position:absolute;
+            left:0;
+            line-height:0;
+            width:100%;
+            height:tokenSpacer(3);
+            bottom:-#{tokenSpacer(3)};
+        }
+    }
+    &--pullup{
+        position:relative;
+        z-index:tokenZindex(3);
+        margin-top:calc( var(--head-maxh) * -1 );
+    }
+}

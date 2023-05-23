@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+$component: componentClass("navbar2");
+$cmp-tokens: ();
+
+.#{$component} {
+    &__slider{
+        border-bottom-width:1px;
+    }
+    .#{$component}__tab-selector{
+        white-space: nowrap;
+        position:relative;
+        &:after{
+            height:tokenSpacer(1);
+            width:100%;
+            content:"";
+            position:absolute;
+            left:0;
+            bottom:-0.5px;
+        }
+    }
+}

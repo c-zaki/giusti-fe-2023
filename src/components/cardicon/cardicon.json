@@ -1,0 +1,9 @@
+ {
+    "iconName" : "comic",
+    "title" : "Prenota la tua demo",
+    "subTitle" : "Scopri di più Niké. Compila il form per prenotare senza impegno una dimostrazione online.",
+    "cta" : {
+      "link" : "#cardicon-url",
+      "label" : "Scopri di più"
+    }
+ }

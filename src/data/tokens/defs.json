@@ -1,0 +1,16 @@
+{
+  "app-prefix": "zaux",
+  "app-loaded-classname": "zaux-loaded",
+  "component-prefix": "c-",
+  "css-var-prefix": "zx",
+  "compatibility-layer": false,
+  "custom-mq": {
+    "_info": "\"https://css-tricks.com/snippets/css/media-queries-for-standard-devices/\"",
+    "tablet-landscape": "\"screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2)\"",
+    "tablet-xl": "\"screen and (min-device-width: 834px) and (max-device-width: 1112px) and (-webkit-min-device-pixel-ratio: 2)\""
+  },
+  "mainFont" : "Helvetica Neue LT Std",
+  "mainFontFamily": "\"Helvetica Neue LT Std, sans-serif\"",
+  "mainFontSlug" : "helvetica",
+  "activeIconSet" : "icozaux1"
+}

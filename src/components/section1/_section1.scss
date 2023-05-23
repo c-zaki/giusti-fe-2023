@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+$component: componentClass("section1");
+$cmp-tokens: ();
+
+.#{$component} {
+    &__bg{
+        position:absolute;
+        height:100%;
+        top:0;
+        left:0;
+        width:100%;
+        transform:rotate(-2deg);
+        left:-5%;
+        z-index:tokenZindex(2);
+        @include media-breakpoint-down("md"){
+            width:140%;
+            left:-20%;
+        }
+    }
+    &__deco{
+        z-index: tokenZindex(1);
+        position:absolute;
+        bottom:0;
+        height:50%;
+        width:100%;
+        left:0;
+        right:0;
+        svg{
+            position:absolute;
+            left:0;
+            right:0;
+            width:100%;
+            top:-#{tokenSpacer(6)};
+        }
+    }
+    &__head,&__body,&__foot{
+        position:relative;
+        z-index:tokenZindex(3);
+    }
+}

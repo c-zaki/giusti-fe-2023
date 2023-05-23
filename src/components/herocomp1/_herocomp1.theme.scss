@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+$component: componentClass("herocomp1");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    background-color:tokenColor("set1","color3");
+    color:tokenColor("set1","white1");
+}

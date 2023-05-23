@@ -1,0 +1,46 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Pagination",
+  "isHome": false
+} %}
+
+{# Imports components #}
+{% import 'components/Pagination/Pagination.njk' as Pagination %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    <h3>Pagination based on WP Pagenavi HTML</h3>
+    <br/><br/>
+    {% set PaginationWPNavi %}
+      <div class="wp-pagenavi" role="navigation">
+          <a class="previouspostslink" rel="prev" aria-label="Previous Page" href="#previousPage">
+          </a>
+          <span aria-current="page" class="current">1</span>
+          <a class="page larger" title="Page 2" href="#page2">2</a>
+          <a class="page larger" title="Page Dots" href="#pagedots">...</a>
+          <a class="page larger" title="Page 3" href="#page3">4</a>
+          <a class="nextpostslink" rel="next" aria-label="Next Page" href="#nextPage">
+          </a>
+      </div>
+    {% endset %}
+    {{Pagination.content({"className" : ["py-4", "text-center"], "content" : PaginationWPNavi })}}
+    <br/><br/>
+    <h3>Theme variation 1</h3>
+    <br/><br/>
+    {{Pagination.content({"variations" : ["theme2"], "className" : ["py-4", "text-center"], "content" : PaginationWPNavi })}}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

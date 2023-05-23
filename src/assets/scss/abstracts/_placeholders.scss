@@ -1,0 +1,21 @@
+@charset "UTF-8";
+// Hardware-accelerated
+// @see http://blog.teamtreehouse.com/increase-your-sites-performance-with-hardware-accelerated-css
+// @see http://www.html5rocks.com/en/tutorials/speed/high-performance-animations/
+%zaux_force_ha {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}
+
+// Placeholder of class .sr-only from Bootstrap
+%zaux_sr_only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

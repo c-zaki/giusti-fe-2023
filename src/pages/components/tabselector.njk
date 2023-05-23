@@ -1,0 +1,46 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Tab Selector"
+} %}
+
+{# Imports components #}
+{% import 'components/tabselector/tabselector.njk' as TabSelector %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+    <div class="zaux-theme--light1">
+        {{TabSelector.content(
+          {
+            "tabs" : [
+              {
+                "id" : "funzionalita",
+                "active" : true,
+                "label" : "Funzionalità",
+                "content" : "HTML_FREE_HERE1"
+              },
+              {
+                "id" : "vantaggi",
+                "label" : "Vantaggi",
+                "content" : "HTML_FREE_HERE2"
+              },
+              {
+                "id" : "integraz",
+                "label" : "Integrazioni",
+                "content" : "HTML_FREE_HERE3"
+              }
+            ]
+          }
+        )}}
+    </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

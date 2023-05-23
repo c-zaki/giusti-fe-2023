@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+$component: componentClass("video");
+$cmp-tokens: ();
+
+.#{$component} {
+    video{
+        height:inherit;
+        width:100%;
+        object-fit:cover;
+        display:block;
+    }
+}

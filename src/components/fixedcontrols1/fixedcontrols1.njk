@@ -1,0 +1,53 @@
+
+{% import 'components/icon/icon.njk' as Icon %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-fixedcontrols1' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations": [],
+        "srOnlyTitle": "Fixed nav controls navigation",
+        "items" : component_fixedcontrols1.items
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    <div class="{{_className | join(" ")}} zi-5">
+        <div class="{{componentClassName}}__inner">
+            {% if obj.items %}
+                <nav itemscope itemtype="https://schema.org/SiteNavigationElement">
+                    <h4 class="visually-hidden">{{obj.srOnlyTitle}}</h4>
+                    <ul class="{{componentClassName}}__items d-flex flex-row flex-lg-column gap-lg-5">
+                        {% for item in obj.items %}
+                            <li data-zaux-href="{{item.url}}" class="{{componentClassName}}__item cursor-pointer d-flex align-items-center justify-content-center d-lg-block align-items-center flex-fill w-50 w-lg-auto {% if item.altTheme == true %}{{componentClassName}}__item--theme-2{% endif %} py-4 px-3 shadow-sm-1">
+                                <a class="d-flex align-items-center justify-content-center justify-lg-content-start gap-3 flex-row flex-lg-column align-items-center" href="{{item.url}}" title="{{item.label}}">
+                                    {{
+                                        Icon.content(
+                                            {
+                                                "variations" : ["size-3"],
+                                                "className" : [componentClassName + "__item-icon"],
+                                                "iconName" : item.icon
+                                            }
+                                        )
+                                    }}
+                                    <span class="{{componentClassName}}__item-label c-typo-style1-text-s fw-bold text-uppercase">{{item.label}}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
+    </div>
+
+{% endmacro %}

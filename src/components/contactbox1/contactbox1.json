@@ -1,0 +1,30 @@
+{
+    "items" : [
+        {
+            "icon" : "envelope",
+            "label" : "info@domain.com",
+            "url" : "mailto:info@domain.com"
+        },
+        {
+            "icon" : "phone",
+            "label" : "345123456789",
+            "url" : "tel:345123456789"
+        },
+        {
+            "icon" : "whatsapp",
+            "label" : "Commerciale",
+            "url" : "whatsapp:34512345679"
+        },
+        {
+            "icon" : "gear",
+            "label" : "Area tecnica",
+            "url" : "#area-tecnica"
+        },
+        {
+            "icon" : "headphones",
+            "label" : "Assistenza/Demo",
+            "url" : "#support-demo",
+            "hasBtn" : true
+        }
+    ]
+}

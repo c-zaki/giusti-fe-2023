@@ -1,0 +1,291 @@
+@charset "UTF-8";
+
+
+//@import "../../assets/scss/components/tokens/btn.style";
+
+$component: componentClass("btn2");
+$cmp-tokens: ();
+
+/*
+@if ($zaux-btn-style-tokens){
+    $cmp-tokens : $zaux-btn-style-tokens;
+}
+*/
+
+@mixin c-btn-size($px) {
+  text-align: center;
+
+  .#{$component} {
+    &__inner {
+      font-size: rem($px);
+      border: 1px solid transparent;
+      height: 1em;
+      border-radius: 0.5em;
+      display: block;
+    }
+  }
+}
+
+[class*="#{$component}--"] {
+  // Commented in favor of Bootstrap's `$line-height-base: 0;` (see src/assets/scss/abstracts/_variables.scss)
+  //font-size: 0;
+  //line-height: 0;
+
+  &,
+  &:link,
+  &:visited,
+  &:active,
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.#{$component} {
+
+  display:inline-block;
+  text-align:center;
+  transition: all $zaux-transition-1;
+  letter-spacing:tokenLetterSpacing(0);
+
+  .#{$component}__label{
+    font-size:cmpToken($cmp-tokens, 'fs-btnmedium', tokenTypoSizeFs(1), 'layout');
+    font-weight:$zaux-typo-fw-regular;
+  }
+
+  .#{$component}__icon{
+    margin-top:tokenSpacer(1);
+    i{
+      transition: all $zaux-transition-1;
+      transform-origin:center;
+    }
+    line-height:0 !important;
+  }
+
+  &--flipped-icon, &.--flipped-icon{
+    .#{$component}__icon{
+      i{
+        transform:rotate(180deg);
+      }
+    }
+  }
+
+  &--flippable-icon{
+    &.active, &.--active, &:not(.collapsed){
+      .#{$component}__icon{
+        i{
+          transform:rotate(180deg);
+        }
+      }
+    }
+  }
+
+  &__inner{
+    display:flex;
+    flex-direction:column;
+  }
+
+  //Small
+  &--size-s{
+    .#{$component}__label{
+      font-size:cmpToken($cmp-tokens, 'fs-btnsm', tokenTypoSizeFs(1), 'layout');
+      line-height: cmpToken($cmp-tokens, 'lh-btnsm', tokenTypoSizeLh(1), 'layout');
+    }
+    .#{$component}__icon{
+      margin-top:tokenSpacer(1);
+      i{
+        font-size:tokenIconSize(2);
+      }
+    }
+  }
+
+  //Default and medium
+  &--size-m, &:not([class*=--size]){
+    .#{$component}__label{
+      font-size:cmpToken($cmp-tokens, 'fs-btnmedium', tokenTypoSizeFs(2), 'layout');
+      line-height: cmpToken($cmp-tokens, 'lh-btnmedium', tokenTypoSizeLh(1), 'layout');
+    }
+    .#{$component}__icon{
+      margin-top:tokenSpacer(1);
+      i{
+        font-size:tokenIconSize(2);
+      }
+    }
+  }
+
+  //Large
+  &--size-l{
+    .#{$component}__label{
+      font-size:cmpToken($cmp-tokens, 'fs-btnlarge', tokenTypoSizeFs(4), 'layout');
+      line-height: cmpToken($cmp-tokens, 'lh-btnlarge', tokenTypoSizeLh(2), 'layout');
+    }
+    .#{$component}__icon{
+      margin-top:tokenSpacer(1);
+      i{
+        font-size:tokenIconSize(4);
+      }
+    }
+  }
+
+  //XLarge
+  &--size-xl{
+    .#{$component}__label{
+      font-size:cmpToken($cmp-tokens, 'fs-btnlarge', tokenTypoSizeFs(4), 'layout');
+      line-height: cmpToken($cmp-tokens, 'lh-btnlarge', tokenTypoSizeLh(4), 'layout');
+    }
+    .#{$component}__icon{
+      margin-bottom: cmpToken($cmp-tokens, 'spacer-iconlg-mb', tokenSpacer(5), 'layout');
+      svg{
+        height:68px;
+        width:116px;
+      }
+    }
+  }
+
+  @mixin btn2-inline-styling{
+    .#{$component}{
+      &__inner{
+        flex-direction:row;
+        display:flex;
+        align-items:center;
+      }
+      &__icon, &__label{
+        display:inline-block;
+        vertical-align:top;
+        margin-bottom:0px !important;
+        padding-top:0px !important;
+      }      
+    }
+    &.#{$component}{
+      .#{$component}__label{
+        //padding-top:tokenSpacer(1) / 2;
+      }
+      &--size{
+        &-xl{
+          .#{$component}__icon{
+            margin-left:cmpToken($cmp-tokens, 'spacer-inlineiconlg-mr', tokenSpacer(3), 'layout' );
+          }
+        }
+        &-l{
+          .#{$component}__icon{
+            margin-left:cmpToken($cmp-tokens, 'spacer-inlineiconlg-mr', tokenSpacer(3), 'layout' );
+          }
+        }
+        &-m{
+          .#{$component}__icon{
+            margin-left:cmpToken($cmp-tokens, 'spacer-inlineiconlg-mr', tokenSpacer(2), 'layout' );
+          }
+        }
+        &-s{
+          .#{$component}__icon{
+            margin-left:cmpToken($cmp-tokens, 'spacer-inlineiconlg-mr', tokenSpacer(2), 'layout' );
+          }
+        }
+      }
+      &[class*=--inverted]{
+        &[class*=--icon-size-l]{
+          .#{$component}__icon{
+            margin-left:0;
+          }
+          .#{$component}__label{
+            padding-left:0;
+            padding-right: tokenSpacer(4);
+          }
+        }
+      }
+    }
+  }
+
+  &--inline{
+    @include btn2-inline-styling;
+  }
+
+  &--inverted{
+    .#{$component}__inner{
+      flex-direction:row-reverse;
+    }
+    &.#{$component}{
+      &:hover{
+        .#{$component}__label{
+          //transform:translateX(-#{tokenSpacer(1)});
+        }
+      }
+      &--size{
+        &-xl{
+          .#{$component}__icon{
+            margin-left:0;
+            margin-right:cmpToken($cmp-tokens, 'spacer-inlineiconlg-mr', tokenSpacer(3), 'layout' );
+          }
+          svg{ width:78px; }
+        }
+        &-l{
+          .#{$component}__icon{
+            margin-left:0;
+            margin-right:cmpToken($cmp-tokens, 'spacer-inlineiconlg-mr', tokenSpacer(3), 'layout' );
+          }
+        }
+        &-m{
+          .#{$component}__icon{
+            margin-left:0;
+            margin-right:cmpToken($cmp-tokens, 'spacer-inlineiconlg-mr', tokenSpacer(2), 'layout' );
+          }
+        }
+        &-s{
+          .#{$component}__icon{
+           margin-left:0;
+            margin-right:cmpToken($cmp-tokens, 'spacer-inlineiconlg-mr', tokenSpacer(2), 'layout' );
+          }
+        }
+      }
+    }
+  }
+
+  &--icon-size{
+    &-l{
+      .#{$component}__icon{
+        margin-right:cmpToken($cmp-tokens, 'spacer-iconsizel-ml', tokenSpacer(2), 'layout' );
+        svg{
+          height:96px;
+          width:58px;
+        }
+      }
+      .#{$component}__label{
+        padding-top: cmpToken($cmp-tokens, 'spacer-iconsizel-pt', tokenSpacer(2), 'layout' );
+      }
+    }
+  }
+
+  &--nolabel{
+    .#{$component}__icon{
+      margin:0 !important;
+    }
+  }
+
+  //Responsive
+  &--res1{
+    @include media-breakpoint-down(md){
+      @include btn2-inline-styling;
+      &.#{$component}--icon-size{
+        &-l{
+          .#{$component}__label{
+            padding-top: cmpToken($cmp-tokens, 'spacer-iconsizel-pt', tokenSpacer(6), 'layout' );
+          }
+        }
+      }
+    }
+  }
+
+  &--res2{
+    @include media-breakpoint-down(md){
+      &[class*=--has-icon]{
+        .#{$component}__icon{
+          margin:0;
+        }
+        .#{$component}__label{
+          @include visually-hidden();
+        }
+      }
+    }
+  }
+
+}

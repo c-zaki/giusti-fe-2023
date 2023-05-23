@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+$component: componentClass("gallerystrip");
+$cmp-tokens: ();
+
+.#{$component}{
+    &__slider{
+        position:relative;
+        .#{$component}__slider-arrow{
+            &--prev,&--next{
+                position:absolute;
+                transform:translate(0,-50%);
+                top:50%;
+            }
+            &--prev{
+                left:-#{tokenSpacer(6)};
+                @include media-breakpoint-down("md"){
+                    left:auto;
+                    right:tokenSpacer(9);
+                }
+            }
+            &--next{
+                right:-#{tokenSpacer(6)};
+                @include media-breakpoint-down("md"){
+                    left:auto;
+                    right:tokenSpacer(5);
+                }
+            }
+            @include media-breakpoint-down("md"){
+                transform:none;
+                top:auto;
+                bottom:-#{tokenSpacer(8)};
+            }
+        }
+    }
+}

@@ -1,0 +1,57 @@
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/icon/icon.njk' as Icon %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-searchbar' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : [],
+        "searchOverlayId" : "search-overlay",
+        "searchPH" : "Search",
+        "compact" : false
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+    {% set label = obj.label or configDefault.label %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {# Containts classes for the content sections #}
+    {% set contentClasses = {
+        "side1" : "pt-10",
+        "side2" : "pt-10"
+    } %}
+
+    <div {% if obj.customAttr %}{{obj.customAttr}}{% endif %} class="{{_className | join(" ") | trim}}">
+        <button data-bs-toggle="modal" data-bs-target="#{{obj.searchOverlayId}}" class="w-100">
+            <div class="{{componentClassName}}__inner {% if obj.compact == false %}px-4 py-6{% else %}p-4{% endif %}">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex gap-2 zaux-color-set1-color6">
+                        {{
+                            Icon.content({"iconName" : "search", "variations" : ["size-2"]})
+                        }}
+                        <span class="fs-2">
+                            {{obj.searchPH | safe}}
+                        </span>
+                    </div>
+                    <div class="pointer-events-none">
+                        {{
+                            Button.content({"hasIcon" : true, "icon" : "more", "hideLabel" : true,"variations" : ["size-s", "alt1"]})
+                        }}
+                    </div>
+                </div>
+            </div>
+        </button>
+    </div>
+
+{% endmacro %}

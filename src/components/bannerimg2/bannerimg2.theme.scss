@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+$component: componentClass("bannerimg2");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component} {
+    background-color:tokenColor("set1","color3");
+}

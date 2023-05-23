@@ -1,0 +1,45 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Typography"
+} %}
+
+{# Imports components #}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {% for style in zaux_config.styles.typography.style1 %}
+      <h5 class="c-typo-style1-{{style.name}}">{{style.name}}</h5>
+      <br/>
+    {% endfor %}
+    <br/><br/><br/>
+    <hr style="border-bottom:1px solid black;"/>
+    <br/><br/><br/>
+    <h3>Rich text</h3>
+    <br/>
+    <div class="c-typo-block-style1">
+      {% include "layouts/partials/richtext.njk" %}
+    </div>
+    <br/><br/><br/>
+    <hr style="border-bottom:1px solid black;"/>
+    <br/><br/><br/>
+    <h3>Rich text small</h3>
+    <br/><br/>
+    <div class="c-typo-block-style1 c-typo-block-style1--small">
+      {% include "layouts/partials/richtext.njk" %}
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

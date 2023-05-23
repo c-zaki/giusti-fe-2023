@@ -1,0 +1,30 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Banner Img 2",
+  "noSidePad" : true
+} %}
+
+{# Imports components #}
+{% import 'components/bannerimg2/bannerimg2.njk' as BannerImg2 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="zaux-theme--light1">
+        <div class="pb-5">
+          {{ BannerImg2.content() }}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

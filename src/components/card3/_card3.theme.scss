@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+$component: componentClass("card3");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    background-color:tokenColor("set1","white1");
+    color:tokenColor("set1","black1");
+    &__date{
+        color:tokenColor("set1","color1");
+    }
+    &__media{
+        background-color:tokenColor("set1","color2");
+    }
+    &__tag{
+        background-color:tokenColor("set1","color1");
+        color:tokenColor("set1","white1");
+    }
+    &--theme-2{
+        background-color:tokenColor("set1","color2");
+    }
+}

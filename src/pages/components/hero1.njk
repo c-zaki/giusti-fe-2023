@@ -1,0 +1,60 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Hero 1",
+  "fullPage" : true,
+  "noSidePad" : true
+} %}
+
+{# Imports components #}
+{% import 'components/hero1/hero1.njk' as Hero1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {{
+      Hero1.content(
+        {
+            "img" : component_hero1.img,
+            "title" : "Hero 1",
+            "abstract" : "optional abstract here",
+            "cta" : {
+                "title" : "Cta title here",
+                "url" : "#url-sample"
+            }
+        }
+      )
+    }}
+    <br/><br/>
+    {{
+      Hero1.content(
+        {
+            "video" : component_hero1.video,
+            "badgeLabel" : "Badge label here",
+            "preTitle" : "Pre title text here",
+            "title" : "Hero 1 with video",
+            "cta" : {
+                "title" : "Cta title here",
+                "url" : "#url-sample"
+            },
+            "mediaType" : "video",
+            "video" : {
+                "srcList" : component_hero1.video.srcList,
+                "options" : { "autoplay" : true, "loop" : true }
+            }
+        }
+      )
+    }}
+  </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

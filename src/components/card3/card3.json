@@ -1,0 +1,15 @@
+{
+    "authInfo" : {
+        "name" : "John Doe",
+        "date" : "10/4/2023"
+    },
+    "media" : {
+        "mainSrc" : "https://placehold.co/400x220"
+    },
+    "title" : "Lorem ipsum dolor sit amet",
+    "subTitle" : "Progetto Ambiente è lieta di aver preso parte alla 5 edizione della Conferenza Nazionale sulla Formazione solidale…",
+    "mainTag" : {
+        "url" : "#main-tag-url",
+        "label" : "Tag label"
+    }
+}

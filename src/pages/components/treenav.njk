@@ -1,0 +1,131 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Tree nav"
+} %}
+
+{# Imports components #}
+{% import 'components/treenav/treenav.njk' as TreeNav %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+    <div class="zaux-theme--light1">
+        {{
+            TreeNav.content(
+                {
+                    "title" : "Tree nav title",
+                    "backBtn" : {
+                        "link" : "#back-link",
+                        "label" : "Scheda Principale"
+                    },
+                    "entries" : [
+                        {
+                            "mainLevel" : {
+                                "label" : "First level label",
+                                "link" : "#first-level-link"
+                            }
+                        },
+                        {
+                            "mainLevel" : {
+                                "label" : "First level label",
+                                "link" : "#first-level-link"
+                            }
+                        },
+                        {
+                            "mainLevel" : {
+                                "highlight" : true,
+                                "label" : "First level label",
+                                "link" : "#first-level-link"
+                            }
+                        },
+                        {
+                            "mainLevel" : {
+                                "label" : "First level label",
+                                "link" : "#first-level-link"
+                            },
+                            "subLevel" : [
+                                {
+                                    "mainLevel" : {
+                                        "highlight" : true,
+                                        "link" : "#test-highlight",
+                                        "label" : "Sublevel title linked highlighted"
+                                    }
+                                },
+                                {
+                                    "mainLevel" : {
+                                        "label" : "Second level label",
+                                        "link" : "#test"
+                                    }
+                                },
+                                {   
+                                    "mainLevel" : {
+                                        "label" : "Third level opening title no link",
+                                        "highlight" : true
+                                    },
+                                    "subLevel" : [
+                                        {
+                                            "mainLevel" : {
+                                                "label" : "Third level",
+                                                "link" : "#third-level-link"
+                                            },
+                                            "subLevel" : [
+                                                {
+                                                    "mainLevel" : {
+                                                        "label" : "Fourth level",
+                                                        "link" : "#fourth-level-link"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "mainLevel" : {
+                                                "label" : "Third level",
+                                                "link" : "#third-level-link"
+                                            },
+                                            "subLevel" : [
+                                                {
+                                                    "mainLevel" : {
+                                                        "label" : "Fourth level",
+                                                        "link" : "#fourth-level-link"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "mainLevel" : {
+                                "label" : "First level label",
+                                "link" : "#first-level-link"
+                            }
+                        },
+                        {
+                            "mainLevel" : {
+                                "label" : "First level label",
+                                "link" : "#first-level-link"
+                            }
+                        },
+                        {
+                            "mainLevel" : {
+                                "label" : "First level label",
+                                "link" : "#first-level-link"
+                            }
+                        }
+                    ]
+                }
+            )
+        }}
+    </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

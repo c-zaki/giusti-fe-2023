@@ -1,0 +1,38 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Badges"
+} %}
+
+{# Imports components #}
+{# import 'components/herovideo/herovideo.njk' as HeroVideo #}
+{% import 'components/badge/badge.njk' as Badge %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="zaux-theme--light1">
+      {{Badge.content()}}
+      <br/><br/>
+      {{Badge.content({ "variations" : ["size-m"], "label" : "Badge size medium" })}}
+      <br/><br/>
+      {{Badge.content({ "variations" : ["size-l"], "label" : "Badge size large" })}}
+      <br/><br/>
+      {{Badge.content({ "link" : {"title" : "testLinkTitle", "url" : "testlink"}, "label" : "Badge linkable" })}}
+      <div class="zaux-bg-set1-color7 p-5 my-5">
+        <h3 class="zaux-color-set1-white1">Theme variant: Outline 1</h3>
+        {{Badge.content({ "variations" : ["outline1", "size-m"], "label" : "Outline theme" })}}
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

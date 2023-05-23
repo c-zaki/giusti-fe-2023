@@ -1,0 +1,50 @@
+# Projects
+dist/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+$RECYCLE.BIN/
+
+# OS generated files
+Desktop.ini
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# IDE
+.idea/
+
+# Sass
+.sass-cache/
+*.css.map
+
+# JS
+*.js.map
+
+# Node.js
+node_modules
+_tmp
+package-lock.json
+.npm-cache
+.npm-cache/*
+
+# Deploy config
+*.deploy.json
+*.deploy.*.json
+*.deploy.*.json
+!demo.deploy.json

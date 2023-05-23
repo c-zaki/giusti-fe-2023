@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+
+$component: componentClass("header");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    
+    transition: all $zaux-transition-0;
+    &__row{
+        &--1{
+            background-color:tokenColor("set1","color1");
+            color:tokenColor("set1","white1");
+            .#{$component}__topmenu{
+                > li{
+                    border-right-style:solid;
+                    border-right-color:tokenColor("set1","white1");
+                    color:tokenColor("set1","white1");
+                }
+            }
+        }
+        &--2{
+            background-color:tokenColor("set1", "white1");
+            input{
+                background-color:transparent;
+                border:none;
+            }
+            [class*=-icon]{
+                color:tokenColor("set1","color6");
+                @media (max-width: tokenBreakpoint("md") ){
+                    color:tokenColor("set1","color1");
+                }
+            }
+        }
+    }
+
+    &__language-selector{
+        select{
+            background-color: transparent;
+            border-radius:0;
+            border:none;
+            background-size: 0.6rem;
+            //transition: all $zaux-transition-0;
+        }
+    }
+    &__hamburger{
+        .#{$component}__hamburger-line{
+            &--1,&--2,&--3{
+                transition:$zaux-transition-1;
+                background-color:tokenColor("set1","black1");
+            }
+        }
+        &:hover{
+            .#{$component}__hamburger-line{
+                background-color:tokenColor("set1","color1");
+            }
+        }
+    }
+
+    &__menu{
+        li{
+            transition:all $zaux-transition-1;
+            color:tokenColor("set1","black1");
+            .#{$component-prefix}icon{
+                color:tokenColor("set1","black1");
+            }
+            &:not([class*=--has-children]){
+                &:hover{
+                    color:tokenColor("set1","color1");
+                    .#{$component-prefix}icon{
+                        color:tokenColor("set1","color1");
+                    }
+                }
+            }
+        }
+        &-item{
+            &[class*=--active],&.active{
+                background-color:tokenColor("set1","black1");
+                color:tokenColor("set1","white1");
+                .#{$component-prefix}icon{
+                    color:tokenColor("set1","white1");
+                }
+                button{color:tokenColor("set1","white1");}
+            }
+        }
+    }
+
+    &__controls{
+        .#{$component-prefix}icon{
+            color:tokenColor("set1","black1");
+            &:hover{
+                color:tokenColor("set1","color1");
+            }
+        }
+        [class*=c-btn]{
+            transition:none !important;
+        }
+    }
+    
+    &--theme{
+        &-alt1{
+            .#{$component}{
+                &__row{
+                    &--1{
+                        background-color:tokenColor("set1","white1");
+                        color:tokenColor("set1","color7");
+                    }
+                }
+            }
+        }
+    }
+
+}   

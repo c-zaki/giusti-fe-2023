@@ -1,0 +1,102 @@
+{# Imports components #}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/img/img.njk' as Img %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-sliderstrip2' %}
+
+    {% set configDefault = {
+        "className": [""],
+        "variations" : ["nomaxh"],
+        "titleTag" : "h3",
+        "title" : "Slider strip title",
+        "slidesPerView" : 3,
+        "slidesPerViewMobile" : 1.5,
+        "slidesPerViewMd" : 2.5,
+        "initialSlideMd" : 0,
+        "contained" : false,
+        "overflow" : "visible",
+        "initialSlide" : 0,
+        "cta" : {},
+        "initialSlideMobile" : 0
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {% set sliderId = "sliderID" + range(1,1000) | random  %}
+    
+    <div class="{{_className | join(" ")}} overflow-hidden py-7">
+        <div class="{{componentClassName}}__inner px-4 px-md-8 pt-8 pt-md-13 pb-0 pb-md-12 {% if obj.contained == true %}container-l{% endif %} position-relative">
+            <div class="{{componentClassName}}__deco py-0 py-md-12 rounded-4 zaux-ratio--4"></div>
+            <div class="{{componentClassName}}__head pb-6 d-flex flex-column flex-md-row gap-4 justify-content-between align-items-start align-items-md-end">
+                <{{obj.titleTag}} class="c-typo-style1-size-display-2 ps-0 ps-md-4 ps-md-10 position-relative">{{obj.title}}</{{obj.titleTag}}>
+                <div class="d-flex gap-md-4 justify-content-between justify-content-md-start w-100 w-md-auto">
+                    <div class="d-flex gap-2 gap-md-4 order-2 order-md-1">
+                        <div data-slider-id="{{sliderId}}" class="{{componentClassName}}__slider-arrow {{componentClassName}}__slider-arrow--prev">
+                            {{ Button.content({ "type" : "button", "variations" : ["outline1", "size-s", "uneven"], "iconOnly" : true, "iconSize" : "2", "hasIcon" : true, "icon" : "arrow-left" }) }}
+                        </div>
+                        <div aria-label="Next slide" data-slider-id="{{sliderId}}" class="{{componentClassName}}__slider-arrow {{componentClassName}}__slider-arrow--next">
+                            {{ Button.content({ "type" : "button", "variations" : ["outline1", "size-s", "uneven"], "iconOnly" : true, "iconSize" : "2", "hasIcon" : true, "icon" : "arrow-right" }) }}
+                        </div>
+                    </div>
+                    <div class="order-1 order-md-2">
+                        {% set ctaParams = { "variations" : ["secondary", "size-s"], "iconSize" : "2", "hasIcon" : true, "icon" : "arrow-right", "label" : "Button with icon" } %}
+                        {% set ctaParams = ctaParams | overwriteMerge(obj.cta) %}
+                        {{ Button.content(ctaParams) }}
+                    </div>
+                </div>
+            </div>
+            <div class="{{componentClassName}}__slider">
+                <div data-slider-id={{sliderId}} data-js-component="Slider" class="c-slider swiper-container" 
+                    data-config='{
+                        "centeredSlides":false,
+                        "speed":600,
+                        "initialSlide" : {{obj.initialSlideMobile}},
+                        "spaceBetween": {{zaux_config.tokens.spaces['spacer-width-px'] * zaux_config.tokens.spaces.spaces[5].mul}},
+                        "slidesPerView": {{obj.slidesPerViewMobile}},
+                        "navigation": {
+                            "nextEl": ".{{componentClassName}}__slider-arrow--next[data-slider-id={{sliderId}}]",
+                            "prevEl": ".{{componentClassName}}__slider-arrow--prev[data-slider-id={{sliderId}}]"
+                        },
+                        "breakpoints" : {
+                            {{token_breakpoints["md"] | dump | replace("px", "") | safe}}: {
+                                "initialSlide" : {{obj.initialSlideMd}},
+                                "spaceBetween": {{zaux_config.tokens.spaces['spacer-width-px'] * zaux_config.tokens.spaces.spaces[6].mul}},
+                                "slidesPerView": {{obj.slidesPerViewMd}}
+                            },
+                            {{token_breakpoints["lg"] | dump | replace("px", "") | safe}}: {
+                                "initialSlide" : {{obj.initialSlide}},
+                                "spaceBetween": {{zaux_config.tokens.spaces['spacer-width-px'] * zaux_config.tokens.spaces.spaces[6].mul}},
+                                "slidesPerView": {{obj.slidesPerView}}
+                            }
+                        }
+                    }'>
+                    <div class="c-slider__wrapper overflow-{{obj.overflow}}">
+                        <div class="c-slider__instance swiper-container">
+                            <div class="swiper-wrapper">
+                                {% for element in obj.slides %}
+                                    <div class="{{componentClassName}}__slide swiper-slide">
+                                        {{ element.content | safe }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}

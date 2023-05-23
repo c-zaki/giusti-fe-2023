@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+$component: componentClass("gallerystrip");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &__slider-arrow{
+        i{
+            color:tokenColor("set1","color1");
+        }
+    }
+
+    &--light{
+        .#{$component}__slider-arrow{
+            i{
+                color:tokenColor("set1","white1");
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+$component: componentClass("bannerimg1");
+$cmp-tokens: ();
+
+.#{$component} {
+    max-height:400px;
+}   

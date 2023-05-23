@@ -1,0 +1,246 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/guidelines.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_guidelines,
+  "title": "Design Tokens",
+  "bodyClass" : "guideline-page"
+} %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+{% endblock %}
+
+{% block content %}
+    
+    <div class="guidelines p-5">
+        <div class="d-flex justify-content-between align-items-top">
+            <h1 class="display-3 mb-4"><span class="text-muted">/</span> Design Tokens</h1>
+            <h4 class="text-muted">{{app.name}}</h4>
+        </div>
+        <hr/>
+        <!-- Colors -->
+        <div class="guideline-block guideline-block--colors py-4">
+            <h2 class="guideline__title mb-5">Colors</h2>
+            {% for colorSetName, colorSet in zaux_config.tokens.colors %}
+                {% if colorSetName !== 'app' %}
+                    <h4 class="mb-4 text-muted">{{colorSetName}}</h4>
+                    <div class="guideline-block__color-swatches d-flex flex-wrap gap-4 mb-5">
+                        {% for name, color in colorSet %}
+                            <div data-copy-to-clipboard="{{color}}" class="guideline-block__color-swatch text-left d-flex justify-content-between flex-column">
+                                <div style="background-color:{{color}};" class="guideline-block__color-square">
+
+                                </div>
+                                <div class="py-2 px-2 text-muted text-sm">
+                                    <span class="d-block">{{name}}</span>
+                                    <span>{{color}}</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Typography -->
+        <div class="guideline-block guideline-block--typo py-4">
+            <h2 class="guideline__title mb-5">Typography</h2>
+            <!--<h4 class="mb-5">Base font size: {{zaux_config.tokens.typo['base-font-size']}}</h4>-->
+            {% for style in zaux_config.styles.typography.style1 %}
+            <h5 class="c-typo-style1-{{style.name}}">The quick brown fox jumps over the lazy dog</h5>
+            <p class="mb-5 text-muted" style="font-family:monospace;">{{style.name}} | font-size: {{style.fontSize}}; line-height: {{style.lineHeight}};</p>
+            {% endfor %}
+        </div>
+
+        <!-- Shadows -->
+        <div class="guideline-block guideline-block--colors py-4">
+            <h2 class="guideline__title mb-5">Shadows</h2>
+            <div class="d-flex flex-wrap gap-4">
+                {% for shadowName, shadow in zaux_config.tokens.shadows %}
+                    <div>
+                        <div class="mb-2" style="height:150px;width:150px;box-shadow:{{shadow.spread}} {{shadow.color}};"></div>
+                        <p class="text-muted">{{shadowName}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Spaces -->
+        <div class="guideline-block guideline-block--typo py-4">
+            <h2 class="guideline__title mb-3">Spaces</h2>
+            <h4 class="mb-5">Spacer base width: {{zaux_config.tokens.spaces['spacer-width-px']}}px</h4>
+            <div class="d-flex gap-4 flex-wrap">
+                {% for spaceName,space in zaux_config.tokens.spaces.spaces %}
+                    <div class="d-flex justify-content-end flex-column" style="width:4%">
+                        <div>
+                            <div style="width:100%;height:{{zaux_config.tokens.spaces['spacer-width-px'] * space.mul}}px;" class="bg-secondary">
+                                
+                            </div>
+                            <p class="text-muted pt-3">
+                                {{spaceName}} 
+                                <br/><br/>
+                                {{zaux_config.tokens.spaces['spacer-width-px'] * space.mul}}px
+                                <hr/>
+                                <small class="text-muted">{{zaux_config.tokens.spaces['spacer-width-px']}} x {{space.mul}}</small>
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Radius -->
+        <div class="guideline-block guideline-block--typo py-4">
+            <h2 class="guideline__title mb-5">Radius</h2>
+            <div class="d-flex gap-4 flex-wrap">
+                {% for radiusName, radius in zaux_config.tokens.radius %}
+                    <div>
+                        <div style="width:150px;height:150px;border-radius:{{radius}};" class="border border-secondary">
+                        </div>
+                        <p class="pt-2 text-muted">
+                            {{radiusName}}
+                            <hr/>
+                            <span class="text-muted">{{radius}}</span>
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Breakpoints -->
+        <div class="guideline-block guideline-block--typo py-4">
+            <h2 class="guideline__title mb-5">Breakpoints</h2>
+            <div class="d-flex flex-wrap gap-5 text-muted">
+                {% for breakPointName, breakpoint in zaux_config.tokens.breakpoints %}
+                    <div>
+                    <p>{{breakPointName}}</p>
+                     <hr/>
+                    <p>{{breakpoint}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Containers -->
+        <div class="guideline-block guideline-block--typo py-4">
+            <h2 class="guideline__title mb-5">Containers</h2>
+            {% for name, value in zaux_config.tokens.containers %}
+                <div style="width:100%;max-width:{{value}};border-width:1px;border-style:dashed !important;border-color:var(--guideline-color-4) !important;" class="py-4 text-center mb-4 d-flex flex-column justify-content-center align-items-center">
+                    <p style="font-family:monospace;" class="mb-0 text-muted">
+                        .container-{{name}}
+                        <br/>
+                        <span style="font-family:monospace;">{{value}}</span>
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Grid -->
+        <div class="guideline-block guideline-block--typo py-4 overflow-hidden">
+            <h2 class="guideline__title">Grid</h2>
+            <h4 class="mb-5">Grid gutter base: {{zaux_config.tokens.grid['base-gutter-width']}}px</h4>
+
+            {% for name, value in zaux_config.tokens.containers %}
+                <div style="width:100%;max-width:{{value}};" class="py-4 text-center mb-4 d-flex flex-column justify-content-center align-items-center">
+                    <div style="width:100%;opacity:0.15;" class="row overflow-hidden bg-secondary">
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4); border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4); border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4); border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-1"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="row gx-5 overflow-hidden">
+                {% for key, gutter in zaux_config.tokens.grid.gutters %}
+                <div class="my-5 col-12">
+                    <div style="--bs-gutter-x: {{zaux_config.tokens.grid['base-gutter-width'] * gutter.mul}}px !important;opacity:0.15;" class="row overflow-hidden bg-secondary">
+                        <div class="col-3"><div style="background-color:var(--guideline-color-4); border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-3"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-3"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                        <div class="col-3"><div style="background-color:var(--guideline-color-4);border:1px dashed var(--guideline-color-4);" class="py-5"></div></div>
+                    </div>
+                    <div>
+                        <p class="pt-4">.g-{{key}}</p>
+                        <hr/>
+                        <p>Gutter width: {{zaux_config.tokens.grid['base-gutter-width'] * gutter.mul}}px</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Icons -->
+        <div class="guideline-block guideline-block--typo py-4">
+            <h2 class="guideline__title mb-5">Icon set</h2>
+            <div class="row gy-5">
+                {% for iconKey, iconName in zaux_config.tokens.defs.activeIcons %}
+                <div class="col-2">
+                    <div class="d-flex align-items-center gap-3">
+                        <i style="color:var(--guideline-color-4);" class="c-icon c-icon--size-10" aria-hidden="true">
+                            <svg style="border:1px dashed var(--guideline-color-5);fill:currentColor;" class="icon-{{iconName}}">
+                                <use xlink:href="../assets/icon/icozaux1/symbol-defs.svg#icon-{{iconName}}"></use>
+                            </svg>
+                        </i>
+                        <p class="pt-2 text-center">
+                            {{iconName}}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Icon sizes -->
+        <div class="guideline-block guideline-block--typo py-4">
+            <h2 class="guideline__title">Icon sizes</h2>
+            <h4 class="mb-5">Icon base width: {{zaux_config.tokens.iconSizes.sizeFactor}}{{zaux_config.tokens.iconSizes.unit}}</h4>
+            <div class="d-flex flex-wrap gap-5 align-items-start">
+                {% for iconSizeName, iconSize in zaux_config.tokens.iconSizes.sizes %}
+                <div>
+                    <i style="color:var(--guideline-color-4);" aria-hidden="true">
+                        <svg style="border:1px dashed var(--guideline-color-5);font-size:{{iconSize.mul * zaux_config.tokens.iconSizes.sizeFactor}}px;fill:currentColor;display:inline-block;width:1em;height:1em;" class="icon-{{zaux_config.tokens.defs.activeIcons | getRandomIndexElement()}}">
+                            <use xlink:href="../assets/icon/icozaux1/symbol-defs.svg#icon-{{zaux_config.tokens.defs.activeIcons | getRandomIndexElement()}}"></use>
+                        </svg>
+                    </i>
+                    <p class="pt-4 text-left">
+                        {{iconSizeName}}
+                        <hr/>
+                        {{iconSize.mul * zaux_config.tokens.iconSizes.sizeFactor}}px
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Ratios -->
+        <div class="guideline-block guideline-block--typo py-4">
+            <h2 class="guideline__title mb-5">Ratios</h2>
+            <div class="row gy-5">
+            {% for ratioName, ratio in zaux_config.tokens.ratios %}
+                <div class="col-2">
+                    <div style="aspect-ratio: {{ratio.ratioW}} / {{ratio.ratioH}};max-width:350px;width:100%;color:var(--guideline-color-2);" class="bg-secondary d-flex justify-content-center mb-3 flex-column text-center">
+                        <p>{{ratio.ratioW}} : {{ratio.ratioH}}</p>
+                        <p><small>Ratio {{loop.index}}</small></p>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+{% endblock %}

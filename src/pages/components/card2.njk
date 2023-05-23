@@ -1,0 +1,54 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Card 2"
+} %}
+
+{# Imports components #}
+{% import 'components/card2/card2.njk' as Card2 %}
+{% import 'components/toast/toast.njk' as Toast %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+    <div class="zaux-theme--light1">
+        <div class="d-block my-5" style="width:600px;">
+            {{ 
+              Card2.content({ 
+              "media" : {
+                "mainSrc" : "https://placehold.co/206x115"
+              },
+              "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+              "cta" : {
+                "link" : "#continua-a-leggere",
+                "label" : "Continua a leggere"
+              }
+            }) }}
+        </div>
+        <h3 class="my-5">Theme variant 1</h3>
+        <div class="d-block my-5" style="max-width:600px;">
+          {{ 
+              Card2.content({ 
+                "variations" : ["theme-2"],
+                "media" : {
+                  "mainSrc" : "https://placehold.co/206x115"
+                },
+                "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+                "cta" : {
+                  "link" : "#continua-a-leggere",
+                  "label" : "Continua a leggere"
+                }
+            }) }}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

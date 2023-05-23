@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+$component: componentClass("tabselector");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &__tab{
+        color:tokenColor("set1","color1");
+        &[class*=--active], &.active{
+            background-color:tokenColor("set1","color1");
+            color:tokenColor("set1","white1");
+        }
+    }
+
+    &__tabs-content{
+        background-color:tokenColor("set1","color8");
+        border-bottom-color:tokenColor("set1","color1");
+        border-bottom-width:1px;
+        border-bottom-style:solid;
+    }
+}

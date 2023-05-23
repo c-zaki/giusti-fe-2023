@@ -1,0 +1,74 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Media Gallery 1",
+  "noSidePad" : false
+} %}
+
+{# Imports components #}
+{% import 'components/mediagallery1/mediagallery1.njk' as MediaGallery1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="zaux-theme--light1">
+        <div class="d-inline-block">
+        {{ MediaGallery1.content(
+            {
+                "featImg": {
+                    "mainSrc" : "https://placehold.co/1280x720?text=16:9"
+                },
+                "elements" : [
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    },
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    },
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    },
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    },
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    },
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    }
+                ]
+            }   
+        ) }}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

@@ -1,0 +1,38 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Mosaic 1"
+} %}
+
+{# Imports components #}
+{% import 'components/mosaic1/mosaic1.njk' as Mosaic1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {{
+      Mosaic1.content({
+        "theme" : "alt1",
+        "eyelet" : "Services",
+        "title" : "Explore our services",
+        "subtitle" : "Un set completo di servizi integrati per avvicinare il tuo brand alle persone.",
+        "cta" : {
+          "title" : "Scopri i nostri servizi",
+          "url" : "#scopri-servizi"
+        }
+      })
+    }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

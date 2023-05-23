@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+$component: componentClass("newsletterbox1");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    [class*=__validation-label]{
+        color:tokenColor("set1","white1") !important;
+    }
+}

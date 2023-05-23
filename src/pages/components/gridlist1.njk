@@ -1,0 +1,128 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Grid list 1"
+} %}
+
+{# Imports components #}
+{% import 'components/gridlist1/gridlist1.njk' as GridList1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+  <div class="zaux-theme--light1">
+    <div class="container-l container--spacing1">
+        <h3>Configuration 1</h3>
+        <br/><br/><br/>
+        {{ GridList1.content({
+            "elements" : [
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                }
+            ]
+        }) }}
+        <br/><br/><br/>
+        <h3>Configuration 2</h3>
+        <br/><br/><br/>
+        {{ GridList1.content({
+            "layout" : "layout2",
+            "elements" : [
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                }
+            ]
+        }) }}
+        <br/><br/><br/>
+        <h3>Configuration 3</h3>
+        <br/><br/><br/>
+        {{ GridList1.content({
+            "layout" : "layout3",
+            "elements" : [
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                }
+            ]
+        }) }}
+        <br/><br/><br/>
+        <h3>Configuration 4</h3>
+        <br/><br/><br/>
+        {{ GridList1.content({
+            "layout" : "layout4",
+            "elements" : [
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                },
+                {
+                    "content" : "<div class='p-10 zaux-bg-default-lightgray'></div>"
+                }
+            ]
+        })}}
+    </div>
+  </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

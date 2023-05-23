@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+$component: componentClass("profiledeets");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &__author{
+        color:tokenColor("set1","color1");
+    }
+}   

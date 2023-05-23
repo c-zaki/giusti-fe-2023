@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+$component: componentClass("btn");
+$cmp-tokens: ();
+
+$c-btn-hover-color-shift-factor: 10%;
+
+@mixin button-style1($bgcolor, $textcolor){
+
+    background-color:$bgcolor;
+    color:$textcolor;
+    transition:background-color $zaux-transition-1;
+    position:relative;
+    
+    .#{$component}__inner{
+        .#{$component}__label{
+            color:$textcolor;
+        }
+    }
+
+    &:after{
+        transition:border-color $zaux-transition-1;
+        content:"";
+        position:absolute;
+        background-size:100%;
+    }
+
+    &:hover{
+        background-color:darken($bgcolor, $c-btn-hover-color-shift-factor);
+        .#{$component}__label{
+            color: tokenColor("set1","color10");
+        }
+    }
+    
+    &:active, &.active{
+        background-color:darken($bgcolor, $c-btn-hover-color-shift-factor + 5);
+    }
+    
+    &:is(input[type=submit]){
+        color: $textcolor;
+    }
+}
+
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+
+
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component} {
+    font-weight:$zaux-typo-fw-semibold;
+    &--primary{
+        @include button-style1(
+            cmpToken($cmp-tokens, 'color-primary-bg', tokenColor('set1','color1'), 'theme-light1'),
+            cmpToken($cmp-tokens, 'color-primary-text', tokenColor('set1','white1'), 'theme-light1')
+        );
+        &:is([type=button]){
+            @include button-style1(
+                cmpToken($cmp-tokens, 'color-primary-bg', tokenColor('set1','color1'), 'theme-light1'),
+                cmpToken($cmp-tokens, 'color-primary-text', tokenColor('set1','white1'), 'theme-light1')
+            );
+        }
+    }
+    &--secondary{
+        @include button-style1(
+            cmpToken($cmp-tokens, 'color-secondary-bg', tokenColor('set1','white1'), 'theme-light1'),
+            cmpToken($cmp-tokens, 'color-secondary-text', tokenColor('set1','color7'), 'theme-light1')
+        );
+        .#{$component}__icon{
+            color:tokenColor("set1","color1");
+        }
+    }
+    &--alt1{
+        background-color:tokenColor("set1","white1");
+        color:tokenColor("set1", "color3");
+        &:hover{
+            background-color:tokenColor("set1","color1");
+            .#{$component}__icon{
+                color:tokenColor("set1","color3");
+            }
+        }
+        .#{$component}__icon{
+            color:tokenColor("set1","color1");
+        }
+        border-radius:tokenRadius(3);
+    }
+    &--alt2{
+        background-color:tokenColor("set1","white1");
+        color:tokenColor("set1", "color7");
+        &:hover{
+            background-color:transparent;
+            color:tokenColor("set1", "color7");
+        }
+        .#{$component}__icon{
+            color:tokenColor("set1","color1");
+        }
+        border-radius:tokenRadius(3);
+    }
+    &--outline1{
+        @include button-style1(
+            rgba(255,255,255,0),
+            tokenColor("set1","white1")
+        );
+        .#{$component}__icon{
+            color:tokenColor("set1","white1");
+        }
+        border-color:tokenColor("set1","white1");
+        border-style:solid;
+        &:hover{
+            background-color:tokenColor("set1","color1");
+            color:tokenColor("set1","white1");
+            .#{$component}__icon{
+                color:tokenColor("set1","black1");
+            }
+            .#{$component}__label{
+                color:tokenColor("set1","black1");
+            }
+            border-color:tokenColor("set1","color1");
+        }
+        &:active{
+            background-color:darken( tokenColor("set1","color1"), $c-btn-hover-color-shift-factor);
+        }
+    }
+    
+    .#{$component}__icon, .#{$component}__label{
+        transition:all $zaux-transition-0;
+    }
+
+    &[disabled]{
+        opacity:cmpToken($cmp-tokens, 'opacity-btndisabled', 0.5, 'theme-light1');
+    }
+
+    //States
+    &.--loading{
+        .#{$component}__label, .#{$component}__icon{
+            animation: btnHeartBeat 1s infinite;
+        }
+    }
+
+}
+
+@keyframes btnHeartBeat {
+  0% {
+    opacity:0.1;
+  }
+  50% {
+    opacity:0.6;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}

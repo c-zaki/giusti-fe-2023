@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+$component: componentClass("mediablock");
+$cmp-tokens: ();
+
+.#{$component} {
+    
+    .#{$component}{
+        &__media{
+            &--img{
+                img{
+                    height:auto;
+                    width:100%;
+                }
+            }
+            &--video{
+                video{
+                    height:auto;
+                    width:100%;
+                }
+            }
+        } 
+    }
+
+    &--fullviewport{
+        height:100vh;
+        width:100vw;
+        position:relative;
+        .#{$component}{
+            &__media{
+                position:absolute;
+                left:0;
+                top:0;
+                right:0;
+                bottom:0;
+                &--img{
+                    img{
+                        height:100%;
+                        width:100%;
+                    }
+                }
+                &--video{
+                    video{
+                        height:100%;
+                        width:100%;
+                    }
+                }
+            } 
+        }
+    }   
+}

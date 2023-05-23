@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+$component: componentClass("fixedcontrols1");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component} {
+    &__item{
+        background-color:tokenColor("set1","color1");
+        color:tokenColor("set1","color3");
+        &-icon{
+            color:tokenColor("set1","white1");
+        }
+        &--theme-2{
+            background-color:tokenColor("set1","color4");
+        }
+    }
+}

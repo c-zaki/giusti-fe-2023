@@ -1,0 +1,32 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Banner Img 1",
+  "noSidePad" : true
+} %}
+
+{# Imports components #}
+{% import 'components/bannerimg1/bannerimg1.njk' as BannerImg1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="zaux-theme--light1">
+        <div class="pb-5">
+        {{ BannerImg1.content() }}
+        </div>
+        <div class="p-5"><h3>Constrained mode</h3></div>
+        {{ BannerImg1.content( {"constrained" : true, "img" : {"mainSrc" : "https://placehold.co/400x225"} } ) }}
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

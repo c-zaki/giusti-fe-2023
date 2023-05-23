@@ -1,0 +1,69 @@
+{# Imports components #}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/img/img.njk' as Img %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-sharebtn' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : [],
+        "btnType" : "default",
+        "btnSize" : "size-m",
+        "toolTipPosition" : "top",
+        "toolTipSize" : "medium"
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+    {% set theme = "default" %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+        {% if "theme" in variation %}
+            {% set theme = variation %}
+        {% endif %}
+    {% endfor %}
+
+    {% set toolTipSizeClasses = "py-3 px-4" %}
+    {% set toolTipIconVariations = ["size-2"] %}
+
+    {% if obj.toolTipSize == "small" %}
+        {% set toolTipSizeClasses = "py-2 px-4" %}
+        {% set toolTipIconVariations = ["size-3", "size-md-2"] %}
+    {% endif %}
+    
+    <div data-js-component="ShareBtn" class="{{_className | join(" ")}}">
+        <div class="{{componentClassName}}__tooltip {{componentClassName}}__tooltip--{{obj.toolTipSize}} {{componentClassName}}__tooltip--{{obj.toolTipPosition}} {{toolTipSizeClasses}} rounded-pill d-inline-block">
+            <ul class="d-flex gap-4">
+                {% for social in obj.socialList %}
+                    <li class="lh-0">
+                        <button type="button" data-sharer="{{social.socialSlug}}" data-url="{{social.url}}" {% if social.extraOpts %}{{social.extraOpts}}{% endif %}>
+                            {{Icon.content({"variations" : toolTipIconVariations, "iconName" : social.icon}) }}
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% if obj.btnType == "default" %}
+            {% set ctaParams = {"type" : "button", "tag" : "button", "className" : [componentClassName + "__share-trigger"], "variations" : ["primary", obj.btnSize], "hasIcon" : true, "icon" : "share" } %}
+            {% set ctaParams = ctaParams | overwriteMerge(obj.cta) %}
+            {{ Button.content(ctaParams) }}
+        {% elif obj.btnType == "freeHTML" %}
+            <div data-class="{{componentClassName}}__share-trigger">
+                {{ obj.content | safe }}
+            </div>
+        {% else %}
+            {% set ctaParams = {"type" : "button", "tag" : "button", "className" : [componentClassName + "__share-trigger"], "variations" : [obj.btnSize], "hasIcon" : true, "icon" : { "iconName" : "share" } } %}
+            {% set ctaParams = ctaParams | overwriteMerge(obj.cta) %}
+            {{ Button2.content(ctaParams) }}
+        {% endif %}
+    </div>
+
+{% endmacro %}

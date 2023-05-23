@@ -1,0 +1,62 @@
+$component: componentClass("pagination");
+$cmp-tokens: ();
+
+.#{$component}{
+    border-top-width:1px;
+    .wp-pagenavi{
+        display:flex;
+        gap:tokenSpacer(4);
+        //border-width:1px;
+        > * {
+            
+            height:cmpToken($cmp-tokens, "spacer-linkheight", tokenSpacer(6), "layout");
+            width:cmpToken($cmp-tokens, "spacer-linkwidth", tokenSpacer(6), "layout");
+            font-size:tokenTypoSizeFs(1);
+            border-radius:tokenRadius(full);
+            line-height:#{tokenSpacer(6) - 0.1};
+            text-align:center;
+            border-width:1px;
+            //border-width:1px;
+        }
+        .previouspostslink{
+            position:relative;
+            &:before{
+                top:50%;
+                left:50%;
+                content:"";
+                height:8px;
+                width:8px;
+                position:absolute;
+                transform-origin:center;
+                transform:translate(-50%,-50%) rotate(90deg);
+                background-size:100%;
+            }
+        }
+        .nextpostslink{
+            position:relative;
+            &:before{
+                top:50%;
+                left:50%;
+                content:"";
+                height:8px;
+                width:8px;
+                position:absolute;
+                transform-origin:center;
+                transform:translate(-50%,-50%) rotate(270deg);
+                background-size:100%;
+            }
+        }
+        .current{
+            position:relative;
+            &:after{
+                content:"";
+                position:absolute;
+                border-width: 0 16px 16px 0;
+                left:50%;
+                bottom:-16px;
+                position:absolute;
+                transform:translateX(-50%) rotate(180deg) scale(-1);
+            }
+        }
+    }
+}

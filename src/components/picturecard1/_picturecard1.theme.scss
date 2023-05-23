@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+$component: componentClass("picturecard1");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+
+    background-color:tokenColor("set1","black1");
+    color:tokenColor("set1","white1");
+
+    &__icon{
+        color:tokenColor("set1","color1");
+    }
+
+    &__content{
+        background-color:rgba( tokenColor("set1","black1"), 0.6 );
+        transition: background-color $zaux-transition-1;
+    }
+
+    &:hover{
+        .#{$component}__content{
+            background-color:rgba( tokenColor("set1","black1"), 0.3 );
+        }
+    }
+
+}

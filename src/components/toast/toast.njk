@@ -1,0 +1,32 @@
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-toast' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations": [],
+        "size" : "default"
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {% set spacing = "py-2 px-4 py-md-4 px-md-6 m-5" %}
+    {% set typoSize = "c-typo-style1-size-text-m c-typo--noautores c-typo-style1-size-md-text-m" %}
+
+    <div data-js-component="Toast" class="{{_className | join(" ")}}">
+        <div class="{{componentClassName}}__inner mb-8">
+            <div data-text-content class="{{typoSize}} {{spacing}} {{componentClassName}}__content d-inline-block rounded-pill">
+                {{ obj.content | safe }}
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}

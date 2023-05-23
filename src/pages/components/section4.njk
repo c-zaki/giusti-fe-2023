@@ -1,0 +1,126 @@
+
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Section 4",
+  "noSidePad" : true
+} %}
+
+{# Imports components #}
+{% import 'components/section4/section4.njk' as Section4 %}
+{% import 'components/richtextblock1/richtextblock1.njk' as RichTextBlock1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {% set textContentSample %}
+    <p>
+        Il progetto di valorizzazione di Piazza dei Cavalieri prevede una serie di visite guidate in presenza, condotte da allieve e allievi della Scuola Normale secondo diversi livelli di approfondimento. Il calendario delle visite sarà presto disponibile.
+    </p>
+    {% endset %}
+    
+    {{ Section4.content({
+        "img" : {
+            "variations" : ["ratio-2", "fluid-xy"],
+            "mainSrc" : "https://placehold.co/512x512?text=4:3"
+        },
+        "cta" : {
+          "label" : "Scopri tutto",
+          "link" : "#scopri-tutto-link"
+        },
+        "textContent" : textContentSample
+    }) }}
+    {{ Section4.content({
+        "flip" : true,
+        "title" : "Flipped",
+        "bottomContent" : bottomContent1,
+        "img" : {
+            "variations" : ["ratio-2", "fluid-xy"],
+            "mainSrc" : "https://placehold.co/512x512?text=4:3"
+        },
+        "cta" : {
+          "label" : "Scopri tutto",
+          "link" : "#scopri-tutto-link"
+        },
+        "textContent" : textContentSample
+    }) }}
+    {{ Section4.content({
+        "theme" : "theme-2",
+        "title" : "Alternative theme",
+        "bottomContent" : bottomContent1,
+        "img" : {
+            "variations" : ["ratio-2", "fluid-xy"],
+            "mainSrc" : "https://placehold.co/512x512?text=4:3"
+        },
+        "cta" : {
+          "label" : "Scopri tutto",
+          "link" : "#scopri-tutto-link"
+        },
+        "textContent" : textContentSample
+    }) }}
+    {{ Section4.content({
+        "flip" : true,
+        "theme" : "theme-2",
+        "title" : "Alternative theme",
+        "bottomContent" : bottomContent1,
+        "img" : {
+            "variations" : ["ratio-2", "fluid-xy"],
+            "mainSrc" : "https://placehold.co/512x512?text=4:3"
+        },
+        "cta" : {
+          "label" : "Scopri tutto",
+          "link" : "#scopri-tutto-link"
+        },
+        "textContent" : textContentSample
+    }) }}
+    {{ Section4.content({
+        "theme" : "theme-3",
+        "title" : "Alternative theme 2",
+        "bottomContent" : bottomContent1,
+        "img" : {
+            "variations" : ["ratio-2", "fluid-xy"],
+            "mainSrc" : "https://placehold.co/512x512?text=4:3"
+        },
+        "cta" : {
+          "label" : "Scopri tutto",
+          "link" : "#scopri-tutto-link"
+        },
+        "textContent" : textContentSample
+    }) }}
+
+    {% set richText %}
+      {% set richTextSample %}
+          <p>Con le&nbsp;<strong>App Nikè</strong>&nbsp;tutto diventa più facile. La filosofia alla base di Nikè è quella del “tutto apparecchiato”, che mira a far sentire a proprio agio l’utente nell’utilizzo dell’APP, consentendo di svolgere con semplicità anche le attività meno amate per rendere il lavoro sempre più efficiente ed efficace.</p>
+      {% endset %}
+      {{ RichTextBlock1.content({"themed" : false, "content" : richTextSample }) }}
+    {% endset %}
+
+    {{ Section4.content({
+        "flip" : true,
+        "theme" : "theme-3",
+        "title" : "Alternative theme 2",
+        "bottomContent" : bottomContent1,
+        "img" : {
+            "variations" : ["ratio-2", "fluid-xy"],
+            "mainSrc" : "https://placehold.co/512x512?text=4:3"
+        },
+        "cta" : {
+          "label" : "Scopri tutto",
+          "link" : "#scopri-tutto-link"
+        },
+        "contentHTML" : richText
+    }) }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

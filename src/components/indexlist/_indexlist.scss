@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+$component: componentClass("indexlist");
+$cmp-tokens: ();
+
+.#{$component} { 
+
+    &__list{
+        border-top-width:1.5px;
+        li{
+            border-bottom-width: 1.5px;
+            position:relative;
+            &:before{
+                content:"•";
+                position:absolute;
+                top:50%;
+                left:0;
+                transform:translateY(-50%);
+            }
+        }
+    }
+
+}

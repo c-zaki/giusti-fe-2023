@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+
+$component: componentClass("slider");
+
+// /swiper/modules/pagination/pagination.scss
+
+:root {
+  --swiper-theme-color: #{tokenColor("set1", "color1")};
+  --swiper-pagination-bullet-inactive-color: #{tokenColor("set1", "gray1")};
+  --swiper-pagination-bullet-horizontal-gap: #{tokenSpacer(2)};
+  --swiper-pagination-bullet-vertical-gap: 0;
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-bullet-opacity: 1;
+}
+
+.#{$component} {
+  &__wrapper {
+    overflow: hidden;
+    position: relative;
+  }
+
+  &--fx-1 {
+    .swiper-wrapper {
+      // display: flex;
+      transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    }
+  }
+
+  &--gx-3 {
+    $gx: tokenSpacer(3);
+
+    .#{$component}__instance {
+      padding-right: $gx * 2;
+      > .swiper-wrapper {
+        margin-left: $gx;
+      }
+    }
+  }
+
+  .swiper-button-disabled{
+    //opacity:0;
+  }
+
+  .#{$component}__pagination{
+      --swiper-pagination-bullet-horizontal-gap: #{cmpToken($cmp-tokens, 'spacer-bullet-mx', tokenSpacer(1), 'layout')};
+      --swiper-pagination-bullet-size:#{cmpToken($cmp-tokens, 'size-bullet', 10px, 'layout')};
+  }
+
+  .swiper-slide{
+    height:auto;
+    > *{
+      height:100%;
+    }
+  }
+
+  &__instance{
+
+    position:relative;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform:translate(-50%,-50%);
+      width: tokenSpacer(7);
+      height: tokenSpacer(7);
+      border-radius: tokenRadius("full");
+      border-width:tokenSpacer(2);
+      border-style:solid;
+      animation: sliderLoading $zaux-transition-2 infinite;
+      @include media-breakpoint-down("sm"){
+        height:tokenSpacer(6);
+        width:tokenSpacer(6);
+        border-width:tokenSpacer(1);
+      }
+    }
+
+    > * {
+      opacity:0;
+      height:1px;
+      width:1px;
+    }
+
+    &.swiper-initialized, &[class*=--show-before-init]{
+      &:after{
+        display:none;
+      }
+      > * {
+        opacity:1;
+        height:auto;
+        width:auto;
+      }
+    }
+  }
+
+}
+
+
+@keyframes sliderLoading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

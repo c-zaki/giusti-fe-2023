@@ -1,0 +1,17 @@
+{
+    "body": {
+        "className": "zaux-theme--light1"
+    },
+    "defaultProductImgs" : {
+        "mainImg" : {
+            "mainUrl" : "https://placehold.co/502x617.jpg",
+            "srcSet" : [
+                {
+                    "url" : "https://placehold.co/502x617.jpg",
+                    "url2x" : "https://placehold.co/1004x1234.jpg",
+                    "breakpoint" : "md"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,8 @@
+$hamburger-layer-border-radius: 0;
+$hamburger-types: (spin);
+$hamburger-layer-width: 20px;
+$hamburger-layer-height: 1px;
+
+@import "hamburgers/_sass/hamburgers/hamburgers";
+
+.hamburger-box{ pointer-events:none; }

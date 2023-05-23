@@ -1,0 +1,102 @@
+@if hasCompatibilityLayer() {
+  // Fix SVG in <img> tags not scaling in IE9, IE10, IE11
+  // IE9, IE10, and IE11 don't properly scale SVG files added with img tags when viewBox, width
+  // and height attributes are specified. To get more consistent scaling across browsers always ensure
+  // you specify a viewBox but leave off the width and height attributes on your svg element.
+  // @see https://gist.github.com/larrybotha/7881691
+  // @see https://stackoverflow.com/questions/9777143/svg-in-img-element-proportions-not-respected-in-ie9/9792254#9792254
+  @include onIE() {
+    img[src$=".svg"] {
+      width: 100%;
+    }
+  }
+}
+
+[type="search"]::-webkit-search-cancel-button {
+  @include appearance(none);
+}
+
+body {
+  // Improving Font Rendering With CSS
+  // @see https://betterprogramming.pub/improving-font-rendering-with-css-3383fc358cbc
+  @include text-antialiased;
+
+  // Custom scrollbars
+  @include scrollbars(
+    6px,
+    rgba(tokenColor("set1", "black1"), 0.25),
+    transparent,
+    6px
+  );
+  
+  font-size:tokenTypo("base-font-size");
+  
+}
+
+body:not(.no-pad-top) ##{tokenDef('app-prefix')}-content-outer{
+  padding-top:var(--header-height);
+  overflow:hidden;
+}
+
+main {
+  transition: filter $zaux-transition-1;
+}
+
+#zaux-content-outer{
+  overflow: hidden;
+}
+
+body.zaux-navmain-active {
+  main {
+    @include media-breakpoint-down(md) {
+      filter: blur(4px);
+    }
+  }
+}
+
+.zaux-block-scroll {
+  overflow: hidden !important;
+}
+
+[class*=container-]{
+  
+  &[class*=--spacing1]{
+    padding-left:tokenSpacer(5);
+    padding-right:tokenSpacer(5);
+  }
+  @each $k in tokenTypoBreakpoints(){
+    @include media-breakpoint-up($k){
+      &[class*=#{$k}--spacing1]{
+        padding-left:tokenSpacer(5);
+        padding-right:tokenSpacer(5);
+      }
+    }
+  }
+
+  &[class*=--spacing0]{
+    padding-left:tokenSpacer(0);
+    padding-right:tokenSpacer(0);
+  }
+  @each $k in tokenTypoBreakpoints(){
+    @include media-breakpoint-up($k){
+      &[class*=#{$k}--spacing0]{
+        padding-left:tokenSpacer(0);
+        padding-right:tokenSpacer(0);
+      }
+    }
+  }
+
+}
+
+body.modal-open{
+  overflow:hidden;
+}
+
+*::selection {
+  color: tokenColor("set1","white1");
+  background: darken( tokenColor("set1","color1"), 5%);
+}
+
+.pointer-events-none{
+  pointer-events: none;
+}

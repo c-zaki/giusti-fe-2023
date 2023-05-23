@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+$component: componentClass("slidertabs1");
+$cmp-tokens: ();
+
+.#{$component}{
+
+    &__tab{
+        aspect-ratio:tokenRatio(3);
+        position:relative;
+        picture,img{
+            pointer-events:none;
+        }
+        button{
+            height:100%;
+            width:100%;
+            position:absolute;
+            left:0;
+            top:0;
+            right:0;
+            bottom:0;
+        }
+        .#{$component}__tab-img{
+            position:relative;
+            z-index:tokenZindex(2);
+        }
+    }
+    &__slider{
+        position:relative;
+        .#{$component}__slider-arrow{
+            &--prev,&--next{
+                position:absolute;
+                transform:translate(0,-50%);
+                top:50%;
+            }
+            &--prev{
+                left:-#{tokenSpacer(6)};
+            }
+            &--next{
+                right:-#{tokenSpacer(6)};
+            }
+        }
+    }
+}

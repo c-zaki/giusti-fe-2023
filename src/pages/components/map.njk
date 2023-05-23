@@ -1,0 +1,30 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": template_component,
+  "title": "Map"
+} %}
+
+{# Imports components #}
+{% import 'components/map/map.njk' as Map %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {{ Map.content({
+        "className" : ["h-390px", "h-md-780px"],
+        "src" : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2891.4680261898307!2d10.306014116166487!3d43.55512986678348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d5ebd5744e2623%3A0x607aa72b5856ae9f!2sVia%20del%20Forte%20S.%20Pietro%2C%2010%2C%2057123%20Livorno%20LI!5e0!3m2!1sit!2sit!4v1675254315873!5m2!1sit!2sit"
+    }) }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

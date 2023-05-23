@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+$component: componentClass("summary");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &__controlbar{
+        border-bottom-width:1px;   
+        border-top-width:1px;
+        border-top-style:solid;
+        border-top-color:tokenColor("set1","color3");
+        border-bottom-style:solid;
+        border-bottom-color:tokenColor("set1","color3");
+    }
+}

@@ -1,0 +1,37 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Media card 1"
+} %}
+
+{# Imports components #}
+{% import 'components/mediacard1/mediacard1.njk' as MediaCard1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    <div class="p-5" style="max-width:600px;">
+        {{ MediaCard1.content() }}
+    </div>
+    <div class="p-5 zaux-bg-set1-black1" style="max-width:600px;">
+        {{ MediaCard1.content(
+            {
+              "variations" : ["theme-2"]
+            }
+        ) }}
+    </div>
+    <small class="d-block pt-4 zaux-color-default-error fw-bold"><em>*The variations shown above have external padding and background for showcasing purposes, it is not included in the component.</em></small>
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

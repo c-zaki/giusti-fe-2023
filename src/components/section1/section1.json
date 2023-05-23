@@ -1,0 +1,9 @@
+{
+    "preTitle" : "Eyelet sample",
+    "title" : "Lorem ipsum dolor sit amet",
+    "subTitle" : "In molti hanno scelto Niké, i nostri clienti, il nostro orgoglio",
+    "cta" : {
+        "title" : "Cta label",
+        "link" : "#url-sample"
+    }
+}

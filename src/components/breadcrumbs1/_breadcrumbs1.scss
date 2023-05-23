@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+$component: componentClass("breadcrumbs1");
+$cmp-tokens: ();
+
+.#{$component} {
+    @include c-typo-style("text-s", map-get($zaux-styles-typography, "style1"));
+    /*
+    [class*=_last]{
+        font-weight:$zaux-typo-fw-bold;
+    }
+    */
+}

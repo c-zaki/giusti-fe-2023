@@ -1,0 +1,50 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Profile Deets"
+} %}
+
+{# Imports components #}
+{% import "components/profiledeets/profiledeets.njk" as ProfileDeets %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {{
+        ProfileDeets.content(
+          {
+            "authorName" : "Author name",
+            "qualification" : "Qualification",
+            "img" : {
+              "mainSrc" : "https://placehold.co/150x150"
+            }
+          }
+        )
+    }}
+    <div class="py-5"></div>
+    {{
+        ProfileDeets.content(
+          {
+            "authorName" : "Author name with link",
+            "qualification" : "Qualification",
+            "img" : {
+              "mainSrc" : "https://placehold.co/150x150"
+            },
+            "url" : "#with-link"
+          }
+        )
+    }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

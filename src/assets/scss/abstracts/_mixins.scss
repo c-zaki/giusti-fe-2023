@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+@mixin appearance($value) {
+  @if hasCompatibilityLayer() {
+    -webkit-appearance: $value;
+    -moz-appearance: $value;
+  }
+  appearance: $value;
+}
+
+@mixin bg-clip-text() {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@mixin backface-visibility($value) {
+  @if hasCompatibilityLayer() {
+    -webkit-backface-visibility: $value;
+    -moz-backface-visibility: $value;
+  }
+  backface-visibility: $value;
+}
+
+// @see https://css-tricks.com/styling-underlines-web/
+@mixin underline($text_color, $bg_color) {
+  text-shadow: -2px -2px $bg_color, -2px 2px $bg_color, 2px -2px $bg_color,
+    2px 2px $bg_color;
+  box-shadow: inset 0 -0.175em $bg_color, inset 0 -0.2em $text_color;
+}
+
+// @see https://sharkcoder.com/visual/underline
+@mixin underline-via-bg($color, $sizePx, $yPos: 100%) {
+  background-image: linear-gradient(to right, $color 0%, $color $yPos);
+  background-repeat: repeat-x;
+  background-position: 0 $yPos;
+  background-size: $yPos $sizePx;
+}
+
+// Object-fit mixin who supports the polyfill's syntax
+// https://github.com/fregante/object-fit-images
+@mixin objectfit($type: "cover", $position: "center") {
+  object-fit: $type;
+  object-position: $position;
+
+  @if hasCompatibilityLayer() {
+    font-family: "object-fit: #{$type}; object-position: #{$position};";
+  }
+}
+
+// Fix SVG in <img> tags not scaling in IE9, IE10, IE11
+// IE9, IE10, and IE11 don't properly scale SVG files added with img tags when viewBox, width
+// and height attributes are specified. To get more consistent scaling across browsers always ensure
+// you specify a viewBox but leave off the width and height attributes on your svg element.
+//
+// @see https://gist.github.com/larrybotha/7881691
+// @see https://stackoverflow.com/questions/9777143/svg-in-img-element-proportions-not-respected-in-ie9/9792254#9792254
+@mixin onIE() {
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    @content;
+  }
+}
+
+@mixin placeholder() {
+  &::placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+@mixin cancel-style() {
+  &::-ms-clear {
+    @content;
+  }
+  &::-webkit-search-cancel-button {
+    @content;
+  }
+}
+
+// https://css-tricks.com/snippets/sass/custom-scrollbars-mixin/
+@mixin scrollbars(
+  $size,
+  $foreground-color,
+  $background-color: mix($foreground-color, white, 50%),
+  $rounded: 4px
+) {
+  // Prevents to gain layout (Google Chrome 29+)
+  @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+    & {
+      overflow: overlay;
+    }
+  }
+
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+    border-radius: $rounded;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+
+  // Firefox
+  scrollbar-color: $foreground-color $background-color !important;
+  scrollbar-width: thin !important;
+
+  @if hasCompatibilityLayer() {
+    // For Internet Explorer
+    & {
+      scrollbar-face-color: $foreground-color;
+      scrollbar-track-color: $background-color;
+    }
+  }
+}
+
+@mixin hideScrollbars {
+  // https://blogs.msdn.microsoft.com/kurlak/2013/11/03/hiding-vertical-scrollbars-with-pure-css-in-chrome-ie-6-firefox-opera-and-safari/
+  // There is a CSS rule that can hide scrollbars in Webkit-based browsers (Chrome and Safari).
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+
+  @if hasCompatibilityLayer() {
+    // There is a CSS rule that can hide scrollbars in IE 10+.
+    -ms-overflow-style: none;
+
+    // Use -ms-autohiding-scrollbar if you wish to display on hover.
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+
+  // There used to be a CSS rule that could hide scrollbars in Firefox, but it has since been deprecated.
+  scrollbar-width: none;
+}
+
+// Better font smoothing for modern browsers.
+// @see https://davidwalsh.name/font-smoothing
+// @see https://developer.mozilla.org/en-US/docs/Web/CSS/font-smooth
+@mixin text-antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin retina() {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min--moz-device-pixel-ratio: 2),
+    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+    @content;
+  }
+}
+
+@mixin generateResponsive(
+  $base-class,
+  $prop-name,
+  $breakpoints-list: tokenBreakpoints()
+) {
+  @each $mq-prefix, $v in $breakpoints-list {
+    // Prevents keys who starts with underscore
+    @if str-index($mq-prefix, "_") == null {
+      @if not($mq-prefix == "xs") {
+        @include media-breakpoint-up($mq-prefix) {
+          #{$base-class}-#{$mq-prefix}-#{$prop-name} {
+            @content;
+          }
+        }
+      } @else {
+        #{$base-class}-#{$prop-name} {
+          @content;
+        }
+      }
+    }
+  }
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content; 
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  } 
+  }
+
+@mixin translate($x, $y){
+  transform:translate($x,$y);
+}

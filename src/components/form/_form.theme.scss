@@ -1,0 +1,352 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+@import "./input/checkboxbtn/checkboxbtn.theme.scss";
+
+$component: componentClass("form");
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+@mixin form-field-theme-light1{
+    border-style:none;
+    appearance: none;
+
+    //// FIELD TYPES ////
+
+    //Default and type 1
+    
+        ///// GENERIC INPUT /////
+        transition: background-color $zaux-transition-0, border-color $zaux-transition-0, box-shadow $zaux-transition-0;
+        border-style:solid;
+        border-radius:tokenRadius(0);
+        border-color: tokenColor("set1","color2");
+        //border-bottom:1px solid cmpToken( $cmp-tokens, "color-fieldtype1-borderbottom", tokenColor("set1", "color5"), 'theme-light1');
+        outline:none;
+        color: cmpToken($cmp-tokens, 'color-inputtext', tokenColor(set1,black1), 'theme-light1');
+
+        &:not([class*=btn]){
+            background-color:tokenColor("set1","white1");
+        }
+
+        &:is(input[type=submit]){
+            border-color:tokenColor("set1","color1");
+        }
+
+        &:is(div){
+            border-bottom:none;
+        }
+        
+        &::placeholder{
+            color:cmpToken($cmp-tokens, 'color-placeholder', tokenColor(set1,color6), 'theme-light1');
+        }
+        &:after{
+            transition: opacity $zaux-transition-0;
+        }
+
+        &:focus{
+            border-color:tokenColor("set1","color1");
+        }
+
+        //Alternative theme
+        &[class*=theme-alt2]{
+            background-color:transparent;
+            border-color:tokenColor("set1","color5");
+            color:tokenColor("set1","white1");
+            &:focus{
+                border-color:tokenColor("set1","color1");
+            }
+        }
+
+        &[class*=theme-alt3]{
+            border-radius:0;
+            background-color:transparent;
+            color:tokenColor("set1","white1");
+            border-top-width:0px;
+            border-left-width:0px;
+            border-right-width:0px;
+            border-bottom-color:tokenColor("set1","color5");
+            &:focus{
+                border-bottom-color:tokenColor("set1","color1");
+            }
+            &::placeholder{
+                color:rgba(tokenColor("set1","white1"), 0.5);
+            }
+            & + [class*=__field-icon]{
+                color:tokenColor("set1","white1");
+            }
+             &:is(input[type=radio]),  &:is(input[type=checkbox]){
+                border-width:0px;
+             }
+        }
+
+        ///// SELECT /////
+
+        &:is(select){
+            $select-arrow-color: cmpToken($cmp-tokens, "color-selectarrow", tokenColor("set1","color6"), "theme-light1" );
+            $select-arrow-color: str-replace(#{$select-arrow-color}, "#", "%23");
+            background-position:right center;
+            background-repeat:no-repeat;
+            background-size:tokenSpacer(3) tokenSpacer(1);
+            background-position:right tokenSpacer(5) center;
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath id='Icon_ionic-md-arrow-dropdown' data-name='Icon ionic-md-arrow-dropdown' d='M9 13.5l4 4 4-4Z' transform='translate(-9 -13.5)' fill='#{$select-arrow-color}'/%3E%3C/svg%3E");
+            &[class*=--size-s]{ background-size:tokenSpacer(3) tokenSpacer(1); background-position:right tokenSpacer(3) center; }
+            &[class*=--size-m]{ background-size:tokenSpacer(3) tokenSpacer(2); }
+            &[class*=--size-l]{ background-size:tokenSpacer(4) tokenSpacer(4); }
+            &[class*=theme-alt2]{
+                option{
+                    color:tokenColor("set1","color3");
+                }
+            }
+            &[class*=theme-alt3]{
+                $select-arrow-color: cmpToken($cmp-tokens, "color-selectarrow", tokenColor("set1","white1"), "theme-light1" );
+                $select-arrow-color: str-replace(#{$select-arrow-color}, "#", "%23");
+                background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath id='Icon_ionic-md-arrow-dropdown' data-name='Icon ionic-md-arrow-dropdown' d='M9 13.5l4 4 4-4Z' transform='translate(-9 -13.5)' fill='#{$select-arrow-color}'/%3E%3C/svg%3E");
+                option{
+                    color:tokenColor("set1","color3");
+                }
+            }
+        }
+
+        ///// RADIOS /////
+
+        &:is(input[type=radio]){
+            background-color:transparent;
+            border-style:solid;
+            border-color: cmpToken($cmp-tokens, 'color-radioborder', tokenColor('set1', 'color1'), 'theme-light1' );
+            border-radius:tokenRadius("full");
+            &:after{
+                background-color:cmpToken($cmp-tokens, 'color-radiodot', tokenColor('set1','color1'), 'theme-light1');
+                border-radius:tokenRadius("full");
+            }
+            &:focus{
+                //border-color: cmpToken($cmp-tokens, 'color-radioborder_focus', tokenColor('set1', 'color1'), 'theme-light1' );
+                //box-shadow: 0px 0px 0px 4px rgba(cmpToken($cmp-tokens, 'color-radioborder_focus', tokenColor('set1', 'color1'), 'theme-light1' ), 0.2);
+            }
+            &:checked{
+                //border-style:solid;
+                //border-color: cmpToken($cmp-tokens, 'color-radioborder_checked', tokenColor('set1', 'color1'), 'theme-light1' );
+            }
+
+            & + .#{$component}__field-label{
+                a{
+                    text-decoration:underline;
+                }
+            }
+
+            &[class*=theme-alt2]{
+                background-color:transparent;
+                border:2px solid tokenColor("set1","color5");
+                &:after{
+                    background-color:tokenColor("set1","color1");
+                }
+                & + .#{$component}__field-label{
+                    color: tokenColor("set1","white1");
+                }
+            }
+
+            &[class*=theme-alt3]{
+                background-color:tokenColor("set1","white1");
+                border:1px solid tokenColor("set1","white1");
+                &:after{
+                    background-color:cmpToken($cmp-tokens, 'color-radiodot', tokenColor('set1','color1'), 'theme-light1');
+                }
+                & + .#{$component}__field-label{
+                    color: tokenColor("set1","white1");
+                }
+            }
+            &[class*=theme-alt4]{
+                background-color:tokenColor("set1","white1");
+                border:1px solid tokenColor("set1","white1");
+                &:after{
+                    background-color:cmpToken($cmp-tokens, 'color-radiodot', tokenColor('set1','color1'), 'theme-light1');
+                }
+                & + .#{$component}__field-label{
+                    color: tokenColor("set1","white1");
+                }
+            }
+        }
+
+        ///// CHECKBOXES /////
+
+        &:is(input[type=checkbox]){
+            //border-style:solid;
+            //border-color: cmpToken($cmp-tokens, 'color-checkboxborder', tokenColor('set1', 'black1'), 'theme-light1' );
+            border-radius:tokenRadius(0);
+            background-color:transparent;
+            border-style:solid;
+            border-color:tokenColor("set1","color1");
+            &:focus{
+                //border-color: cmpToken($cmp-tokens, 'color-radioborder_focus', tokenColor('set1', 'color1'), 'theme-light1' );
+                //box-shadow: 0px 0px 0px 3px rgba(cmpToken($cmp-tokens, 'color-radioborder_focus', tokenColor('set1', 'color1'), 'theme-light1' ), 0.2);
+            }
+            &:checked{
+                background-color:cmpToken($cmp-tokens, 'color-checkboxbg_focus', tokenColor('set1','color1'), 'theme-light1');
+                //border-color: cmpToken($cmp-tokens, 'color-checkboxborder_focus', tokenColor('set1', 'color1'), 'theme-light1' );
+                $checkbox-checkmark-color: cmpToken($cmp-tokens, 'color-checkmark', tokenColor('set1','white1'), 'theme-light1' );
+                $checkbox-checkmark-color: str-replace(#{$checkbox-checkmark-color}, "#", "%23");
+                background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='#{$checkbox-checkmark-color}' stroke-linecap='square' stroke-linejoin='square' stroke-width='2' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+            }
+
+            & + .#{$component}__field-label{
+                a{
+                    text-decoration:underline;
+                }
+            }
+
+            
+            &[class*=theme-alt2]{
+                background-color:transparent;
+                border:2px solid tokenColor("set1","color5");
+                &:checked{
+                //border-color: cmpToken($cmp-tokens, 'color-checkboxborder_focus', tokenColor('set1', 'color1'), 'theme-light1' );
+                background-color:transparent;
+                $checkbox-checkmark-color: tokenColor('set1','color1');
+                $checkbox-checkmark-color: str-replace(#{$checkbox-checkmark-color}, "#", "%23");
+                background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='#{$checkbox-checkmark-color}' stroke-linecap='square' stroke-linejoin='square' stroke-width='2' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+                }
+                & + .#{$component}__field-label{
+                    color: tokenColor("set1","white1");
+                }
+            }
+
+            &[class*=theme-alt3]{
+                background-color:tokenColor('set1','white1');
+                &:checked{
+                //border-color: cmpToken($cmp-tokens, 'color-checkboxborder_focus', tokenColor('set1', 'color1'), 'theme-light1' );
+                $checkbox-checkmark-color: tokenColor('set1','color1');
+                $checkbox-checkmark-color: str-replace(#{$checkbox-checkmark-color}, "#", "%23");
+                background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='#{$checkbox-checkmark-color}' stroke-linecap='square' stroke-linejoin='square' stroke-width='2' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+                }
+                & + .#{$component}__field-label{
+                    color: tokenColor("set1","white1");
+                }
+            }
+            &[class*=theme-alt4]{
+                background-color:tokenColor("set1","white1");
+                border:1px solid tokenColor("set1","white1");
+                &:checked{
+                    //border-color: cmpToken($cmp-tokens, 'color-checkboxborder_focus', tokenColor('set1', 'color1'), 'theme-light1' );
+                    $checkbox-checkmark-color: tokenColor('set1','color1');
+                    $checkbox-checkmark-color: str-replace(#{$checkbox-checkmark-color}, "#", "%23");
+                    background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='#{$checkbox-checkmark-color}' stroke-linecap='square' stroke-linejoin='square' stroke-width='2' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+                }
+                & + .#{$component}__field-label{
+                    color: tokenColor("set1","white1");
+                }
+            }
+        }
+        
+        //// FILES ////
+
+        &:is(input[type=file]){
+            background-color:transparent;
+            border-color:transparent;
+
+            &::file-selector-button{
+                appearance:none;
+                background-color:tokenColor("set1","color1");
+                border-radius:tokenRadius(0);
+                color:tokenColor("set1","white1");
+                text-transform:uppercase;
+                font-weight: $zaux-typo-fw-medium;
+                transition: background-color $zaux-transition-1;
+                //@extend .c-btn, .c-btn--primary, .c-btn--size-s;
+                &:hover{
+                    background-color:lighten(tokenColor("set1","color1"), 15%);
+                }
+                &:active{
+                    background-color:darken(tokenColor("set1","color1"), 15%);
+                }
+            }
+
+            &[class*=theme-alt2]{
+                color:tokenColor("set1","white1");
+                &::file-selector-button{
+                    border:2px solid tokenColor("set1","color5");
+                    background-color:transparent;
+                }
+            }
+
+            &[class*=theme-alt3]{
+                color:tokenColor("set1","white1");
+                &::file-selector-button{
+                    background-color:transparent;
+                    border:1px solid tokenColor("set1","white1");
+                    color:tokenColor("set1","white1");
+                }
+            }
+
+        }
+
+    /// LABELS ///
+    
+    &-label{
+        color:cmpToken($cmp-tokens, 'color-fieldlabel', tokenColor(set1,black1), 'theme-light1');
+    }
+
+    /// ICONS ///
+    /// 
+    &-icon{
+        color:cmpToken($cmp-tokens, 'color-fieldicondf', tokenColor("set1","black1"), 'theme-light1');
+    }
+
+}
+@mixin form-field-status-theme-light1($status){
+    @if $status == "success" {
+        border-color:tokenColor("default", "success");
+        &:is([type=checkbox]), &:is([type=radio]){
+            border-color:tokenColor("set1", "color1");
+        }
+        //color:tokenColor("default","success");
+        &::placeholder{
+            //color:tokenColor("default", "success");
+        }   
+        & + [class*=#{$component}__validation-label]{
+            color:tokenColor("default","success");
+        }
+    }
+    @if $status == "warning" {
+        border-color:tokenColor("default", "warning");
+        color:tokenColor("default","warning");
+        &::placeholder{
+            color:tokenColor("default", "warning");
+        }   
+    }
+    @if $status == "error"{
+        border-color:tokenColor("default","error");
+        color:tokenColor("default","error");
+        &::placeholder{
+            color:tokenColor("default","error");
+        }   
+        & + [class*=#{$component}__validation-label]{
+            color:tokenColor("default","error");
+        }
+    }
+}
+.zaux-theme--light1, .zaux-theme--light1 .#{$component}{
+
+    &__field,input,textarea,select{
+        @include form-field-theme-light1;
+    }
+
+    .#{$component}__field{
+        &--error{ @include form-field-status-theme-light1("error")}
+        &--warning{ @include form-field-status-theme-light1("warning") }
+        &--success{ @include form-field-status-theme-light1("success") }
+    }
+
+    &__field-wrap{
+        &--success{ .#{$component}__field{ @include form-field-status-theme-light1("success") } }
+        &--warning{ .#{$component}__field{ @include form-field-status-theme-light1("warning") } }
+        &--error{ .#{$component}__field{ @include form-field-status-theme-light1("error") } }
+    }
+
+    &__loader{
+        border-color:tokenColor("set1","color1");
+        border-style:solid;
+        border-right-color:transparent;
+    }
+
+}

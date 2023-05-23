@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+$component: componentClass("img");
+$cmp-tokens: ();
+
+.#{$component}{
+    img{
+        transition: all $zaux-transition-0;
+    }
+    img[data-src]:not([class*=-is-loaded]){
+        display:none;
+        opacity:0.4;
+    }
+}

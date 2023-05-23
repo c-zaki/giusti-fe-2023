@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+$component: componentClass("titlebanner");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &__title{
+        color:tokenColor("set1","color1");
+    }
+}

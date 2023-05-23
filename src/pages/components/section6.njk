@@ -1,0 +1,41 @@
+
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Section 6",
+  "noSidePad" : true
+} %}
+
+{# Imports components #}
+{% import 'components/section6/section6.njk' as Section6 %}
+{% import 'components/newsletterbox1/newsletterbox1.njk' as NewsletterBox1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {% set sampleContent %}
+        {{
+            NewsletterBox1.content()
+        }}
+    {% endset %}
+    {{
+        Section6.content(
+            {
+                "content" : sampleContent
+            }
+        )
+    }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

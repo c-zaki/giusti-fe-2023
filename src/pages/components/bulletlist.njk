@@ -1,0 +1,86 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Bullet list"
+} %}
+
+{# Imports components #}
+{% import 'components/bulletlist/bulletlist.njk' as BulletList %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+  <div class="zaux-theme--light1">
+    {{
+        BulletList.content(
+            {
+                "list" : [
+                    {
+                        "title" : "Nikè rilevazioni",
+                        "subTitle" : "Monitoraggio marketing punti vendita",
+                        "cta" : {
+                            "link" : "#nike-rilevazioni"
+                        }
+                    },
+                    {
+                        "title" : "Title 2",
+                        "subTitle" : "Lorem ipsum dolor sit amet"
+                    },
+                    {
+                        "title" : "Title 3",
+                        "cta" : {
+                            "link" : "#nike-rilevazioni"
+                        }
+                    },
+                    {
+                        "subTitle" : "Title 4"
+                    }
+                ]
+            }
+        )
+    }}
+
+    <h3 class="fs-6 pt-8 pb-3">Theme variant 1</h3>
+
+    <div class="zaux-bg-set1-color3 p-5 my-5">
+        {{
+            BulletList.content(
+                {
+                    "variations" : ["theme-2"],
+                    "list" : [
+                        {
+                            "title" : "Nikè rilevazioni",
+                            "subTitle" : "Monitoraggio marketing punti vendita",
+                            "cta" : {
+                                "link" : "#nike-rilevazioni"
+                            }
+                        },
+                        {
+                            "title" : "Title 2",
+                            "subTitle" : "Lorem ipsum dolor sit amet"
+                        },
+                        {
+                            "title" : "Title 3",
+                            "cta" : {
+                                "link" : "#nike-rilevazioni"
+                            }
+                        },
+                        {
+                            "subTitle" : "Title 4"
+                        }
+                    ]
+                }
+            )
+        }}
+    </div>
+  </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

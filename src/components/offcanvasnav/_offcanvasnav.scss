@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+$component: componentClass("offcanvasnav");
+$cmp-tokens: ();
+
+.#{$component} {
+    
+    position:fixed;
+    z-index:tokenZindex(4);
+    //left:-#{cmpToken($cmp-tokens, 'css-cmp-width', 300px, 'layout')};
+    //width: cmpToken($cmp-tokens, 'css-cmp-width', 300px, 'layout');
+    width:100%;
+    left:0;
+    transition:top $zaux-transition-1;
+    top:-100vh;
+    right:0;
+    height:100%;
+    overflow-y:auto;
+
+    &--open{
+        top:0;
+    }
+
+    &__inner{
+        //padding-top:tokenSpacer(12);
+        height:100%;
+    }
+
+    &__menu{
+        height:100%;
+        .#{$component}__list{
+            li{
+                margin-bottom: cmpToken($cmp-tokens, 'spacer-menu-entry-mb', tokenSpacer(5), 'layout');
+                a{
+                    display:block;
+                }
+                img{
+                    @include media-breakpoint-down("md"){
+                        max-width:150px;
+                    }
+                }
+            }
+        }
+    }
+
+    &__language-selector{
+        position:relative;
+        padding-right:2.3rem;
+        border-bottom-width:1px;
+        font-weight:$zaux-typo-fw-semibold;
+        .#{$component-prefix}icon{
+            position:relative;
+            z-index:tokenZindex(3);
+            pointer-events:none;
+        }
+        select{
+            left:0;
+            width:100%;
+            position:absolute;
+            background-position:right !important;
+            line-height:1.2rem !important;
+            font-weight:$zaux-typo-fw-semibold;
+        }
+    }
+
+
+}

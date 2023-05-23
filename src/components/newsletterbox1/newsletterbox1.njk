@@ -1,0 +1,44 @@
+{# Imports components #}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/form/input/text/text.njk' as inputText %}
+{% import 'components/form/input/checkbox/checkbox.njk' as inputCheckbox %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-newsletterbox1' %}
+
+    {% set configDefault = {
+        "className": [""],
+        "variations" : [],
+        "placeHolder" : "Email",
+        "checkboxLabel" : "Checkbox label here <a class='fw-bold zaux-color-set1-color1' href='#test'>with link</a>",
+        "submitBtnLabel"  : "Iscriviti",
+        "method" : "POST",
+        "action" : "",
+        "formAttrs" : "",
+        "btnLabel" : "Send"
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    <div class="{{_className | join(" ")}}">
+        <div class="{{componentClassName}}__inner text-center">
+            <form class="maxw-576px mx-auto" data-js-component="Form" {{obj.formAttrs}} method="{{obj.method}}" action="{{obj.action}}">
+                {{ inputText.content({ "className" : [componentClassName + "__input"], "validationPot" : true, "labelWrap" : true, "type" : "email", "required" : true, "className" : ["rounded-pill"], "variations" : ["size-m", "pill"], "placeHolder" : "Email", "hasBtn" : true, "btn" : { "variations" : ["primary", "size-m"], "label" : obj.submitBtnLabel} }) }}
+                <div class="pt-4 d-flex justify-content-center">
+                    {{ inputCheckbox.content({"required" : true, "variations" : ["theme-alt4"], "label" : obj.checkboxLabel})}}
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endmacro %}

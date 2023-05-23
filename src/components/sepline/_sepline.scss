@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+$component: componentClass("sepline");
+$cmp-tokens: ();
+
+.#{$component} {
+    border-top-width:1px;
+    height:1px;
+}

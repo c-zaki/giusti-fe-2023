@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+$component: componentClass("badge");
+$cmp-tokens: ();
+
+.#{$component} {
+    .#{$component}__inner{
+        display:block;
+        padding: tokenSpacer(1) tokenSpacer(3);
+    }
+    @include c-typo-style("text-s", map-get($zaux-styles-typography, "style1"));
+    border-width:1px;
+    font-weight:$zaux-typo-fw-light;
+    &--size-m{
+        .#{$component}__inner{
+            padding: tokenSpacer(3) tokenSpacer(4);
+        }
+        @include c-typo-style("text-m", map-get($zaux-styles-typography, "style1"));
+    }
+    &--size-l{
+        .#{$component}__inner{
+            padding: tokenSpacer(4) tokenSpacer(5);
+        }
+        @include c-typo-style("text-l", map-get($zaux-styles-typography, "style1"));
+    }
+    &[class*=--outline]{
+        border-width:1px;
+    }
+}

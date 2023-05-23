@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+$component: componentClass("searchoverlay");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    //background-color:tokenColor("set1","color1");
+    //color:tokenColor("set1","white1");
+    background-color:rgba(tokenColor("set1","black1"), 0.5);
+    &__search{
+        background-color:tokenColor("set1","color3");
+        color:tokenColor("set1","white1");
+    }
+    &__controls{
+        color:tokenColor("set1","white1");
+        i{
+            color:tokenColor("set1","white1");
+        }
+    }
+    &__results{
+        transition: background-color $zaux-transition-1;
+    }
+    &--typing{
+        .#{$component}__results{
+            background-color:tokenColor("set1","white1");
+        }
+    }
+    [data-no-results]{
+        color:tokenColor("set1","color5");
+        transition:opacity $zaux-transition-0;
+    }
+    [data-search-results]{
+        transition: opacity $zaux-transition-1;
+    } 
+    &--searching{
+        [data-search-results]{
+            opacity:0;
+        }
+    }
+}

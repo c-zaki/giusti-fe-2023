@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+
+$component: componentClass("typo");
+
+@mixin c-typo-text-rules( $child-selector : "", $isImportant : false ){
+    $valueSuffix: "" !default;
+    @if ($isImportant) {
+      $valueSuffix: " !important";
+    }
+    @each $i, $props in tokenTypoSizes() {
+      .#{$component}-fs-#{$i} #{$child-selector} {
+        font-size: rem(tokenTypoSizeFs($i))#{$valueSuffix};
+      }
+    }
+    @each $i, $props in tokenTypoLineHeights() {
+      .#{$component}-lh-#{$i} #{$child-selector} {
+        line-height: rem(tokenTypoSizeLh($i))#{$valueSuffix};
+      }
+    }
+}
+
+@mixin c-typo-text-rules-responsive( $child-selector : "", $isImportant : false ){
+    $valueSuffix: "" !default;
+
+    @if ($isImportant) {
+      $valueSuffix: " !important";
+    }
+
+    @each $i, $props in tokenTypoSizes() {
+      @each $k in tokenTypoBreakpoints() {
+        @include media-breakpoint-up(#{$k}) {
+          .#{$component}-fs-#{$i} #{$child-selector} {
+            font-size: rem(tokenTypoSizeFs($i))#{$valueSuffix};
+          }
+        }
+      }
+    }
+
+    @each $i, $props in tokenTypoLineHeights() {
+      @each $k in tokenTypoBreakpoints() {
+        @include media-breakpoint-up(#{$k}) {
+          .#{$component}-lh-#{$i} #{$child-selector} {
+            line-height: rem(tokenTypoSizeLh($i))#{$valueSuffix};
+          }
+        }
+      }
+    }
+
+}
+
+
+@mixin c-typo-style($style, $styleSource, $type : 'layout', $autoResponsive : true){
+  @each $styleObj in $styleSource{
+    $styleName : map-get($styleObj, "name");
+    @if( $styleName == $style ){
+      @if( $type == 'layout' ){
+        @if( $styleName == $style ){
+          font-size: rem(map-get($styleObj, "fontSize"));
+          line-height: rem(map-get($styleObj, "lineHeight"));
+          @if( map-get( $styleObj, "fontWeight") ){
+            font-weight: map-get($styleObj, "fontWeight");
+          }
+          @if( map-get( $styleObj, 'textTransform') ){
+            text-transform: map-get($styleObj, 'textTransform');
+          }
+          @if( map-get($styleObj, "letterSpacing") ){
+            letter-spacing:rem(map-get($styleObj, 'letterSpacing'));
+          }
+          @if( map-get($styleObj, "lineCapFix") ){
+          margin-top: -#{map-get($styleObj, "lineCapFix")}px;
+          margin-bottom:-#{map-get($styleObj, "lineCapFix")}px;
+          }
+        }
+      }
+      @if( $type == 'theme' ){
+        font-family: map-get($styleObj, 'fontFamily');
+        color: map-get($styleObj, 'color');
+        @if( map-get($styleObj, "textDecoration" ) ){
+          text-decoration: map-get($styleObj, "textDecoration");
+        }
+      }
+      @if( $autoResponsive == true and $type == 'layout' ){
+        @if( map-get($styleObj, "breakpoints")){
+          $responsiveStyles : map-get($styleObj, "breakpoints");
+          @each $breakPointKey, $breakPointStyle in $responsiveStyles{
+            @include media-breakpoint-down( $breakPointKey ){
+              &:not([class*=c-typo--noautores]){
+                font-size: rem(map-get($breakPointStyle, "fontSize"));
+                line-height: rem(map-get($breakPointStyle, "lineHeight"));
+                font-weight: map-get($breakPointStyle, "fontWeight");
+                @if( map-get( $breakPointStyle, 'textTransform') ){
+                  text-transform: map-get($breakPointStyle, 'textTransform');
+                }
+                @if( map-get($breakPointStyle, "letterSpacing") ){
+                  letter-spacing:rem(map-get($breakPointStyle, 'letterSpacing'));
+                }
+                @if( map-get($breakPointStyle, "lineCapFix") ){
+                margin-top: -#{map-get($breakPointStyle, "lineCapFix")}px;
+                margin-bottom:-#{map-get($breakPointStyle, "lineCapFix")}px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+////////////////////////////////////////////////////
+// Custom block rules
+////////////////////////////////////////////////////
+/*
+@mixin typoFix1 {
+  font-size: clamp(22px, 2.625rem, 32px) !important;
+  line-height: clamp(26px, 2.875rem, 36px) !important;
+}
+
+@mixin typoFix2 {
+  font-size: clamp(12px, 1rem, 15px) !important;
+  line-height: clamp(14px, 1.625rem, 25px) !important;
+}
+*/

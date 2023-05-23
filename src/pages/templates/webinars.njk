@@ -1,0 +1,346 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/default.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": template_home,
+  "title": "Webinars",
+  "className" : "zaux-theme--light1",
+  "isHome" : true
+} %}
+
+{# Imports components #}
+{% import 'components/emptyblock/emptyblock.njk' as EmptyBlock %}
+{% import 'components/header/header.njk' as header %}
+{% import 'components/newsletterbox1/newsletterbox1.njk' as NewsletterBox1 %}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/herocomp1/herocomp1.njk' as HeroComp1 %}
+{% import 'components/section1/section1.njk' as Section1 %}
+{% import 'components/section4/section4.njk' as Section4 %}
+{% import 'components/section6/section6.njk' as Section6 %}
+{% import 'components/gridlist1/gridlist1.njk' as GridList1 %}
+{% import 'components/contactbox1/contactbox1.njk' as ContactBox1 %}
+{% import 'components/card1/card1.njk' as Card1 %}
+{% import 'components/card2/card2.njk' as Card2 %}
+{% import 'components/card3/card3.njk' as Card3 %}
+{% import 'components/bulletlist/bulletlist.njk' as BulletList %}
+{% import 'components/map/map.njk' as Map %}
+{% import 'components/cardicon/cardicon.njk' as CardIcon %}
+{% import 'components/sliderstrip1/sliderstrip1.njk' as SliderStrip1 %}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/bannerimg1/bannerimg1.njk' as BannerImg1 %}
+{% import 'components/titlebanner/titlebanner.njk' as TitleBanner %}
+{% import 'components/breadcrumbs1/breadcrumbs1.njk' as Breadcrumbs %}
+{% import 'components/richtextblock1/richtextblock1.njk' as RichTextBlock1 %}
+{% import 'components/indexlist/indexlist.njk' as IndexList %}
+{% import 'components/mediacard1/mediacard1.njk' as MediaCard1 %}
+{% import 'components/treenav/treenav.njk' as TreeNav %}
+{% import 'components/contentlayout1/contentlayout1.njk' as ContentLayout1 %}
+
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Hero Banner -->
+        {{ BannerImg1.content() }}
+    <!-- End of hero banner -->
+
+    <!-- Breadcrumbs -->
+        <div class="container-l pb-6 pt-7 pt-md-9 pb-md-7">
+            {{ Breadcrumbs.content() }}
+        </div>
+    <!-- End of breadcrumbs -->
+
+    <!-- Content layout -->
+
+        {# START OF CONTENT BUFFER #}
+
+            {# Content #}
+              {% set titleBannerContent %}
+                  <!-- Title banner -->
+                      {{
+                          TitleBanner.content(
+                              {
+                                  "contained" : false,
+                                  "title" : "Webinar",
+                                  "subtitle" : "Per sapere di più su Nikè iscriviti e partecipa ai nostri webinar o guarda quelli passati."
+                              }
+                          )
+                      }}
+                  <!-- End of title banner -->
+              {% endset %}
+              {% set mediaCardContent %}
+                  {{ MediaCard1.content() }}
+              {% endset %}
+              {% set mediaCardContentNoFbox %}
+                  {{ MediaCard1.content({"title" : "Next webinar", "noFancyBox" : true, "url" : "#no-fancybox-link" }) }}
+              {% endset %}
+              {% set gridVids1 %}
+                {{
+                    GridList1.content(
+                        {
+                          "cols" : "col-12 col-sm-6",
+                          "contained" : false,
+                          "elements" : [
+                              { "content" : mediaCardContent },
+                              { "content" : mediaCardContentNoFbox }
+                          ]
+                        }
+                    )
+                }}
+              {% endset %}
+              {% set gridVids2 %}
+                {% set richTextSample %}
+                    <h3>Archivio</h3>
+                {% endset %}
+                {{ RichTextBlock1.content({"content" : richTextSample }) }}
+                {{
+                    GridList1.content(
+                        { 
+                          "cols" : "col-12 col-sm-6 col-md-3",
+                          "contained" : false,
+                          "elements" : [
+                            { "content" : mediaCardContent },
+                            { "content" : mediaCardContent },
+                            { "content" : mediaCardContent },
+                            { "content" : mediaCardContent },
+                            { "content" : mediaCardContent }
+                          ]
+                        }
+                    )
+                }}
+              {% endset %}
+            {# End of content #}
+
+            {# Sidebar #}
+                {% set SummaryContent %}
+                    <!-- Summary -->
+                        {{
+                            TreeNav.content(
+                                {
+                                    "title" : "Tree nav title",
+                                    "backBtn" : {
+                                        "link" : "#back-link",
+                                        "label" : "Scheda Principale"
+                                    },
+                                    "entries" : [
+                                        {
+                                            "mainLevel" : {
+                                                "label" : "First level label",
+                                                "link" : "#first-level-link"
+                                            }
+                                        },
+                                        {
+                                            "mainLevel" : {
+                                                "label" : "First level label",
+                                                "link" : "#first-level-link"
+                                            }
+                                        },
+                                        {
+                                            "mainLevel" : {
+                                                "highlight" : true,
+                                                "label" : "First level label",
+                                                "link" : "#first-level-link"
+                                            }
+                                        },
+                                        {
+                                            "mainLevel" : {
+                                                "label" : "First level label",
+                                                "link" : "#first-level-link"
+                                            },
+                                            "subLevel" : [
+                                                {
+                                                    "mainLevel" : {
+                                                        "highlight" : true,
+                                                        "link" : "#test-highlight",
+                                                        "label" : "Sublevel title linked highlighted"
+                                                    }
+                                                },
+                                                {
+                                                    "mainLevel" : {
+                                                        "label" : "Second level label",
+                                                        "link" : "#test"
+                                                    }
+                                                },
+                                                {   
+                                                    "mainLevel" : {
+                                                        "label" : "Third level opening title no link"
+                                                    },
+                                                    "subLevel" : [
+                                                        {
+                                                            "mainLevel" : {
+                                                                "label" : "Third level",
+                                                                "link" : "#third-level-link"
+                                                            },
+                                                            "subLevel" : [
+                                                                {
+                                                                    "mainLevel" : {
+                                                                        "label" : "Fourth level",
+                                                                        "link" : "#fourth-level-link"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "mainLevel" : {
+                                                                "label" : "Third level",
+                                                                "link" : "#third-level-link"
+                                                            },
+                                                            "subLevel" : [
+                                                                {
+                                                                    "mainLevel" : {
+                                                                        "label" : "Fourth level",
+                                                                        "link" : "#fourth-level-link"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "mainLevel" : {
+                                                "label" : "First level label",
+                                                "link" : "#first-level-link"
+                                            }
+                                        },
+                                        {
+                                            "mainLevel" : {
+                                                "label" : "First level label",
+                                                "link" : "#first-level-link"
+                                            }
+                                        },
+                                        {
+                                            "mainLevel" : {
+                                                "label" : "First level label",
+                                                "link" : "#first-level-link"
+                                            }
+                                        }
+                                    ]
+                                }
+                            )
+                        }}
+                    <!-- End of summary -->
+                {% endset %}
+            {# End of sidebar #}
+
+        {# END OF CONTENT BUFFER #}
+
+        {{
+            ContentLayout1.content(
+                {
+                    "className" : ["pb-10"],
+                    "layout" : "layout2",
+                    "col1Content" : [
+                        { "content" : titleBannerContent },
+                        { "content" : gridVids1 },
+                        { "content" : gridVids2 }
+                    ],
+                    "col2Content" : [
+                        { "content" : SummaryContent }
+                    ]
+                }
+            )
+        }}
+
+    <!-- End of content layout -->
+
+    <!-- Prova nikè -->
+      {% set contentHTML %}
+        {% set gridContent1 %}
+          {{
+              CardIcon.content(
+                {
+                  "className" : ["h-100"]
+                }
+              )
+          }}
+        {% endset %}
+        {% set gridContent2 %}
+          {{
+              CardIcon.content(
+                {
+                  "className" : ["h-100"],
+                  "variations" : ["theme-2"], 
+                  "iconName" : "user",
+                  "title" : "Richiedi una consulenza gratuita",
+                  "subTitle" : "Compila il form per prenotare senza impegno una consulenza gratuita di primo livello."
+                }
+              )
+          }}
+        {% endset %}
+        {{
+          GridList1.content(
+            {
+              "cols" : "col-12 col-sm-6",
+              "elements" : [
+                {
+                  "content" : gridContent1
+                },
+                {
+                  "content" : gridContent2
+                }
+              ]
+            }
+          )
+        }}
+      {% endset %}
+      {{
+        Section1.content(
+          {
+            "txtAlignContent" : "text-left",
+            "variations" : ["theme-2"],
+            "preTitle" : "Prova nikè",
+            "title" : "Richiedi una demo di Nikè CRM o una consulenza gratuita e scopri come può portare la tua azienda verso il successo",
+            "content" : contentHTML
+          }
+        )
+      }}
+    <!-- End of prova nikè -->
+    
+    <!-- Newsletter -->
+      {% set sampleContent %}
+          {{
+              NewsletterBox1.content()
+          }}
+      {% endset %}
+      {{
+          Section6.content(
+              {
+                  "content" : sampleContent
+              }
+          )
+      }}
+    <!-- End of newsletter -->
+
+    <!-- Contatti -->
+      {% set mapContent %}
+        {{
+          Map.content(
+            {
+              "className" : ["h-100", "w-100"],
+              "src" : "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5759.862461651769!2d11.209139!3d43.79504000000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a56e190990909%3A0x70c0443cebc153ba!2sVia%20Alberto%20Franchetti%2C%2019%2C%2050127%20Firenze%20FI!5e0!3m2!1sit!2sit!4v1684190719849!5m2!1sit!2sit"
+            }
+          )
+        }}
+      {% endset %}
+      {{
+        ContactBox1.content(
+          {
+            "title" : "Contatti",
+            "frameContent" : mapContent
+          }
+        )
+      }}
+    <!-- End of contatti -->
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

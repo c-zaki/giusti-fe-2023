@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+//@import "../../assets/scss/components/tokens/accordion.style";
+
+$component: componentClass("accordion");
+$cmp-tokens: ();
+
+//@if ($zaux-accordion-style-tokens){
+  //  $cmp-tokens : $zaux-accordion-style-tokens;
+//}
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component} {
+
+    &__header{
+        border-bottom-style:cmpToken($cmp-tokens, "prop-headerborderbottomstyle", solid, "theme-light1");
+        border-top-style: cmpToken($cmp-tokens, "color-header-bordertopstyle", solid, "theme-light1");
+        border-bottom-color:cmpToken($cmp-tokens, "color-headerborderbottomcolor", tokenColor("set1", "color2"), "theme-light1");
+        border-top-color: cmpToken($cmp-tokens, "color-header-bordertopcolor", tokenColor("set1", "color2"), "theme-light1");
+    }
+
+    &__title{
+        font-weight: cmpToken($cmp-tokens, "fw-title", $zaux-typo-fw-extrabold, "theme-light1");
+        color: cmpToken($cmp-tokens, "color-title", tokenColor("set1", "color1"), "theme-light1");
+    }
+
+    &__icon{
+        color:cmpToken($cmp-tokens, "color-icon", tokenColor("set1", "color7"), "theme-light1");
+    }
+
+    &__controls{
+        *{
+            color:cmpToken($cmp-tokens, "color-controls", tokenColor("set1", "color1"), "theme-light1");
+        }
+    }
+    
+    &__content{
+        background-color:tokenColor("set1","white1");
+    }
+
+}

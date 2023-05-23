@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+$component: componentClass("navmodal1");
+$cmp-tokens: ();
+
+.#{$component} {
+
+    height:100%;
+    width:100%;
+    position:fixed;
+    z-index:tokenZindex(4);
+    display:none;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0; 
+
+    
+    &__dialog{
+        height:100%;
+        width:100%;
+        padding-top:var(--header-height);
+    }
+
+    &__header{
+        position:relative;
+    }
+
+    .#{$component}__content{
+        position:relative;
+        top:-100vh;
+        transition: all $zaux-transition-1;
+        
+    }
+
+    &.show{
+        .#{$component}__content{
+            top:0;
+        }
+    }
+
+    &[data-js-component]{
+        [data-logo],[data-nav-title]{
+            &:not([class*=--active]){
+                display:none;
+            }
+        }
+    }
+
+}

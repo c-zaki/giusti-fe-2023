@@ -1,0 +1,413 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+@import "./input/checkboxbtn/checkboxbtn.scss";
+
+$component: componentClass("form");
+
+@mixin form-fields-rules1{
+    
+    border-width:2px;
+    &:focus{
+        outline:none;
+    }
+
+    input{
+        &:focus{
+            outline:none;
+        }
+    }
+
+    //Sizes
+
+    //Small
+    &--size-s{
+        padding: cmpToken($cmp-tokens, 'spacer-inputsmall-py', tokenSpacer(2), 'layout') cmpToken($cmp-tokens, 'spacer-inputsmall-px', tokenSpacer(4), 'layout');
+        font-size:cmpToken($cmp-tokens, 'fs-inputsmall', tokenTypoSizeFs(1), 'layout');
+        line-height:cmpToken($cmp-tokens, 'lh-inputsmall', tokenTypoSizeLh(1),'layout');
+        input{
+            padding: cmpToken($cmp-tokens, 'spacer-inputsmall-py', tokenSpacer(2), 'layout') cmpToken($cmp-tokens, 'spacer-inputsmall-px', tokenSpacer(0), 'layout');
+        }
+        & + .#{$component}__field-icon{
+            margin-right:tokenSpacer(4);
+            font-size: tokenIconSize(2);
+        }
+        & + .#{$component}__field-btn{
+            margin-right:tokenSpacer(0);
+            padding:tokenSpacer(1);
+        }
+        & + [class*=#{$component}__validation-label]{
+            padding-top:tokenSpacer(2);
+            font-size:cmpToken($cmp-tokens, 'fs-inputsmall', tokenTypoSizeFs(1), 'layout');
+        }
+        &:is(input[type=file])::file-selector-button{
+            font-size:tokenTypoFs(1);
+            margin-right:tokenSpacer(3);
+            padding: tokenSpacer(1) tokenSpacer(2);
+        }
+    }
+
+    //Medium is also default
+    &--size-m,
+    &:not([class*=--size]),
+    &:is(input, select, textarea):not([class*=--size]){
+        padding: cmpToken($cmp-tokens, 'spacer-inputmedium-py', tokenSpacer(4), 'layout') cmpToken($cmp-tokens, 'spacer-inputsmall-px', tokenSpacer(5), 'layout');
+        font-size:cmpToken($cmp-tokens, 'fs-inputmedium', tokenTypoSizeFs(2), 'layout');
+        line-height:cmpToken($cmp-tokens, 'lh-inputmedium', tokenTypoSizeLh(2),'layout');
+        input{
+            padding: cmpToken($cmp-tokens, 'spacer-inputmedium-py', tokenSpacer(2), 'layout') cmpToken($cmp-tokens, 'spacer-inputsmall-px', tokenSpacer(0), 'layout');
+        }
+        & + .#{$component}__field-icon{
+            margin-right:tokenSpacer(4);
+            font-size: tokenIconSize(3);
+        }
+        & + .#{$component}__field-btn{
+            margin-right:tokenSpacer(0);
+        }
+        & + [class*=#{$component}__validation-label]{
+            padding-top:tokenSpacer(4);
+            font-size:cmpToken($cmp-tokens, 'fs-inputmedium', tokenTypoSizeFs(2), 'layout');
+        }
+        &:is(input[type=file])::file-selector-button{
+            font-size:tokenTypoFs(3);
+            margin-right:tokenSpacer(4);
+            padding: tokenSpacer(2) tokenSpacer(4);
+        }
+    }
+
+    //Large
+    &--size-l{
+        padding: cmpToken($cmp-tokens, 'spacer-inputlarge-py', tokenSpacer(3), 'layout') cmpToken($cmp-tokens, 'spacer-inputlarge-px', tokenSpacer(4), 'layout');
+        font-size:cmpToken($cmp-tokens, 'fs-inputlarge', tokenTypoSizeFs(4), 'layout');
+        line-height:cmpToken($cmp-tokens, 'lh-inputlarge', tokenTypoSizeLh(4),'layout');
+        input{
+            padding: cmpToken($cmp-tokens, 'spacer-inputlarge-py', tokenSpacer(4), 'layout') cmpToken($cmp-tokens, 'spacer-inputlarge-px', tokenSpacer(0), 'layout');
+        }
+        & + .#{$component}__field-icon{
+            margin-right:tokenSpacer(4);
+            font-size: tokenIconSize(3);
+        }
+        & + .#{$component}__field-btn{
+            margin-right:tokenSpacer(0);
+        }
+        & + [class*=#{$component}__validation-label]{
+            padding-top:tokenSpacer(4);
+            font-size:cmpToken($cmp-tokens, 'fs-inputlarge', tokenTypoSizeFs(4), 'layout');
+        }
+        &:is(input[type=file])::file-selector-button{
+            font-size:tokenTypoFs(5);
+            margin-right:tokenSpacer(5);
+            padding: tokenSpacer(2) tokenSpacer(4);
+        }
+        &[class*=--responsive1]{
+            @include media-breakpoint-down(md){
+                font-size:cmpToken($cmp-tokens, 'fs-inputlarge_md', tokenTypoSizeFs(3), 'layout-res1');
+                line-height:cmpToken($cmp-tokens, 'lh-inputlarge_md', tokenTypoSizeLh(3),'layout-res1');
+            }
+        }
+    }
+
+    //Radios
+    &:is([type=radio]){
+        position:relative;
+        padding:0 !important;
+        &,&.#{$component}__field--size-s{
+            width:20px;
+            height:20px;
+            border-width: 2px;
+            & + [class*=#{$component}__validation-label]{
+                padding-top:tokenSpacer(2);
+                font-size:tokenTypoSizeFs(1);
+            }
+        }
+        &:after{
+            content:"";
+            position:absolute;
+            pointer-events:none;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            height:10px;
+            width:10px;
+            opacity:0;
+        }
+        &:checked{
+            &:after{
+                opacity:1;
+            }
+        }
+        &.#{$component}__field--size-m{
+            width:30px;
+            height:30px;
+            padding:0;
+            border-width: 2px;
+            &:after{
+                height:15px;
+                width:15px;
+            }
+            & + [class*=#{$component}__validation-label]{
+                padding-top:tokenSpacer(4);
+                font-size:tokenTypoSizeFs(2);
+            }
+        }
+        &.#{$component}__field--size-l{
+            width:40px;
+            height:40px;
+            padding:0;
+            border-width: 2px;
+            &:after{
+                height:20px;
+                width:20px;
+            }
+            & + [class*=#{$component}__validation-label]{
+                padding-top:tokenSpacer(4);
+                font-size:tokenTypoSizeFs(2);
+            }
+        }
+    }
+
+    //Checkboxes
+    &:is([type=checkbox]){
+        position:relative;
+        padding:0 !important;
+        width:30px;
+        height:30px;
+        &,&.#{$component}__field--size-s{
+            width:20px;
+            height:20px;
+            min-width:20px;
+            padding:0;
+            border-width: 2px;
+            & + [class*=#{$component}__validation-label]{
+                padding-top:tokenSpacer(2);
+                font-size:tokenTypoSizeFs(1);
+            }
+        }
+        &.#{$component}__field--size-m{
+            width:30px;
+            height:30px;
+            min-width:30px;
+            padding:0;
+            border-width: 2px;
+            & + [class*=#{$component}__validation-label]{
+                padding-top:tokenSpacer(4);
+                font-size:tokenTypoSizeFs(2);
+            }
+        }
+        &.#{$component}__field--size-l{
+            width:40px;
+            height:40px;
+            min-width:40px;
+            padding:0;
+            border-width: 2px;
+            & + [class*=#{$component}__validation-label]{
+                padding-top:tokenSpacer(4);
+                font-size:cmpToken($cmp-tokens, 'fs-inputlarge', tokenTypoSizeFs(4), 'layout');
+            }
+        }
+    }
+
+    //File
+    &:is([type=file]){
+        padding:0 !important;
+    }
+    &:is([type=file])::file-selector-button{
+        margin-right:tokenSpacer(2);
+        appearance:none;
+        border-style:none;
+        //padding: tokenSpacer(1) tokenSpacer(2);
+    }
+
+    //Variants
+    &--type2, &--type3{
+        border:none;
+        &.#{$component}__field{
+            &--size-s{
+                padding: cmpToken($cmp-tokens, 'spacer-input2small-py', tokenSpacer(2), 'layout') cmpToken($cmp-tokens, 'spacer-input2small-px', tokenSpacer(3), 'layout');
+                font-size:cmpToken($cmp-tokens, 'fs-inputsmall', tokenTypoSizeFs(3)+1, 'layout');
+                input{
+                    padding: cmpToken($cmp-tokens, 'spacer-input2small-py', tokenSpacer(2), 'layout') cmpToken($cmp-tokens, 'spacer-input2small-px', tokenSpacer(3), 'layout');
+                }
+                & + .#{$component}__field-btn{
+                    margin-right:tokenSpacer(6);
+                }
+            }
+            &--size-m{
+                padding: cmpToken($cmp-tokens, 'spacer-input2medium-py', tokenSpacer(4), 'layout') cmpToken($cmp-tokens, 'spacer-input2medium-px', tokenSpacer(5), 'layout');
+                font-size:cmpToken($cmp-tokens, 'fs-inputmedium', tokenTypoSizeFs(6), 'layout');
+                input{
+                    padding: cmpToken($cmp-tokens, 'spacer-input2medium-py', tokenSpacer(4), 'layout') cmpToken($cmp-tokens, 'spacer-input2medium-px', tokenSpacer(5), 'layout');
+                }
+            }
+            &--size-l{
+                padding: cmpToken($cmp-tokens, 'spacer-input2large-py', tokenSpacer(4), 'layout') cmpToken($cmp-tokens, 'spacer-input2large-px', tokenSpacer(5), 'layout');
+                font-size:cmpToken($cmp-tokens, 'fs-inputlarge', tokenTypoSizeFs(9), 'layout');
+                input{
+                    padding: cmpToken($cmp-tokens, 'spacer-input2medium-py', tokenSpacer(2), 'layout') cmpToken($cmp-tokens, 'spacer-input2medium-px', tokenSpacer(5), 'layout');
+                }
+            }
+        }
+    }
+    
+    /*
+    &:is(div){
+        padding:0 !important;
+    }
+    */
+
+}
+
+input,textarea,select{
+    @include form-fields-rules1;
+}
+
+/*
+input[type=submit]{
+    @extend .c-btn, .c-btn--size-m;
+}
+*/
+
+.#{$component} {
+    &__field-wrap{
+        &--has-icon{
+            padding-left:0;
+            padding-right:0;
+            position:relative;
+            .#{$component}{
+                &__field{
+                    &-icon{
+                        position:absolute;
+                        pointer-events:none;
+                        &--r{
+                            right:0;
+                            top:50%;
+                            transform:translateY(-50%);
+                        }
+                        &--sm{
+                            font-size:tokenIconSize(4);
+                        }
+                    }
+                }
+            }
+        }
+        &--has-btn{
+            position:relative;
+            .#{$component}__field-btn{
+                padding:tokenSpacer(1);
+                position:absolute;
+                right:0;
+                top:0;
+                .#{$component-prefix}btn{
+                    height:100%;
+                    padding-top:0;
+                    padding-bottom:0;
+                    display:flex;
+                    align-items:center;
+                }
+            }
+        }
+        &[class*=#{$component}__field-wrap--has-btn]{
+            padding-left:0;
+            padding-right:0;
+            position:relative;
+            .#{$component}__field-btn{
+                position:absolute;
+                height:100%;
+            }
+            &[class*=#{$component}__field-wrap--has-btn-r]{
+                .#{$component}__field-btn{
+                    top:0;
+                    right:0;
+                }
+            }
+        }
+
+        .#{$component}__field{
+            width:100%;
+        }
+
+        //Side label
+        &--sidelabel{
+            label{
+                > * {
+                    display:inline-block;
+                    vertical-align:middle;
+                }
+            }
+            .#{$component}__field-label{
+                padding-left:cmpToken($cmp-tokens, 'spacer-sidelabel-ml', tokenSpacer(1), 'layout');
+                font-weight:$zaux-typo-fw-regular;
+            }
+        }
+
+        &--checkbox, &--radio{
+            &:not([class*=--size]){
+                [class*=#{$component}__validation-label]{
+                    padding-top:tokenSpacer(2);
+                    font-size:cmpToken($cmp-tokens, 'fs-inputsmall', tokenTypoSizeFs(1), 'layout');
+                }
+            }
+            &[class*=--size-m]{
+                [class*=#{$component}__validation-label]{
+                    padding-top:tokenSpacer(4);
+                    font-size:cmpToken($cmp-tokens, 'fs-inputmedium', tokenTypoSizeFs(2), 'layout');
+                }
+            }
+            &[class*=--size-l]{
+                [class*=#{$component}__validation-label]{
+                    padding-top:tokenSpacer(4);
+                    font-size:cmpToken($cmp-tokens, 'fs-inputlarge', tokenTypoSizeFs(4), 'layout');
+                }
+            }
+        }
+    }
+
+    &__field-label{
+        font-weight:$zaux-typo-fw-regular;
+        font-size: cmpToken($cmp-tokens, 'fs-fieldlabel', tokenTypoSizeFs(1), 'layout');
+        &--size-m{
+            font-size:cmpToken($cmp-tokens, 'fs-fieldlabel', tokenTypoSizeFs(2), 'layout');
+        }
+        &--size-l{
+            font-size:cmpToken($cmp-tokens, 'fs-fieldlabel', tokenTypoSizeFs(3), 'layout');
+        }
+    }
+
+    &__field{
+        @include form-fields-rules1;
+    }
+
+    &__loader{
+        height:tokenSpacer(5);
+        width:tokenSpacer(5);
+        border-width:tokenSpacer(1);
+        display:block;
+        pointer-events:none;
+        opacity:0;
+        border-radius:tokenRadius("full");
+        transition: opacity $zaux-transition-1;
+        animation: formLoaderAnimation 1s infinite $zaux-ease-easeinoutquad;
+        &[class*=--active]{
+            opacity:1;
+        }
+    }
+
+    &__validation-pot{
+        > *{
+            padding:tokenSpacer(4);
+        }
+    }
+
+    &__input-wrap{
+        position:relative;
+    }
+}
+
+@keyframes formLoaderAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

@@ -1,0 +1,118 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+
+$component: componentClass("typo");
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--light1 {
+
+  $style-name: "style1";
+
+  @each $typoStyle in map-get($zaux-styles-typography, $style-name) {
+    .#{$component}-#{$style-name}-#{map-get($typoStyle, "name")}{
+      @include c-typo-style(map-get($typoStyle, "name"), map-get($zaux-styles-typography, $style-name), "theme");
+    }
+  }
+
+  [class*="#{$component}-block-#{$style-name}-themed"] {
+
+    code{
+      font-family:monospace;
+    }
+
+    hr{
+      border-top-color:tokenColor("set1","color1");
+      border-top-style:solid;
+    }
+
+    h1,h2,h3,h4,h5,h6{
+      border-top-style:solid;
+      border-top-color:tokenColor("set1","color1");
+    }
+    h1,
+    h2
+    {
+      color:tokenColor("set1","color1");
+    }
+    
+    h3,h4,h5,h6{
+      color:tokenColor("set1","color3");
+    }
+
+    p,
+    li {
+      @include c-typo-style("text-m", map-get($zaux-styles-typography, $style-name), "theme", false);
+    }
+
+    blockquote{
+      background-color: rgba(tokenColor("set1", "color2"), 0.5);
+      font-style: italic;
+      overflow:hidden;
+      position:relative;
+      &:before{
+        position:absolute;
+        top:-10px;
+        color:tokenColor("set1", "color2");
+        opacity:0.5;
+        right:tokenSpacer(4);
+        content:'"';
+        font-size: tokenTypoSizeFs(15);
+      }
+    }
+
+    a {
+      color:tokenColor("set1","color1");
+      @at-root .#{$zaux-system-classname-loaded} &:not([class*="btn"]) {
+        transition: color $zaux-transition-1, opacity $zaux-transition-1;
+      }
+    }
+
+    ul li {
+      &:before {
+        color: tokenColor("set1", "color1");
+      }
+    }
+
+    strong,
+    b {
+      color: tokenColor("set1", "black1");
+      font-weight:$zaux-typo-fw-bold;
+    }
+  }
+}
+
+////////////////////////////////////////////////////
+// Theme: Dark1
+////////////////////////////////////////////////////
+
+.zaux-theme--dark1 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  li {
+    color: tokenColor("set1", "white1");
+  }
+
+  a {
+    @at-root .#{$zaux-system-classname-loaded} & {
+      transition: color $zaux-transition-1, opacity $zaux-transition-1;
+    }
+
+    &:link,
+    &:visited,
+    &:hover {
+      color: tokenColor("set1", "white1");
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

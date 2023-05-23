@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+
+$component: componentClass("richtextblock1");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    
+}

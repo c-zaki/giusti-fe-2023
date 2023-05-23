@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+
+$component: componentClass("checkboxbtn");
+
+.#{$component}{
+    
+    padding:0 !important;
+    cursor:pointer;
+
+    &__label-wrap{
+        cursor:pointer;
+        border-width:2px;
+    }
+
+
+    [class*=__label-text],[class*=__input]{
+        z-index:tokenZindex(2);
+    }
+
+    [class*=__focus-bg]{
+        position:absolute;
+        pointer-events:none;
+        height:100%;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        width:100%;
+    }
+
+    [class*=__validation-label]{
+        padding:tokenSpacer(4) 0;
+    }
+
+    //Sizes
+
+    &[class*=--size-s]{
+        [class*=__label-wrap]{
+            padding:tokenSpacer(3);
+        }
+        [class*=__icon]{
+            font-size:tokenIconSize(2);
+            margin-right:tokenSpacer(2);
+        }
+        [class*=__field-label]{
+            font-size:tokenTypoSizeFs(2);
+        }
+    }
+
+    
+    &:not([class*=--size]),&[class*=--size-m]{
+        [class*=__label-wrap]{
+            padding:tokenSpacer(5);
+        }
+        [class*=__icon]{
+            font-size:tokenIconSize(4);
+            margin-right:tokenSpacer(4);
+        }
+        [class*=__field-label]{
+            font-size:tokenTypoSizeFs(2);
+        }
+    }
+
+    &[class*=--size-l]{
+        [class*=__label-wrap]{
+            padding:tokenSpacer(5);
+        }
+        [class*=__icon]{
+            font-size:tokenIconSize(5);
+            margin-right:tokenSpacer(5);
+        }
+        [class*=__field-label]{
+            font-size:tokenTypoSizeFs(4);
+        }
+    }
+
+}

@@ -1,0 +1,57 @@
+{% import 'components/img/img.njk' as Img %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-titlebanner' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations": [],
+        "titleTag" : "h3",
+        "title" : "Title sample",
+        "subtitle" : "",
+        "contained" : true
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {% set sizeClasses = {
+        "title" : "c-typo-style1-size-display-3 c-typo-style1-size-md-display-2 pb-4 pb-md-6 fw-regular",
+        "subtitle" : "c-typo-style1-size-text-m c-typo-style1-size-md-text-l fw-light"
+    }
+    %}
+
+    {% if obj.smallerTitle %}
+        {% set sizeClasses = sizeClasses | setAttribute("title", "c-typo-style1-size-display-2 fw-semibold") %}
+    {% endif %}
+
+    <div class="{{_className | join(" ")}}">
+        <div class="{{componentClassName}}__inner {% if obj.contained %}container-l{% endif %}">
+            {% if obj.preHeadHTML %}
+                <div class="pb-5">
+                {{ obj.preHeadHTML | safe}}
+                </div>
+            {% endif %}
+            {% if obj.logo %}
+                {% set imgParams = {"imgClasses" : ["pb-8"]} %}
+                {% set imgParams = imgParams | overwriteMerge(obj.logo) %}
+                {{ Img.content( imgParams ) }}
+            {% endif %}
+            {% if obj.title %}
+                <{{obj.titleTag}} class="{{componentClassName}}__title {{sizeClasses.title}}">{{obj.title | safe}}</{{obj.titleTag}}>
+            {% endif %}
+            {% if obj.subtitle !== '' %}
+            <p class="{{componentClassName}}__subtitle {{sizeClasses.subtitle}}">{{obj.subtitle | safe}}</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endmacro %}

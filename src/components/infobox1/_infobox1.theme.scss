@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+$component: componentClass("infobox1");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    border-top-color:tokenColor("set1","color4");
+    border-top-style:solid;
+    border-top-width:1px;
+}

@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+$component: componentClass("slider");
+$cmp-tokens: ();
+
+@if (variable-exists(zaux-slider-style-tokens)){
+    $cmp-tokens : $zaux-slider-style-tokens;
+}
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--light1 .#{$component}{
+    .#{$component}__pagination{
+        &--themestyle1{
+            --swiper-theme-color:#{cmpToken($cmp-tokens, 'color-active-bullet', tokenColor('set1', 'white1'), 'theme-light1' )};
+            --swiper-pagination-bullet-inactive-color: #{cmpToken($cmp-tokens, 'color-inactive-bullet', rgba(tokenColor('set1', 'white1'), 0.5), 'theme-light1' )};
+        }
+    }
+
+    &__instance{
+        &:after{
+            border-color:tokenColor("set1","color4");
+            border-top-color:tokenColor("set1","color1");
+        }
+    }
+}

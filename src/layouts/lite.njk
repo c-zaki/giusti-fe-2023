@@ -1,0 +1,63 @@
+{# Imports components #}
+{% import 'components/header/header.njk' as Header %}
+
+{% include "layouts/partials/html_comment_credits.njk" %}
+<!DOCTYPE html>
+<html lang="{{app.lang}}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{page.title}} - {{app.title}}</title>
+    <meta name="application-name" content="{{app.title}}"/>
+
+    <!--
+    Theme colors for web browsers and favicons
+    @see https://codeburst.io/progressive-web-apps-customize-status-bar-23c4b2de590f
+    -->
+    <meta name="theme-color" content="{{token_colors.app.theme}}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="{{token_colors.app.theme}}">
+    <meta name="msapplication-navbutton-color" content="{{token_colors.app.theme}}">
+    <meta name="msapplication-TileColor" content="{{token_colors.app.theme}}"/>
+
+    {% include "layouts/partials/head_favicon.njk" %}
+
+    <!--
+    Disables phone number format recognition in Microsoft Edge
+    @see https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/dev-guides/dn265018(v=vs.85)
+    -->
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- CSS -->
+    {% include "layouts/partials/head_css.njk" %}
+    {% block head_css %}{% endblock %}
+
+  </head>
+  <body{% if page.data.body.className %} class="{{page.data.body.className}}"{% endif %}>
+
+    <div id="{{token_defs['app-prefix']}}-content-outer">
+
+      {{ Header.content({
+        "isHome" : page.isHome,
+        "isLite" : true
+      }) }}
+
+      <div id="{{token_defs['app-prefix']}}-content-inner">
+
+        {% block content %}{% endblock %}
+
+      </div>
+      <!-- #{{token_defs['app-prefix']}}-content-inner -->
+    </div>
+    <!-- #{{token_defs['app-prefix']}}-content-outer -->
+
+    <!-- CSS -->
+    {% include "layouts/partials/foot_css.njk" %}
+
+    <!-- JS -->
+    {% include "layouts/partials/config_js.njk" %}
+    {% include "layouts/partials/foot_js.njk" %}
+    {% block foot_js %}{% endblock %}
+
+  </body>
+</html>

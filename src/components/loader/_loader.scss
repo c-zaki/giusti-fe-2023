@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+$component: componentClass("loader");
+$cmp-tokens: ();
+
+.#{$component} { 
+    display:inline-block;
+
+    &__icon{
+        transform-origin:center;
+        animation: loaderBounce 0.6s infinite alternate-reverse; 
+    }
+
+    &__dots {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+
+        div {
+            position: absolute;
+            top: tokenSpacer(6);
+            width: tokenSpacer(2);
+            height: tokenSpacer(2);
+            border-radius: tokenRadius(pill);
+            animation-timing-function: $zaux-ease-outcubic;
+
+            &:nth-child(1) {
+            left: 8px;
+            animation: dotmoving1 0.6s infinite;
+            }
+
+            &:nth-child(2) {
+            left: 8px;
+            animation: dotmoving2 0.6s infinite;
+            }
+
+            &:nth-child(3) {
+            left: 32px;
+            animation: dotmoving2 0.6s infinite;
+            }
+
+            &:nth-child(4) {
+            left: 56px;
+            animation: dotmoving3 0.6s infinite;
+            }
+        }
+    }
+
+}
+
+@include keyframes(dotmoving1) {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@include keyframes(dotmoving3) {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@include keyframes(dotmoving2) {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+@include keyframes(loaderBounce){
+    0%{ 
+        transform: translate(0,20px);
+        
+    }
+
+    100%{
+        transform: translate(0,0);
+    }
+}

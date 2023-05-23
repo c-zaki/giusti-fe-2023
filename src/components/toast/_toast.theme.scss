@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+$component: componentClass("toast");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+
+
+    background:linear-gradient(0deg, rgba(tokenColor("set1","black1"), 0.2) 0%, rgba(tokenColor("set1","black1"), 0.1) 30%, rgba(tokenColor("set1","white1"), 0) 80%);
+
+    &__content{
+        background-color: tokenColor("set1","color7");
+        color:tokenColor("set1","white1");
+        box-shadow:tokenShadow(2);
+        position:relative;
+    }
+
+    &--theme-success{
+        .#{$component}__content{
+            background-color: tokenColor("default","success");
+        }
+    }
+
+    &--theme-error{
+        .#{$component}__content{
+            background-color:tokenColor("default","error");
+        }
+    }
+
+    &--theme-blank{
+        .#{$component}__content{
+            box-shadow:none;
+            background-color:transparent
+        }
+    }
+
+    &[class*=--show]{
+        background:linear-gradient(0deg, rgba(tokenColor("set1","black1"), 0.2) 0%, rgba(tokenColor("set1","black1"), 0.1) 30%, rgba(tokenColor("set1","white1"), 0) 80%);
+    }
+
+}

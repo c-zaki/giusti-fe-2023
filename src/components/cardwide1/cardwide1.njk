@@ -1,0 +1,79 @@
+{# Imports components #}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/btn/btn.njk' as Button %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-cardwide1' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : [],
+        "isFeatured" : component_cardwide1.isFeatured,
+        "featuredLabel" : component_cardwide1.featuredLabel,
+        "titleTag" : "h3",
+        "preTitleTag" : "h5",
+        "title" : component_cardwide1.title,
+        "preTitle" : component_cardwide1.preTitle,
+        "img" : component_cardwide1.img,
+        "cta"  : component_cardwide1.cta,
+        "url" : "#"
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {% set _className = (_className.push(componentClassName + "--" + obj.layout), _className) %}
+
+
+    <div class="{{_className | join(" ")}}">
+        <div class="{{componentClassName}}__inner w-100 h-100 d-flex flex-column justify-content-between zaux-ratio--5 position-relative">
+            {% if obj.url %}
+            <a href="{{obj.url}}" title="{{obj.title}}" class="position-absolute top-0 start-0 w-100 h-100 zi-1"></a>
+            {% endif %}
+            <div class="{{componentClassName}}__bg position-absolute start-0 top-0 h-100 w-100">
+                {% set imgParams = { "variations" : ["fluid-xy"]} %}
+                {% set imgParams = imgParams | overwriteMerge(obj.img) %}
+                {{
+                    Img.content(imgParams)
+                }}
+            </div>
+            <div class="{{componentClassName}}__top">
+                {% if obj.isFeatured %}
+                    <div class="{{componentClassName}}__tag p-3 c-typo-style1-text-m text-uppercase d-inline-block position-relative">
+                        {{obj.featuredLabel}}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="{{componentClassName}}__bottom">
+                <div class="{{componentClassName}}__content d-flex flex-column gap-4 p-6 p-sm-8">
+                    <{{obj.preTitleTag}} class="c-typo-style1-text-m fw-bold">{{obj.preTitle}}</{{obj.preTitleTag}}>
+                    <{{obj.titleTag}} class="c-typo-style1-display-3 c-typo-style1-md-display-2 pb-8">{{obj.title}}</{{obj.titleTag}}>
+                    {% if obj.cta %}
+                        <a class="d-flex align-items-center gap-4" title="{{obj.cta.label}}" href="{{obj.cta.link}}">
+                            <div>
+                                <span class="fw-bold fs-2">{{obj.cta.label}}</span>
+                            </div>
+                            <div>
+                                {% set ctaParams  = {"variations" : ["primary", "size-m"], "iconOnly" : true, "hasIcon" : true, "icon" : "arrow1-right", "type" : "button", "tag" : "button" } %}
+                                {% set ctaParams = ctaParams | overwriteMerge(obj.cta) %}
+                                {{
+                                    Button.content(ctaParams)
+                                }}
+                            </div>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>  
+        </div>
+    </div>
+
+{% endmacro %}

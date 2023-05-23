@@ -1,0 +1,33 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Card Icon",
+  "noSidePad" : false
+} %}
+
+{# Imports components #}
+{% import 'components/cardicon/cardicon.njk' as CardIcon %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+  <div class="zaux-theme--light1">
+    <div class="container-m d-flex flex-column gap-6">
+    {{
+        CardIcon.content()
+    }}
+    {{
+        CardIcon.content({"variations" : ["theme-2"], "iconName" : "user"})
+    }}
+    </div>
+  </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

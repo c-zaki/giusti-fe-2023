@@ -1,0 +1,87 @@
+{
+  "webserver": {
+    "open": true,
+    "port": 9000,
+    "ui": {
+      "port": 9001
+    },
+    "injectChanges": false,
+    "ghostMode": {
+      "clicks": false,
+      "forms": false,
+      "scroll": false
+    }
+  },
+  "assets": {
+    "images": {
+      "exts": [
+        "jpg",
+        "jpeg",
+        "png",
+        "gif",
+        "svg",
+        "ico",
+        "js",
+        "css"
+      ]
+    },
+    "imagesopt": {
+      "exts": [
+        "jpg",
+        "jpeg",
+        "svg",
+        "png"
+      ]
+    },
+    "misc": {
+      "exts": [
+        "mp4",
+        "webm",
+        "ogv",
+        "json",
+        "html"
+      ]
+    },
+    "fontpack": {
+      "exts": [
+        "css",
+        "ttf",
+        "woff",
+        "woff2",
+        "eot",
+        "svg"
+      ]
+    },
+    "iconpack": {
+      "exts": [
+        "html",
+        "css",
+        "txt",
+        "svg",
+        "json"
+      ]
+    },
+    "deploy": {
+      "exts": [
+        "html",
+        "php",
+        "css",
+        "mp4",
+        "js",
+        "json",
+        "gif",
+        "jpg",
+        "png",
+        "php",
+        "svg",
+        "webp",
+        "ico",
+        "woff",
+        "woff2",
+        "ttf",
+        "eot",
+        "otf"
+      ]
+    }
+  }
+}

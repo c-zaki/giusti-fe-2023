@@ -1,0 +1,14 @@
+{
+    "title" : "La sostenibile leggerezza <br/> del software",
+    "subTitle" : "Sviluppiamo software ergonomici, comodi da usare e sostenibili per il bene del pianeta, in grado di coniugare sul lavoro comodità e tecnologia con un’anima culturale ed etica.",
+    "cta" : {
+        "link" : "#link-cta",
+        "label" : "Scopri di più"
+    },
+    "decoImg" : {
+        "mainSrc" : "https://placehold.co/1254x720"
+    },
+    "bg" : {
+        "mainSrc" : "https://placehold.co/1920x1080"
+    }
+}

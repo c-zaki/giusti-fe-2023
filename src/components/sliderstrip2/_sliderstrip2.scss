@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+$component: componentClass("sliderstrip2");
+$cmp-tokens: ();
+
+.#{$component}{
+    &__slide{
+        max-height:650px;
+    }
+    &--nomaxh{
+        .#{$component}__slide{
+            max-height:none;
+        }
+    }
+    &__deco{
+        position:absolute;
+        height:100%;
+        width:100%;
+        transform:rotate(-2deg);
+        top:0;
+        right:-#{tokenSpacer(11)};
+        @include media-breakpoint-down("md"){
+            right:auto;
+            left:-#{tokenSpacer(11)};
+            width:150%;
+            max-height:600px;
+        }
+        @include media-breakpoint-down("sm"){
+            max-height:400px;
+        }
+        @include media-breakpoint-down("high-xs"){
+            max-height:360px;
+        }
+    }
+}

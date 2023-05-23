@@ -1,0 +1,134 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Button"
+} %}
+
+{# Imports components #}
+{# import 'components/herovideo/herovideo.njk' as HeroVideo #}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  {% set iconSample =  zaux_config.tokens.defs.activeIcons | getRandomIndexElement() %}
+
+  <h3>Primary button</h3>
+  <br/><br/>
+  <div class="zaux-theme--light1">
+    {{ Button.content({ "variations" : ["primary", "size-l"], "label" : "Primary button large" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["primary", "size-m"], "label" : "Primary button medium" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["primary", "size-s"], "label" : "Primary button small" }) }}
+  </div>
+
+  <br/><br/><br/><br/>
+
+  <div class="zaux-theme--light1">
+    <h3>Secondary button</h3>
+    <br/><br/>
+    <div class="zaux-theme--light1">
+      {{ Button.content({ "variations" : ["secondary", "size-l"], "label" : "Secondary button large" }) }}
+      <br/><br/>
+      {{ Button.content({ "variations" : ["secondary", "size-m"], "label" : "Secondary button medium" }) }}
+      <br/><br/>
+      {{ Button.content({ "variations" : ["secondary", "size-s"], "label" : "Secondary button small" }) }}
+    </div>
+  </div>
+
+  <div class="zaux-theme--light1 my-5">
+    <div class="p-5 zaux-bg-set1-color3">
+    <h3 class="mb-5 zaux-color-set1-white1">Theme variant 1</h3>
+    {{ Button.content({ "variations" : ["alt1", "size-l"], "iconSize" : "3", "hasIcon" : true, "icon" : iconSample, "label" : "Secondary button large" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["alt1", "size-m"], "iconSize" : "2", "hasIcon" : true, "icon" : iconSample, "label" : "Secondary button medium" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["alt1", "size-s"], "iconSize" : "2", "hasIcon" : true, "icon" : iconSample, "label" : "Secondary button small" }) }}
+    </div>
+  </div>
+  
+  <div class="zaux-bg-set1-color3 p-5 my-5 zaux-theme--light1">
+    <h3 class="mb-5 zaux-color-set1-white1">Outline theme 1</h3>
+    {{ Button.content({ "variations" : ["outline1", "size-l"], "iconSize" : "3", "hasIcon" : true, "icon" : iconSample, "label" : "Secondary button large" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["outline1", "size-m"], "iconSize" : "2", "hasIcon" : true, "icon" : iconSample, "label" : "Secondary button medium" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["outline1", "size-s"], "iconSize" : "2", "hasIcon" : true, "icon" : iconSample, "label" : "Secondary button small" }) }}
+  </div>
+
+  <div class="zaux-theme--light1">
+    <h3>Button with icon</h3>
+    <br/><br/>
+    {{ Button.content({ "variations" : ["primary", "size-l"], "iconSize" : "3", "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["primary", "size-m"], "iconSize" : "2", "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["primary", "size-s"], "iconSize" : "2", "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["secondary", "size-l"], "iconSize" : "3", "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["secondary", "size-m"], "iconSize" : "2", "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["secondary", "size-s"], "iconSize" : "2", "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+  </div>
+
+  <div class="zaux-theme--light1 mt-5">
+    <h3 class="mb-5">Icon only</h3>
+    {{ Button.content({ "variations" : ["secondary", "size-l"], "iconSize" : "3", "iconOnly" : true, "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["secondary", "size-m"], "iconSize" : "2", "iconOnly" : true, "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["secondary", "size-s"], "iconSize" : "2", "iconOnly" : true, "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["primary", "size-l"], "iconSize" : "3", "iconOnly" : true, "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["primary", "size-m"], "iconSize" : "2", "iconOnly" : true, "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+    <br/><br/>
+    {{ Button.content({ "variations" : ["primary", "size-s"], "iconSize" : "2", "iconOnly" : true, "hasIcon" : true, "icon" : iconSample, "label" : "Button with icon" }) }}
+  </div>  
+
+  <br/><br/><br/><br/>
+
+  <div class="zaux-theme--light1">
+    <h3>Button type 2</h3>
+    <br/><br/><br/>
+    {{ Button2.content({ "hasIcon" : true, "icon" : { "iconName" : "arrow1-down" },  "variations" : ["size-l"], "label" : "Button type 2 large" }) }}
+    <br/><br/>
+    {{ Button2.content({ "hasIcon" : true, "icon" : { "iconName" : "arrow1-down" }, "variations" : ["size-m"], "label" : "Button type 2 medium" }) }}
+    <br/><br/>
+    {{ Button2.content({ "hasIcon" : true, "icon" : { "iconName" : "arrow1-down" }, "variations" : ["size-s"], "label" : "Button type 2 small" }) }}
+    <br/><br/><br/><br/>
+    {{ Button2.content({ "hasIcon" : true, "icon" : { "iconName" : "search" }, "variations" : ["size-l", "inline"], "label" : "Button type 2 alternative large" }) }}
+    <br/><br/>
+    {{ Button2.content({ "hasIcon" : true, "icon" : { "iconName" : "search" }, "variations" : ["size-m", "inline"], "label" : "Button type 2 alternative medium" }) }}
+    <br/><br/>
+    {{ Button2.content({ "hasIcon" : true, "icon" : { "iconName" : "search" }, "variations" : ["size-s", "inline"], "label" : "Button type 2 alternative small" }) }}
+    <br/><br/><br/><br/>
+    {{ Button2.content({ "hasIcon" : true, "icon" : { "iconName" : "search" }, "variations" : ["size-l", "inline", "inverted"], "label" : "Button type 2 alternative large inverted" }) }}
+    <br/><br/>
+    {{ Button2.content({ "hasIcon" : true, "icon" : { "iconName" : "search" }, "variations" : ["size-m", "inline", "inverted"], "label" : "Button type 2 alternative medium inverted" }) }}
+    <br/><br/>
+    {{ Button2.content({ "hasIcon" : true, "icon" : { "iconName" : "search" }, "variations" : ["size-s", "inline", "inverted"], "label" : "Button type 2 alternative small inverted" }) }}
+    <h3 class="my-6">Flippable icon on click or by class</h3>
+    {{ Button2.content({ "id" : "flippable-icon-btn", "hasIcon" : true, "icon" : { "iconName" : "arrow1-down" }, "variations" : ["size-m"], "label" : "Read more" }) }}
+  </div>
+
+  <script>
+    document.querySelector("#flippable-icon-btn").addEventListener("click", (e) => {
+      e.currentTarget.classList.toggle("--flipped-icon");
+    });
+  </script>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

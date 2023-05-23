@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+$component: componentClass("tag");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    background-color:tokenColor("set1","color1");
+    color:tokenColor("set1","white1");
+}

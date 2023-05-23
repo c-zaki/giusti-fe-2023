@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+@import "../abstracts/variables";
+@import "../abstracts/functions";
+@import "../abstracts/mixins";
+@import "../abstracts/placeholders";
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+$zaux-helper-name: "pos";
+
+/*
+@include generateResponsive(#{"."}mt, n20vw) {
+  margin-top: -20vw;
+}
+*/

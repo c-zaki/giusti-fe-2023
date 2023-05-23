@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+$component: componentClass("heroslider2");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+}

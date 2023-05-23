@@ -1,0 +1,729 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/default.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": template_home,
+  "title": "Home",
+  "className" : "zaux-theme--light1 is-home",
+  "isHome" : true
+} %}
+
+{# Imports components #}
+{% import 'components/emptyblock/emptyblock.njk' as EmptyBlock %}
+{% import 'components/header/header.njk' as header %}
+{% import 'components/newsletterbox1/newsletterbox1.njk' as NewsletterBox1 %}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/herocomp1/herocomp1.njk' as HeroComp1 %}
+{% import 'components/section1/section1.njk' as Section1 %}
+{% import 'components/section4/section4.njk' as Section4 %}
+{% import 'components/section6/section6.njk' as Section6 %}
+{% import 'components/gridlist1/gridlist1.njk' as GridList1 %}
+{% import 'components/contactbox1/contactbox1.njk' as ContactBox1 %}
+{% import 'components/card1/card1.njk' as Card1 %}
+{% import 'components/card2/card2.njk' as Card2 %}
+{% import 'components/card3/card3.njk' as Card3 %}
+{% import 'components/bulletlist/bulletlist.njk' as BulletList %}
+{% import 'components/map/map.njk' as Map %}
+{% import 'components/cardicon/cardicon.njk' as CardIcon %}
+{% import 'components/sliderstrip1/sliderstrip1.njk' as SliderStrip1 %}
+{% import 'components/img/img.njk' as Img %}
+
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Hero -->
+      {{
+          HeroComp1.content(
+            {
+              "decoImg" : {
+                "mainSrc" : zaux_config.properties.mediaDistURL + "/img/hero-visual1.png"
+              }
+            }
+          )
+      }}
+    <!-- End of hero -->
+
+    <!-- Clienti -->
+      {% set slider %}
+        {% set sliderStripContentSample1 %}
+          <div class=" d-flex flex-column justify-content-center h-100 text-center">
+            {{
+              Img.content(
+                {
+                  "mainSrc" : "https://placehold.co/200x150"
+                }
+              )
+            }}
+          </div>
+        {% endset %}
+        {% set sliderStripContentSample2 %}
+          <div class=" d-flex flex-column justify-content-center h-100 text-center">
+            {{
+              Img.content(
+                {
+                  "mainSrc" : "https://placehold.co/200x150"
+                }
+              )
+            }}
+          </div>
+        {% endset %}
+        {{ SliderStrip1.content({
+          "title" : "Scelti per te",
+          "cta" : {
+            "label" : "Vedi tutti",
+            "link" : "#see-all-link"
+          },
+          "slidesPerViewMobile" : 4.3,
+          "slidesPerViewMd" : 6,
+          "slidesPerViewXL" : 6,
+          "slidesPerView" : 6,
+          "slides" : [
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample2
+            },
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample2
+            },
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample2
+            },
+            {
+              "content" : sliderStripContentSample1
+            }
+          ]
+        }) }}
+      {% endset %}
+      {{
+        Section1.content(
+          {
+            "preTitle" : "Clienti",
+            "title" : "Oltre 200 aziende utilizzano con successo Nikè CRM.",
+            "subTitle" : "In molti hanno scelto Niké, i nostri clienti, il nostro orgoglio",
+            "content" : slider
+          }
+        )
+      }}
+    <!-- End of clienti -->
+
+    <!-- Le app nike -->
+      {# Content #}
+        {% set sectionContent %}
+          {% set cardContent1 %}
+            {% set bullets %}
+              {{
+                  BulletList.content(
+                      {
+                        "variations" : ["theme-2"],
+                        "list" : [
+                            {
+                                "title" : "Title here",
+                                "subTitle" : "Lorem ipsum dolor sit amet",
+                                "cta" : {
+                                  "link" : "#link-cta"
+                                }
+                            },
+                            {
+                                "subTitle" : "Lorem ipsum dolor sit amet"
+                            },
+                            {
+                                "subTitle" : "Lorem ipsum dolor sit amet"
+                            }
+                        ]
+                      }
+                  )
+              }}
+            {% endset %}
+            {{ 
+              Card1.content({ 
+                "className" : ["h-100"],
+                "logo" : {
+                  "mainSrc" : zaux_config.properties.mediaDistURL + "/img/nike-crm-logo.svg"
+                },
+                "subTitle" : "Un connettore personalizzabile e modulare per l’ottimizzazione della Customer Relationship Management",
+                "htmlContent" : bullets,
+                "cta" : {
+                  "label" : "Scopri di più",
+                  "link" : "#scopri-di-piu"
+                }
+              }) 
+            }}
+          {% endset %}
+          {% set cardContent2 %}
+            {% set bullets %}
+              {{
+                  BulletList.content(
+                      {
+                        "variations" : ["theme-2"],
+                        "list" : [
+                            {
+                                "subTitle" : "Lorem ipsum dolor sit amet"
+                            },
+                            {
+                                "subTitle" : "Lorem ipsum dolor sit amet"
+                            },
+                            {
+                                "subTitle" : "Lorem ipsum dolor sit amet"
+                            },
+                            {
+                                "subTitle" : "Lorem ipsum dolor sit amet"
+                            },
+                            {
+                                "subTitle" : "Lorem ipsum dolor sit amet"
+                            },
+                            {
+                                "subTitle" : "Lorem ipsum dolor sit amet"
+                            }
+                        ]
+                      }
+                  )
+              }}
+            {% endset %}
+            {{ 
+              Card1.content({ 
+                "className" : ["h-100"],
+                "logo" : {
+                  "mainSrc" : zaux_config.properties.mediaDistURL + "/img/nike-crm-logo.svg"
+                },
+                "subTitle" : "Un connettore personalizzabile e modulare per l’ottimizzazione della Customer Relationship Management",
+                "htmlContent" : bullets,
+                "cta" : {
+                  "label" : "Scopri di più",
+                  "link" : "#scopri-di-piu"
+                }
+              }) 
+            }}
+          {% endset %}
+          {{ SliderStrip1.content({
+            "slidesPerView" : 3,
+            "slides" : [
+              {
+                "content" : cardContent1
+              },
+              {
+                "content" : cardContent2
+              },
+              {
+                "content" : cardContent1
+              }
+            ]
+          }) }}
+        {% endset %}
+      {# End of content #}
+      {{
+        Section1.content(
+          {
+            "txtAlignContent" : "text-left",
+            "preTitle" : "Le app nikè",
+            "title" : "Il perfetto equilibrio tra innovazione ed efficienza <br/> per l’automazione della tua rete di vendita", 
+            "subTitle" : "Il nostro ecosistema si basa su due solide app, Nikè CRM e Nikè SFA, sorrette, gestite e guidate da Nikè Back Office",
+            "variations" : ["theme-2"],
+            "content" : sectionContent
+          }
+        )
+      }}
+    <!-- End of le app nike -->
+
+    <!-- App trasversali -->
+      {% set bullets %}
+        {{
+            BulletList.content(
+                {
+                  "variations" : ["theme-2"],
+                  "list" : [
+                      {
+                          "title" : "Nikè Rilevazioni",
+                          "subTitle" : "Monitoraggio marketing nei punti vendita",
+                          "cta" : {
+                            "link" : "#link-cta"
+                          }
+                      },
+                      {
+                        "title" : "Nikè Eventi Aziendali",
+                        "subTitle" : "Il tuo alleato per gestire corsi ed eventi online",
+                        "cta" : {
+                          "link" : "#link-cta"
+                        }
+                      },
+                      {
+                        "title" : "FoxTail",
+                        "subTitle" : "Una risposta ad ogni domanda",
+                        "cta" : {
+                          "link" : "#link-cta"
+                        }
+                      },
+                      {
+                        "title" : "Nikè Sales Agreement",
+                        "subTitle" : "Contratti e premi sempre sotto controllo",
+                        "cta" : {
+                          "link" : "#link-cta"
+                        }
+                      }
+                  ]
+                }
+            )
+        }}
+      {% endset %}
+      {{ Section4.content({
+          "img" : {
+              "mainSrc" : "https://placehold.co/512x512"
+          },
+          "cta" : {
+            "label" : "Scopri di più",
+            "link" : "#scopri-tutto-link"
+          },
+          "eyelet" : "App trasversali",
+          "title" : "Un’offerta verticalizzata per offrire soluzioni mirate",
+          "textContent" : "Dall’assetto ordinato delle app di base alla trasversalità della specializzazione",
+          "contentHTML" : bullets
+      }) }}
+    <!-- End of app trasversali -->
+
+    <!-- Specializzazioni -->
+      {% set bullets %}
+        {{
+          BulletList.content(
+              {
+                "list" : [
+                  {
+                      "title" : "Food",
+                      "cta" : {
+                        "link" : "#link-cta"
+                      }
+                  },
+                  {
+                    "title" : "Beverage",
+                    "cta" : {
+                      "link" : "#link-cta"
+                    }
+                  },
+                  {
+                    "title" : "Vitivinicolo",
+                    "cta" : {
+                      "link" : "#link-cta"
+                    }
+                  },
+                  {
+                    "title" : "Giocattoli",
+                    "cta" : {
+                      "link" : "#link-cta"
+                    }
+                  },
+                  {
+                    "title" : "Personal care",
+                    "cta" : {
+                      "link" : "#link-cta"
+                    }
+                  },
+                  {
+                    "title" : "Home & Living",
+                    "cta" : {
+                      "link" : "#link-cta"
+                    }
+                  },
+                  {
+                    "title" : "Farmaceutico",
+                    "cta" : {
+                      "link" : "#link-cta"
+                    }
+                  },
+                  {
+                    "title" : "Parafarmaceutico",
+                    "cta" : {
+                      "link" : "#link-cta"
+                    }
+                  }
+                ]
+              }
+          )
+        }}
+      {% endset %}
+      {{ Section4.content({
+        "flip" : true,
+        "variations" : ["theme-2"],
+        "img" : {
+            "mainSrc" : "https://placehold.co/512x512"
+        },
+        "cta" : {
+          "label" : "Scopri di più",
+          "link" : "#scopri-tutto-link"
+        },
+        "eyelet" : "Specializzazioni",
+        "title" : "App ottimizzate per ogni settore",
+        "textContent" : "Scopri tutti i settori merceologici in cui la specializzazione delle nostre app può fare la differenza.",
+        "contentHTML" : bullets
+      }) }}
+    <!-- End of specializzazioni -->
+
+    <!-- Seguici -->
+      {% set content %}
+        <ul class="d-flex gap-6 zaux-color-set1-color1"> 
+          <li><a title="Facebook" href="#facebook">{{Icon.content({"iconName" : "facebook", "variations" : ["size-3"]})}}</a></li>
+          <li><a title="Instagram" href="#instagram">{{Icon.content({"iconName" : "instagram", "variations" : ["size-3"]})}}</a></li>
+          <li><a title="Linkedin" href="#linkedin">{{Icon.content({"iconName" : "linkedin", "variations" : ["size-3"]})}}</a></li>
+          <li><a title="Youtube" href="#youtube">{{Icon.content({"iconName" : "youtube", "variations" : ["size-3"]})}}</a></li>
+        </ul>
+      {% endset %}
+      {{ Section4.content({
+        "img" : {
+            "mainSrc" : "https://placehold.co/512x512"
+        },
+        "cta" : {
+          "label" : "Social wall",
+          "link" : "#scopri-tutto-link"
+        },
+        "eyelet" : "Seguici",
+        "title" : "Giusti e Nikè restano con te anche sui social",
+        "textContent" : "Seguici per rimanere sempre aggiornato attraverso le nostre rubriche storiche e contenuti sempre nuovi.",
+        "contentHTML" : content
+      }) }}
+    <!-- End of seguici -->
+
+    <!-- Integrazioni -->
+      {% set slider %}
+        {% set sliderStripContentSample1 %}
+          <div class="d-flex flex-column justify-content-center h-100 text-center">
+            {{
+              Img.content(
+                {
+                  "mainSrc" : "https://placehold.co/200x150"
+                }
+              )
+            }}
+          </div>
+        {% endset %}
+        {% set sliderStripContentSample2 %}
+          <div class="d-flex flex-column justify-content-center h-100 text-center">
+            {{
+              Img.content(
+                {
+                  "mainSrc" : "https://placehold.co/200x150"
+                }
+              )
+            }}
+          </div>
+        {% endset %}
+        <div class="d-flex flex-column gap-6">
+        {{ SliderStrip1.content({
+          "title" : "Scelti per te",
+          "cta" : {
+            "label" : "Vedi tutti",
+            "link" : "#see-all-link"
+          },
+          "slidesPerViewMobile" : 4.3,
+          "slidesPerViewMd" : 6,
+          "slidesPerViewXL" : 6,
+          "slidesPerView" : 6,
+          "slides" : [
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample2
+            },
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample2
+            }
+          ]
+        }) }}
+        {{ SliderStrip1.content({
+          "title" : "Scelti per te",
+          "cta" : {
+            "label" : "Vedi tutti",
+            "link" : "#see-all-link"
+          },
+          "slidesPerViewMobile" : 4.3,
+          "slidesPerViewMd" : 6,
+          "slidesPerViewXL" : 6,
+          "slidesPerView" : 6,
+          "slides" : [
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample2
+            },
+            {
+              "content" : sliderStripContentSample1
+            },
+            {
+              "content" : sliderStripContentSample2
+            }
+          ]
+        }) }}
+        </div>
+      {% endset %}
+      {{
+        Section1.content(
+          {
+            "preTitle" : "Integrazioni",
+            "title" : "Niké, il CRM che dialoga con il tuo mondo",
+            "subTitle" : "Niké CRM è in grado di comunicare e scambiare dati con qualsiasi software gestionale aziendale e con le principali piattaforme di commercio elettronico. Sviluppato su piattaforme native per IOS e Android e Web può essere utilizzato con qualsiasi browser moderno e si integra con i tool più utilizzati.",
+            "content" : slider,
+            "cta" : {
+              "label" : "Scopri di più",
+              "link" : "#integrazioni"
+            }
+          }
+        )
+      }}
+    <!-- End of integrazioni -->
+
+    <!-- Case History -->
+      {% set slider %}
+        {% set sliderStripContentSample %}
+          {{ 
+            Card2.content({ 
+              "media" : {
+                "mainSrc" : "https://placehold.co/206x115"
+              },
+              "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+              "cta" : {
+                "link" : "#continua-a-leggere",
+                "label" : "Continua a leggere"
+              }
+          }) }}
+        {% endset %}
+        {{ SliderStrip1.content({
+          "title" : "Scelti per te",
+          "cta" : {
+            "label" : "Vedi tutti",
+            "link" : "#see-all-link"
+          },
+          "slidesPerView" : 3,
+          "slides" : [
+            {
+              "content" : sliderStripContentSample
+            },
+            {
+              "content" : sliderStripContentSample
+            },
+            {
+              "content" : sliderStripContentSample
+            },
+            {
+              "content" : sliderStripContentSample
+            },
+            {
+              "content" : sliderStripContentSample
+            },
+            {
+              "content" : sliderStripContentSample
+            },
+            {
+              "content" : sliderStripContentSample
+            },
+            {
+              "content" : sliderStripContentSample
+            },
+            {
+              "content" : sliderStripContentSample
+            },
+            {
+              "content" : sliderStripContentSample
+            }
+          ]
+        }) }}
+      {% endset %}
+      {{
+        Section1.content(
+          {
+            "variations" : ["theme-3"],
+            "preTitle" : "Case history",
+            "title" : "Ogni necessità aziendale è un motivo di successo per Nikè CRM.",
+            "content" : slider,
+            "cta" : {
+              "label" : "Vedi tutti i case history",
+              "link" : "#case-history"
+            }
+          }
+        )
+      }}
+    <!-- End of case history -->
+
+    <!-- Prova nikè -->
+      {% set contentHTML %}
+        {% set gridContent1 %}
+          {{
+              CardIcon.content(
+                {
+                  "className" : ["h-100"]
+                }
+              )
+          }}
+        {% endset %}
+        {% set gridContent2 %}
+          {{
+              CardIcon.content(
+                {
+                  "className" : ["h-100"],
+                  "variations" : ["theme-2"], 
+                  "iconName" : "user",
+                  "title" : "Richiedi una consulenza gratuita",
+                  "subTitle" : "Compila il form per prenotare senza impegno una consulenza gratuita di primo livello."
+                }
+              )
+          }}
+        {% endset %}
+        {{
+          GridList1.content(
+            {
+              "cols" : "col-12 col-sm-6",
+              "elements" : [
+                {
+                  "content" : gridContent1
+                },
+                {
+                  "content" : gridContent2
+                }
+              ]
+            }
+          )
+        }}
+      {% endset %}
+      {{
+        Section1.content(
+          {
+            "txtAlignContent" : "text-left",
+            "variations" : ["theme-2"],
+            "preTitle" : "Prova nikè",
+            "title" : "Richiedi una demo di Nikè CRM o una consulenza gratuita e scopri come può portare la tua azienda verso il successo",
+            "content" : contentHTML
+          }
+        )
+      }}
+    <!-- End of prova nikè -->
+
+    <!-- Nikè magazine -->
+      {% set slider %}
+        {% set cardContent1 %}
+          {{ 
+            Card3.content({ 
+              "media" : {
+                "mainSrc" : "https://placehold.co/206x115"
+              },
+              "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+              "cta" : {
+                "link" : "#continua-a-leggere",
+                "label" : "Continua a leggere"
+              }
+            }) 
+          }}
+        {% endset %}
+        {{ SliderStrip1.content({
+          "slidesPerView" : 3,
+          "slides" : [
+            {
+              "content" : cardContent1
+            },
+            {
+              "content" : cardContent1
+            },
+            {
+              "content" : cardContent1
+            }
+          ]
+          }) 
+        }}
+      {% endset %}
+      {{
+        Section1.content(
+          {
+            "headLogo" : {
+              "mainSrc" : zaux_config.properties.assetsDistURL + "/img/logo-magazine.svg",
+              "imgHeight" : "42",
+              "imgWidth" : "450"
+            },
+            "variations" : ["theme-3"],
+            "subTitle" : "IL BLOG GIUSTI SOFTWARE SULL’INNOVAZIONE",
+            "preTitle" : false,
+            "title" : false,
+            "content" : slider,
+            "cta" : {
+              "label" : "Leggi tutti gli articoli",
+              "link" : "#leggi-articoli"
+            }
+          }
+        )
+      }}
+    <!-- End of nikè magazine -->
+
+    <!-- Newsletter -->
+      {% set sampleContent %}
+          {{
+              NewsletterBox1.content()
+          }}
+      {% endset %}
+      {{
+          Section6.content(
+              {
+                  "content" : sampleContent
+              }
+          )
+      }}
+    <!-- End of newsletter -->
+
+    <!-- Contatti -->
+      {% set mapContent %}
+        {{
+          Map.content(
+            {
+              "className" : ["h-100", "w-100"],
+              "src" : "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5759.862461651769!2d11.209139!3d43.79504000000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a56e190990909%3A0x70c0443cebc153ba!2sVia%20Alberto%20Franchetti%2C%2019%2C%2050127%20Firenze%20FI!5e0!3m2!1sit!2sit!4v1684190719849!5m2!1sit!2sit"
+            }
+          )
+        }}
+      {% endset %}
+      {{
+        ContactBox1.content(
+          {
+            "title" : "Contatti",
+            "frameContent" : mapContent
+          }
+        )
+      }}
+    <!-- End of contatti -->
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

@@ -1,0 +1,96 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/default.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": template_home,
+  "title": "Area riservata",
+  "className" : "zaux-theme--light1",
+  "isHome" : true
+} %}
+
+{# Imports components #}
+{% import 'components/emptyblock/emptyblock.njk' as EmptyBlock %}
+{% import 'components/header/header.njk' as header %}
+{% import 'components/newsletterbox1/newsletterbox1.njk' as NewsletterBox1 %}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/herocomp1/herocomp1.njk' as HeroComp1 %}
+{% import 'components/section1/section1.njk' as Section1 %}
+{% import 'components/section4/section4.njk' as Section4 %}
+{% import 'components/section6/section6.njk' as Section6 %}
+{% import 'components/gridlist1/gridlist1.njk' as GridList1 %}
+{% import 'components/contactbox1/contactbox1.njk' as ContactBox1 %}
+{% import 'components/card1/card1.njk' as Card1 %}
+{% import 'components/card2/card2.njk' as Card2 %}
+{% import 'components/card3/card3.njk' as Card3 %}
+{% import 'components/bulletlist/bulletlist.njk' as BulletList %}
+{% import 'components/map/map.njk' as Map %}
+{% import 'components/cardicon/cardicon.njk' as CardIcon %}
+{% import 'components/sliderstrip1/sliderstrip1.njk' as SliderStrip1 %}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/bannerimg1/bannerimg1.njk' as BannerImg1 %}
+{% import 'components/titlebanner/titlebanner.njk' as TitleBanner %}
+{% import 'components/breadcrumbs1/breadcrumbs1.njk' as Breadcrumbs %}
+{% import 'components/contentlayout1/contentlayout1.njk' as ContentLayout1 %}
+{% import 'components/summarymenu/summarymenu.njk' as SummaryMenu %}
+{% import 'components/cardlink/cardlink.njk' as CardLink %}
+{% import 'components/sharebar/sharebar.njk' as ShareBar %}
+{% import 'components/richtextblock1/richtextblock1.njk' as RichTextBlock1 %}
+{% import 'components/picturecard1/picturecard1.njk' as PictureCard1 %}
+
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Hero Banner -->
+        {{ BannerImg1.content() }}
+    <!-- End of hero banner -->
+
+    <!-- Title banner -->
+        {{
+            TitleBanner.content(
+                {
+                    "className" : ["pt-8 pb-6", "text-center"],
+                    "title" : "Area riservata"
+                }
+            )
+        }}
+    <!-- End of title banner -->
+    
+    <!-- Clienti -->
+        <div class="container-l d-flex flex-column gap-6">
+            <div class="zaux-bg-set1-color2 p-6 p-sm-8">
+                <h4 class="c-typo-style1-title-l fw-bold pb-6">Area documentale</h4>
+                <p class="c-typo-style1-text-m mb-6">Premi il bottone sottostante per accedere adesso all'area riservata.</p>
+                {{
+                    Button.content(
+                        {
+                            "variations" : ["primary"],
+                            "label" : "Accedi adesso",
+                            "link" : "#area-documentale"
+                        }
+                    )
+                }}
+                <p class="c-typo-style1-text-m my-6">Hai dimenticato le credenziali di accesso?</p>
+                {{
+                    Button.content(
+                        {
+                            "variations" : ["primary"],
+                            "label" : "Reimpostale adesso",
+                            "link" : "#reset-password"
+                        }
+                    )
+                }}
+            </div>
+        </div>
+    <!-- End of clienti -->
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

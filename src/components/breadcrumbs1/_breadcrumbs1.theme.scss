@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+$component: componentClass("breadcrumbs1");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--light1 .#{$component}{
+    &:not([class*=--unthemed]){
+        color:tokenColor("set1","color7");
+        a{
+            color:tokenColor('set1','color1');
+        }
+    }
+}

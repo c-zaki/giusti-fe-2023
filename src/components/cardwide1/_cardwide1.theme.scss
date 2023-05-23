@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+$component: componentClass("cardwide1");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    background-color:tokenColor("set1","color3");
+    color:tokenColor("set1","white1");
+    &__bg{
+        opacity:0.75;
+    }
+    &__tag{
+        background-color:tokenColor("set1","color1");
+        color:tokenColor("set1","white1");
+    }
+}   

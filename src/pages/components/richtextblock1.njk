@@ -1,0 +1,30 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Richtext Block"
+} %}
+
+{# Imports components #}
+{% import 'components/richtextblock1/richtextblock1.njk' as RichTextBlock1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {% set richTextSample %}
+        {% include 'layouts/partials/richtext.njk' %}
+    {% endset %}
+    {{ RichTextBlock1.content({"content" : richTextSample }) }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

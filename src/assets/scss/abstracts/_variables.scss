@@ -1,0 +1,209 @@
+@charset "UTF-8";
+
+@import "functions";
+
+//////////////////////////////////////////////////
+// TOKENS
+//////////////////////////////////////////////////
+
+@import "../tokens/breakpoints";
+@import "../tokens/colors";
+@import "../tokens/defs";
+@import "../tokens/containers";
+@import "../tokens/typo";
+@import "../tokens/grid";
+@import "../tokens/radius";
+@import "../tokens/shadows";
+@import "../tokens/iconsizes";
+@import "../tokens/ratios";
+@import "../tokens/spaces";
+@import "../tokens/blur";
+@import "../tokens/styles/overlay";
+@import "../tokens/styles/typography";
+
+//////////////////////////////////////////////////
+// GENERAL SETTING
+//////////////////////////////////////////////////
+
+$zaux-font-size-base-px: tokenTypo("base-font-size");
+
+//////////////////////////////////////////////////
+// STATES
+//////////////////////////////////////////////////
+
+$zaux-system-classname-base: tokenDef("app-prefix");
+$zaux-system-classname-loaded: "#{$zaux-system-classname-base}-loaded";
+
+//////////////////////////////////////////////////
+// EASINGS
+// @see https://matthewlein.com/tools/ceaser
+//////////////////////////////////////////////////
+
+$zaux-ease-outcubic: cubic-bezier(0.215, 0.61, 0.355, 1); //easeOutCubic
+$zaux-ease-easeinoutquad: cubic-bezier(
+  0.455,
+  0.03,
+  0.515,
+  0.955
+); //easeInOutQuad
+
+//////////////////////////////////////////////////
+// TRANSITIONS
+//////////////////////////////////////////////////
+
+$zaux-transition-0: 0.2s $zaux-ease-outcubic;
+$zaux-transition-1: 0.6s $zaux-ease-outcubic;
+$zaux-transition-1-1: 0.8s $zaux-ease-outcubic;
+$zaux-transition-2: 1.2s $zaux-ease-outcubic;
+$zaux-transition-3: 2.4s $zaux-ease-outcubic;
+$zaux-transition-4: 3.4s $zaux-ease-outcubic;
+$zaux-transition-5: 4.4s $zaux-ease-outcubic;
+
+//////////////////////////////////////////////////
+// Fonts
+//////////////////////////////////////////////////
+
+$zaux-font1: "#{tokenDef("mainFont")}", "Segoe UI", sans-serif;
+$zaux-font2: "auger-mono", "Courier New", monospace;
+
+$zaux-typo-fw-thin: 100;
+$zaux-typo-fw-extralight: 200;
+$zaux-typo-fw-light: 300;
+$zaux-typo-fw-regular: 400;
+$zaux-typo-fw-medium: 500;
+$zaux-typo-fw-semibold: 600;
+$zaux-typo-fw-bold: 700;
+$zaux-typo-fw-extrabold: 800;
+$zaux-typo-fw-black: 900;
+$zaux-typo-fw-extrablack: 950;
+
+//////////////////////////////////////////////////
+// Z-INDEX LAYERS
+//////////////////////////////////////////////////
+/// 
+$zaux-index-layers : (
+  0 : 1,
+  1 : 9,
+  2 : 99,
+  3 : 999,
+  4 : 9999,
+  5 : 99999,
+  6 : 999999
+);
+
+//////////////////////////////////////////////////
+// COMPONENTS SETTING
+//////////////////////////////////////////////////
+
+// Base
+$component-prefix: tokenDef("component-prefix") !default;
+
+$container-min-w1: 320px;
+
+//////////////////////////////////////////////////
+// MISC
+//////////////////////////////////////////////////
+
+//////////////////////////////////////////////////
+// THEMES
+//////////////////////////////////////////////////
+
+$zaux-theme-light1: "light1";
+$zaux-theme-dark1: "dark1";
+
+//////////////////////////////////////////////////
+// BOOTSTRAP OVERRIDE
+// @see https://github.com/twbs/bootstrap/blob/v5.1.3/scss/_variables.scss
+//////////////////////////////////////////////////
+
+// Flags
+$enable-reduced-motion: false;
+$enable-smooth-scroll: false;
+$enable-rfs: false;
+$enable-negative-margins: true;
+
+// Fonts
+$font-family-sans-serif: $zaux-font1;
+$font-family-monospace: $zaux-font2;
+$font-weight-base: $zaux-typo-fw-regular;
+
+// Line-heights
+$line-height-base: 1;
+$line-height-sm: $line-height-base;
+$line-height-lg: $line-height-base;
+
+// Headings
+$headings-margin-bottom: inherit;
+$headings-font-family: inherit;
+$headings-font-style: inherit;
+$headings-font-weight: inherit;
+$headings-line-height: inherit;
+$headings-color: inherit;
+
+// HR
+$hr-margin-y: inherit;
+$hr-color: inherit;
+$hr-height: inherit;
+$hr-opacity: inherit;
+
+$lighten-hover-factor: 20%;
+$darken-hover-factor: 10%;
+
+// Removing default colors, sizes
+$colors: ();
+$theme-colors: ();
+$grays: ();
+$font-sizes: (
+  inherit: inherit,
+);
+$display-font-sizes: ();
+$paragraph-margin-bottom: 0;
+
+//////////////////////////////////////////////////
+// BOOTSTRAP SPACERS
+//////////////////////////////////////////////////
+
+$spacer: rem(tokenSpace("spacer-width-px") * 1px);
+$spacers: ();
+@each $key, $value in tokenSpace("spaces") {
+  $spacers: map-merge(
+    $spacers,
+    (
+      $key: $spacer * tokenSpacerMul($key),
+    )
+  );
+}
+
+//////////////////////////////////////////////////
+// BOOTSTRAP GUTTERS
+//////////////////////////////////////////////////
+
+$grid-gutter-width: rem(tokenGrid("base-gutter-width") * 1px);
+$gutters: ();
+@each $key, $value in tokenGrid("gutters") {
+  $gutters: map-merge(
+    $gutters,
+    (
+      $key: $grid-gutter-width * tokenGutterMul($key),
+    )
+  );
+}
+
+//////////////////////////////////////////////////
+// BOOTSTRAP GRID
+//////////////////////////////////////////////////
+
+$grid-breakpoints: ();
+@each $mq-prefix, $value in tokenBreakpoints() {
+  // Prevents keys who starts with underscore
+  @if str-index($mq-prefix, "_") == null {
+    $grid-breakpoints: map-merge(
+      $grid-breakpoints,
+      (
+        $mq-prefix: $value,
+      )
+    );
+  }
+}
+
+$container-max-widths: ();

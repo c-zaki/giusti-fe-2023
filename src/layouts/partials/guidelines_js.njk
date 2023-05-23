@@ -1,0 +1,10 @@
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("[data-copy-to-clipboard]").forEach( (elem,index) => {
+            elem.addEventListener("click", (e) => {
+            var content = e.currentTarget.getAttribute("data-copy-to-clipboard");
+            navigator.clipboard.writeText(content);
+            });  
+        });
+    });
+</script>

@@ -1,0 +1,76 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": template_component,
+  "title": "Navbar 1"
+} %}
+
+{# Imports components #}
+{% import 'components/navbar1/navbar1.njk' as NavBar1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="zaux-theme--light1">
+        {{NavBar1.content(
+            {
+                "elements" : [
+                    { "active" : true, "label" : "Label test", "url" : "#label-test-url" },
+                    { "label" : "Label test", "url" : "#label-test-url" },
+                    { "label" : "Label test", "url" : "#label-test-url" }
+                ]
+            }
+        )}}
+
+        <h3 class="my-6">Overflowing entries behaviour</h3>
+
+        <div style="max-width:900px;" class="my-5">
+            {{NavBar1.content(
+                {
+                    "elements" : [
+                        { "active" : true, "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" }
+                    ]
+                }
+            )}}
+        </div>
+
+        <h3 class="my-6">Alternative theme</h3>
+
+        <div style="max-width:900px;" class="zaux-bg-set1-color7 p-5 my-5">
+            {{NavBar1.content(
+                {
+                    "variations" : ["theme2"],
+                    "elements" : [
+                        { "active" : true, "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" },
+                        { "label" : "Label test", "url" : "#label-test-url" }
+                    ]
+                }
+            )}}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

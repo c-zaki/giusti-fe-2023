@@ -1,0 +1,82 @@
+{# Imports components #}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/btn/btn.njk' as Button %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-cardlink' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : [],
+        "titleTag" : "h4",
+        "preTitleTag" : "h5",
+        "title" : component_cardlink.title,
+        "subTitle" : component_cardlink.subTitle,
+        "cta" : component_cardlink.cta
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    <div class="{{_className | join(" ")}}">
+        <div class="{{componentClassName}}__inner d-flex flex-column justify-content-between {% if obj.cta is undefined or obj.cta == false %}p-6{% endif %}">
+            {% if obj.cta %}
+                <a class="p-6 d-block" href="{{obj.cta.url}}" title="{{obj.cta.link}}">
+            {% endif %}
+                <div class="{{componentClassName}}__top d-flex flex-column gap-5">
+                    {% if obj.preTitle %}
+                        <{{obj.preTitleTag}} class="{{componentClassName}}__eyelet c-typo-style1-text-s fw-bold">{{obj.preTitle}}</{{obj.preTitleTag}}>
+                    {% endif %}
+                    <{{obj.titleTag}} class="{{componentClassName}}__title {% if obj.preTitle %}{{componentClassName}}__title--style2{% endif %} c-typo-style1-display-4">{{obj.title}}</{{obj.titleTag}}>
+                    {% if obj.media %}
+                        {% set imgParams = { "className" : [componentClassName + "__media"], "variations" : ["fluid", "ratio-5"] } %}
+                        {% set imgParams = imgParams | overwriteMerge(obj.media) %}
+                        {{
+                            Img.content(imgParams)
+                        }}
+                    {% endif %}
+                    {% if obj.subTitle %}
+                        <p class="{{componentClassName}}__subtitle c-typo-style1-text-m">{{obj.subTitle}}</p>
+                    {% endif %}
+                </div>
+                {% if obj.freeHTML %}
+                    <div class="{{componentClassName}}__body pt-6">
+                        {{ obj.freeHTML | safe }}
+                    </div>
+                {% endif %}
+                <div class="{{componentClassName}}__bottom pt-5 d-flex justify-content-end">
+                    {% if obj.cta %}
+                        <div class="{{componentClassName}}__cta d-flex align-items-center gap-3">
+                            <span class="c-typo-style1-text-s fw-bold">{{obj.cta.label}}</span>
+                            {{
+                                Button.content(
+                                    {
+                                        "className" : ["pointer-events-none"],
+                                        "type" : "button",
+                                        "tag" : "button",
+                                        "variations" : ["primary", "size-m"],
+                                        "iconOnly" : true,
+                                        "hasIcon" : true,
+                                        "icon" : "arrow1-right"
+                                    }
+                                )
+                            }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% if obj.cta %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endmacro %}

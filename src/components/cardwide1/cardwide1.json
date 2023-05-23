@@ -1,0 +1,13 @@
+{
+    "isFeatured" : true,
+    "featuredLabel" : "In evidenza",
+    "preTitle" : "News",
+    "title" : "Title here",
+    "cta" : {
+        "label" : "Leggi tutto",
+        "link" : "#read-more"
+    },
+    "img" : {
+        "mainSrc" : "https://placehold.co/1920x1080"
+    }
+}

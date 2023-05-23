@@ -1,0 +1,226 @@
+{# Imports components #}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/bulletlist/bulletlist.njk' as BulletList %}
+{% import 'components/form/input/select/select.njk' as inputSelect %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-offcanvasnav' %}
+
+    {% set configDefault = {
+        "className": [""],
+        "srOnlyTitle" : "Menu principale",
+        "variations" : [],
+        "searchOverlaySelector" : "#search-overlay",
+        "social" : component_offcanvasnav.social,
+        "menu1" : component_offcanvasnav.menu1,
+        "menu2" : component_offcanvasnav.menu2,
+        "menu3" : component_offcanvasnav.menu3,
+        "menuMobile" : component_offcanvasnav.menuMobile,
+        "topMenu" : component_header.topMenu
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+    {% set componentId = obj.id or "offcanvasid" %}
+    {% set menuEntries = obj.menuEntries or component_offcanvasnav.menuEntries or [] %}
+    {% set srOnlyTitle = obj.srOnlyTitle or configDefault.srOnlyTitle %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {% set _className = (_className.push("zaux-gs-scrollbar--1"), _className) %}
+
+    <div id="{{componentId}}" class="{{_className | join(" ") | trim}}" data-js-component="OffCanvasNav">
+        <div class="{{componentClassName}}__inner container-l">
+            <nav class="{{componentClassName}}__menu" itemscope itemtype="https://schema.org/SiteNavigationElement">
+                <h4 class="visually-hidden">{{srOnlyTitle}}</h4>
+                <div class="py-4 py-md-9"></div>
+                <div class="pt-9 d-block d-md-none">
+                    {{ inputSelect.content({
+                        "variations" : ["size-m","theme-alt2"],
+                        "customAttr" : "data-zaux-select-link",
+                        "optionList" : [
+                            { "value" : "", "label" : "Seleziona lingua" },
+                            { "value" : "#ita", "label" : "Italiano" },
+                            { "value" : "#eng", "label" : "English" }
+                        ]    
+                    }) }}
+                </div>
+                <div class="row pt-6 pb-6 g-2 g-sm-6">
+                    {% if obj.menu1 %}
+                        {% set menus = obj.menu1 %}
+                        <div class="col-12 col-sm-4 d-flex flex-column gap-6 gap-sm-8">
+                            {% for menu in menus %}
+                                <div>
+                                    {% if menu.logo %}
+                                        {% set imgParams = {"imgClasses" : ["maxw-186px maxw-sm-100"] } %}
+                                        {% set imgParams = imgParams | overwriteMerge(menu.logo) %}
+                                        {% set imgParams = imgParams | setAttribute("mainSrc" , zaux_config.properties.assetsDistURL + menu.logo) %}
+                                        <div class="pb-6">
+                                            {{
+                                                Img.content(imgParams)
+                                            }}
+                                        </div>
+                                        <h5 class="{{componentClassName}}__title c-typo-style1-text-l fw-bold pb-4 pb-sm-6 visually-hidden">{{menu.title}}</h5>
+                                    {% else %}
+                                        <h5 class="{{componentClassName}}__title c-typo-style1-text-l fw-bold pb-4 pb-sm-6">{{menu.title}}</h5>
+                                    {% endif %}
+                                    {{
+                                        BulletList.content(
+                                            {
+                                                "variations" : ["theme-2"],
+                                                "hideBtns" : true,
+                                                "list" : menu.entries 
+                                            } 
+                                        )
+                                    }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if obj.menu2 %}
+                        {% set menus = obj.menu2 %}
+                        <div class="col-12 col-sm-4 d-flex flex-column gap-6 gap-sm-8">
+                            {% for menu in menus %}
+                                <div>
+                                    {% if menu.logo %}
+                                        {% set imgParams = {"imgClasses" : ["maxw-186px maxw-sm-100"] } %}
+                                        {% set imgParams = imgParams | overwriteMerge(menu.logo) %}
+                                        {% set imgParams = imgParams | setAttribute("mainSrc" , zaux_config.properties.assetsDistURL + menu.logo) %}
+                                        <div class="pb-6">
+                                            {{
+                                                Img.content(imgParams)
+                                            }}
+                                        </div>
+                                        <h5 class="{{componentClassName}}__title c-typo-style1-text-l fw-bold pb-4 pb-sm-6 visually-hidden">{{menu.title}}</h5>
+                                    {% else %}
+                                        <h5 class="{{componentClassName}}__title c-typo-style1-text-l fw-bold pb-4 pb-sm-6">{{menu.title}}</h5>
+                                    {% endif %}
+                                    {{
+                                        BulletList.content(
+                                            {
+                                                "variations" : ["theme-2"],
+                                                "hideBtns" : true,
+                                                "list" : menu.entries 
+                                            } 
+                                        )
+                                    }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if obj.menu3 %}
+                        {% set menus = obj.menu3 %}
+                        <div class="col-12 col-sm-4 d-flex flex-column gap-6 gap-sm-8">
+                            {% for menu in menus %}
+                                <div>
+                                    {% if menu.logo %}
+                                        {% set imgParams = {"imgClasses" : ["maxw-186px maxw-sm-100"] } %}
+                                        {% set imgParams = imgParams | overwriteMerge(menu.logo) %}
+                                        {% set imgParams = imgParams | setAttribute("mainSrc" , zaux_config.properties.assetsDistURL + menu.logo) %}
+                                        <div class="pb-6">
+                                            {{
+                                                Img.content(imgParams)
+                                            }}
+                                        </div>
+                                        <h5 class="{{componentClassName}}__title c-typo-style1-text-l fw-bold pb-4 pb-sm-6 visually-hidden">{{menu.title}}</h5>
+                                    {% else %}
+                                        <h5 class="{{componentClassName}}__title c-typo-style1-text-l fw-bold pb-4 pb-sm-6">{{menu.title}}</h5>
+                                    {% endif %}
+                                    {{
+                                        BulletList.content(
+                                            {
+                                                "variations" : ["theme-2"],
+                                                "hideBtns" : true,
+                                                "list" : menu.entries 
+                                            } 
+                                        )
+                                    }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="d-block d-md-none">
+                    {% if obj.menuMobile %}
+                        {% set menus = obj.menuMobile %}
+                        <div class="col-12 col-sm-4 d-flex flex-column gap-6 gap-sm-8">
+                            {% for menu in menus %}
+                                <div>
+                                    {% if menu.logo %}
+                                        {% set imgParams = {"imgClasses" : ["maxw-186px maxw-sm-100"] } %}
+                                        {% set imgParams = imgParams | overwriteMerge(menu.logo) %}
+                                        {% set imgParams = imgParams | setAttribute("mainSrc" , zaux_config.properties.mediaDistURL + menu.logo) %}
+                                        <div class="pb-6">
+                                            {{
+                                                Img.content(imgParams)
+                                            }}
+                                        </div>
+                                        <h5 class="{{componentClassName}}__title c-typo-style1-text-l fw-bold pb-4 pb-sm-6 visually-hidden">{{menu.title}}</h5>
+                                    {% else %}
+                                        <h5 class="{{componentClassName}}__title c-typo-style1-text-l fw-bold pb-4 pb-sm-6">{{menu.title}}</h5>
+                                    {% endif %}
+                                    {{
+                                        BulletList.content(
+                                            {
+                                                "variations" : ["theme-2"],
+                                                "hideBtns" : true,
+                                                "list" : menu.entries 
+                                            } 
+                                        )
+                                    }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="d-block d-md-none pb-10">
+                    {% if obj.topMenu %}
+                        <ul class="{{componentClassName}}__topmenu d-flex flex-column gap-4 pt-9">
+                            {% for entry in obj.topMenu %}
+                                <li>
+                                    <a class="d-flex gap-4 align-items-center" href="{{entry.url}}" title="{{entry.label}}">
+                                        {{
+                                        Icon.content(
+                                            {
+                                            "variations" : ["size-2"],
+                                            "iconName" : entry.icon
+                                            }
+                                        )
+                                        }}
+                                        <span class="fs-2 lh-2">{{entry.label}}</span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="d-none">
+                    <ul class="{{componentClassName}}__controls d-flex justify-content-center gap-6 py-8">
+                        <li class="{{componentClassName}}__control-item  lh-0">
+                            {{ Button2.content({ "hasIcon" : true, "icon" : { "iconName" : "back", "variations" : ["size-3-imp", "size-lg-2-imp"] }, "variations" : ["inverted", "size-s", "inline"], "label" : "Torna al portale" }) }}
+                        </li>
+                        <li class="{{componentClassName}}__control-item  lh-0">
+                            <div class="{{componentClassName}}__language-selector lh-0 position-relative">
+                                {{ Icon.content({"iconName" : "language" })}}
+                                <select data-zaux-select-link class="p-0 ps-5 fs-1">
+                                    <option value="#it-link">Ita</option>
+                                    <option value="#en-link">Eng</option>
+                                </select>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+{% endmacro %}

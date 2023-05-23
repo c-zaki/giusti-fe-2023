@@ -1,0 +1,39 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Modal 1"
+} %}
+
+{# Imports components #}
+{% import 'components/modal1/modal1.njk' as Modal1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="zaux-theme--light1">
+        <button class="c-btn c-btn--primary" data-bs-toggle="modal" data-bs-target="#modaltest1">Show modal</button>
+        {% set sampleContent %}
+            <div class="c-typo-block-style1-themed">
+                <p>Lorem ipsum dolor sit amet</p>
+            </div>
+        {% endset %}
+        {{Modal1.content(
+            {
+                "modalId" : "modaltest1",
+                "title" : "Modal title here",
+                "content" : sampleContent
+            }
+        )}}
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

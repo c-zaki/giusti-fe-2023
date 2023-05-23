@@ -1,0 +1,28 @@
+{
+    "imgSeries1" : [
+        {
+          "contentType" : "img",
+          "img" : {
+            "mainSrc" : "https://placehold.co/1156x653"
+          }
+        },
+        {
+          "contentType" : "img",
+          "img" : {
+            "mainSrc" : "https://placehold.co/1156x653"
+          }
+        },
+        {
+          "contentType" : "img",
+          "img" : {
+            "mainSrc" : "https://placehold.co/1156x653"
+          }
+        },
+        {
+          "contentType" : "img",
+          "img" : {
+            "mainSrc" : "https://placehold.co/1156x653"
+          }
+        }
+    ]
+}

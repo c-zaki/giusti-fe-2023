@@ -1,0 +1,106 @@
+
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Share button"
+} %}
+
+{# Imports components #}
+{% import 'components/sharebtn/sharebtn.njk' as ShareBtn %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1 text-center">
+
+    <h6 class="mb-5">To see what paremeters can be set for each social check out the doc at <a target="_blank" class="zaux-color-set1-color1" href="https://ellisonleao.github.io/sharer.js/">https://ellisonleao.github.io/sharer.js/</a></h6>
+
+    <div class="d-flex gap-6 align-items-center justify-content-center">
+      {{ShareBtn.content(
+          {
+            "toolTipSize" : "small",
+            "cta" : {
+              "variations" : ["secondary", "size-s"],
+              "label" : "Condividi"
+            },
+            "socialList" : [
+                { "url" : "#sample-url", "socialSlug" : "facebook", "icon" : "facebook" },
+                { "url" : "#sample-url", "socialSlug" : "twitter", "icon" : "twitter" }
+            ]
+          }
+      )}}
+    </div>
+
+    <h3 class="my-5 pt-6 pb-6">Top, bottom, left, right positioning</h3>
+
+    {{ShareBtn.content(
+        {
+          "toolTipPosition" : "top",
+          "cta" : {
+              "label" : "Condividi"
+          },
+          "socialList" : [
+              { "url" : "#sample-url", "socialSlug" : "facebook", "icon" : "facebook" },
+              { "url" : "#sample-url", "socialSlug" : "twitter", "icon" : "twitter" }
+          ]
+        }
+    )}}
+    
+    <div class="py-6"></div>
+
+    {{ShareBtn.content(
+        {
+          "toolTipPosition" : "bottom",
+          "cta" : {
+              "label" : "Condividi"
+          },
+          "socialList" : [
+              { "url" : "#sample-url", "socialSlug" : "facebook", "icon" : "facebook" },
+              { "url" : "#sample-url", "socialSlug" : "twitter", "icon" : "twitter" }
+          ]
+        }
+    )}}
+
+    <div class="py-6"></div>
+
+    {{ShareBtn.content(
+        {
+          "toolTipPosition" : "right",
+          "cta" : {
+              "label" : "Condividi"
+          },
+          "socialList" : [
+              { "url" : "#sample-url", "socialSlug" : "facebook", "icon" : "facebook" },
+              { "url" : "#sample-url", "socialSlug" : "twitter", "icon" : "twitter" }
+          ]
+        }
+    )}}
+
+    <div class="py-6"></div>
+    
+    {{ShareBtn.content(
+        {
+          "toolTipPosition" : "left",
+          "cta" : {
+              "label" : "Condividi"
+          },
+          "socialList" : [
+              { "url" : "#sample-url", "socialSlug" : "facebook", "icon" : "facebook" },
+              { "url" : "#sample-url", "socialSlug" : "twitter", "icon" : "twitter" }
+          ]
+        }
+    )}}
+
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+$component: componentClass("cardwide1");
+$cmp-tokens: ();
+
+.#{$component} {
+    &__content{
+        position:relative;
+        &:before{
+            content:"";
+            top:tokenSpacer(10);
+            border-width: 0 tokenSpacer(7) tokenSpacer(7) 0;
+            left:-#{tokenSpacer(7)-0.2};
+            position:absolute;
+            @include media-breakpoint-down("md"){
+                top:-#{tokenSpacer(7)};
+                left:auto;
+                transform:rotate(90deg);
+                right:#{tokenSpacer(8)};
+            }
+        }
+    }
+
+    &__pic{
+        @include media-breakpoint-down("md"){
+            max-height:150px;
+        }
+    }
+
+    &--flipped{
+        .#{$component}__content{
+            &:before{
+                left:auto;
+                right:-#{tokenSpacer(7)-0.2};
+                transform:rotate(-90deg);
+            }
+        }
+    }
+
+    &--type3{
+        &[class*=--flipped]{
+            .#{$component}__content{
+                &:before{
+                    border-width: 0 tokenSpacer(9) tokenSpacer(9) 0;
+                    right:-#{tokenSpacer(9)-0.2};
+                    @include media-breakpoint-down("md"){
+                        left:auto;
+                        border-width: 0 tokenSpacer(6) tokenSpacer(6) 0;
+                        transform:rotate(90deg);
+                        right:tokenSpacer(8);
+                        top: -#{tokenSpacer(6)-0.2};
+                    }
+                }
+            }
+        }
+        &:not[class*=--flipped]{
+            .#{$component}__content{
+                &:before{
+                    left:-#{tokenSpacer(9)-0.2};
+                    right:auto;
+                }
+            }
+        }
+    }
+}

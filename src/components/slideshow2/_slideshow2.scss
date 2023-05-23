@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+$component: componentClass("slideshow2");
+$cmp-tokens: ();
+
+.#{$component}{
+    &__pagination{
+        top:tokenSpacer(4);
+        right:tokenSpacer(4);
+        width:auto !important;
+        left:auto !important;
+        bottom:auto !important;
+    }
+}

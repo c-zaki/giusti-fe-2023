@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+$zaux-helper-name: "fit";
+
+.#{tokenDef("app-prefix")}-#{$zaux-helper-name} {
+  &-of {
+    &-cover {
+      &-left-center {
+        @include objectfit(cover, left center);
+      }
+      &-50-50 {
+        @include objectfit(cover, center center);
+      }
+      &-right-center {
+        @include objectfit(cover, right center);
+      }
+      &-50-top {
+        @include objectfit(cover, center top);
+      }
+    }
+    &-contain {
+      &-50-50 {
+        @include objectfit(contain, center center);
+      }
+    }
+  }
+}
+
+@include generateResponsive(
+  #{"."}#{tokenDef("app-prefix")}-#{$zaux-helper-name}-cover,
+  full
+) {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

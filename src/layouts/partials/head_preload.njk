@@ -1,0 +1,16 @@
+{#
+@see https://web.dev/preload-responsive-images/
+#}
+<!-- Preloads -->
+{% if page.data.head.preloads.maxMd %}
+  {% for p in page.data.head.preloads.maxMd %}
+    <link rel="preload" href="{{p.src}}" as="image" media="{{component_img.props.mq.mobile}}">
+    <link rel="preload" href="{{p.src2x}}" as="image" media="{{component_img.props.mq.mobile2x}}">
+  {% endfor %}
+{% endif %}
+{% if page.data.head.preloads.minLg %}
+  {% for p in page.data.head.preloads.minLg %}
+    <link rel="preload" href="{{p.src}}" as="image" media="{{component_img.props.mq.desktop}}">
+    <link rel="preload" href="{{p.src2x}}" as="image" media="{{component_img.props.mq.desktop2x}}">
+  {% endfor %}
+{% endif %}

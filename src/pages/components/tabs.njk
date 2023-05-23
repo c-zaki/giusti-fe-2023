@@ -1,0 +1,61 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Tabs"
+} %}
+
+{# Imports components #}
+{# import 'components/herovideo/herovideo.njk' as HeroVideo #}
+{% import 'components/sliderstrip1/sliderstrip1.njk' as SliderStrip1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+    <div class="zaux-theme--light1">
+    
+    {% set codeBlock %}
+      <ul class="py-5 d-flex gap-5 zaux-bg-default-black zaux-color-default-white px-5" role="tablist">
+          <li role="presentation">
+              <button class="zaux-color-default-white --active" id="home-tab" data-zaux-toggle="tab" data-zaux-group="group1" data-zaux-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+          </li>
+          <li role="presentation">
+              <button class="zaux-color-default-white" id="profile-tab" data-zaux-toggle="tab" data-zaux-group="group1" data-zaux-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+          </li>
+          <li role="presentation">
+              <button class="zaux-color-default-white" id="contact-tab" data-zaux-toggle="tab" data-zaux-group="group1" data-zaux-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+          </li>
+      </ul>
+      <div class="p-5 zaux-bg-default-white">
+          <div class="--active --fade --show" id="home" role="tabpanel" data-zaux-tab-content data-zaux-group="group1" aria-labelledby="home-tab">
+            Tab content 1
+          </div>
+          <div class="--fade" id="profile" role="tabpanel" data-zaux-tab-content data-zaux-group="group1" aria-labelledby="profile-tab">
+            Tab content 2
+          </div>
+          <div class="--fade" id="contact" role="tabpanel" data-zaux-tab-content data-zaux-group="group1" aria-labelledby="contact-tab">
+            Tab content 3
+          </div>
+      </div>
+    {% endset %}
+
+    <div class="p-5 zaux-bg-default-lightgray">
+      {{ codeBlock | safe }}
+    </div>
+
+    <h3 class="my-5">Code sample</h3>
+
+    <pre class="my-4 py-4 zaux-bg-set1-black1 zaux-color-set1-white1">
+      {{ codeBlock }}
+    </pre>
+
+    </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

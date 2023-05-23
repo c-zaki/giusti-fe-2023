@@ -1,0 +1,33 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Search bar"
+} %}
+
+{# Imports components #}
+{% import 'components/searchbar/searchbar.njk' as searchbar %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {{
+        searchbar.content(
+            {
+                "searchOverlayId" : "filter-search-overlay",
+                "searchPH" : "Cerca un evento"
+            }
+        )
+    }}
+  </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

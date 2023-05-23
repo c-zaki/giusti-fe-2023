@@ -1,0 +1,84 @@
+{
+  "topMenu" : [
+    {
+      "icon" : "envelope",
+      "label" : "info@giustisoft.it",
+      "url" : "mailto:info@giustisoft.it"
+    },
+    {
+      "icon" : "phone",
+      "label" : "0586 12345667",
+      "url" : "tel:058612401522"
+    },
+    {
+      "icon" : "whatsapp",
+      "label" : "Commerciale",
+      "url" : "whatsapp:3414124151"
+    },
+    {
+      "icon" : "gear",
+      "label" : "Area tecnica",
+      "url" : "#area-tecnica"
+    },
+    {
+      "icon" : "headphones",
+      "label"  : "Assistenza/Demo",
+      "url" : "#assistenza"
+    }
+  ],
+  "menuItems" : [
+    { 
+      "title" : "Nikè CRM",
+      "url" : "#"
+    },
+    { 
+      "title" : "Nikè BO",
+      "url" : "#"
+    },
+    {
+      "title" : "Nikè SFA",
+      "url" : "#",
+      "coverImg": "https://placehold.co/512x512/orange/white",
+      "logo" : "/img/nike-sfa-logo.svg",
+      "subMenu" : [
+        {
+          "label" : "Label test 1",
+          "subTitle" : "subTitle test asdas",
+          "url" : "#url-test"
+        },
+        {
+          "label" : "Label test",
+          "subTitle" : "subTitle test",
+          "url" : "#url-test"
+        },
+        {
+          "label" : "Label test",
+          "subTitle" : "subTitle test",
+          "url" : "#url-test"
+        }
+      ]
+    },
+    {
+      "title" : "App trasversali",
+      "url" : "#",
+      "coverImg": "https://placehold.co/512x512",
+      "subMenu" : [
+        {
+          "label" : "Label test",
+          "subTitle" : "subTitle test",
+          "url" : "#url-test"
+        },
+        {
+          "label" : "Label test",
+          "subTitle" : "subTitle test",
+          "url" : "#url-test"
+        },
+        {
+          "label" : "Label test",
+          "subTitle" : "subTitle test",
+          "url" : "#url-test"
+        }
+      ]
+    }
+  ]
+}

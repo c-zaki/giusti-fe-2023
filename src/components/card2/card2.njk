@@ -1,0 +1,72 @@
+{# Imports components #}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/badge/badge.njk' as Badge %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-card2' %}
+
+    {% set configDefault = {
+        "className": [""],
+        "variations" : []
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+    {% set responsive = "" %}
+    {% set resClasses = {
+        "controls" : "mb-n6s mb-md-0"
+    } %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+        {% if "res" in variation %}
+            {% set responsive = variation %}
+        {% endif %}
+    {% endfor %}
+
+    {% if responsive == "res1" %}
+        {% set resClasses = resClasses | setAttribute("controls", "") %}
+    {% endif %}
+
+    <div class="{{_className | join(" ")}} position-relative" data-zaux-href="{{obj.url}}">
+        <div class="{{componentClassName}}__inner h-100">
+            {% if obj.cta %}
+                <a href="{{obj.cta.link}}" title="{{obj.cta.label}}">
+            {% endif %}
+                {% if obj.media %}
+                    <div class="{{componentClassName}}__media zaux-ratio--6 d-flex flex-column justify-content-center text-center">
+                        {% set imgParams = {} %}
+                        {% set imgParams = imgParams | overwriteMerge(obj.media) %}
+                        {{ Img.content(imgParams) }}
+                        <div class="{{componentClassName}}__deco"></div>
+                    </div>
+                {% endif %}
+                <div class="{{componentClassName}}__content text-left px-6 pt-7 pb-6">
+                    <div class="{{componentClassName}}__content-top">
+                        <p class="c-typo-style1-text-m">
+                            {{obj.content | safe}}
+                        </p>
+                    </div>
+                    <div class="{{componentClassName}}__content-bottom pt-7">
+                        {% if obj.cta %}
+                            {% set ctaParams = { "variations" : ["primary"] } %}
+                            {% set ctaParams = ctaParams | overwriteMerge(obj.cta) %}
+                            {{
+                                Button.content(ctaParams)
+                            }}
+                        {% endif %}
+                    </div>
+                </div>
+            {% if obj.cta %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endmacro %}

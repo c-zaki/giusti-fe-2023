@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+$component: componentClass("loader");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &__icon{
+        color: tokenColor("set1","color1");
+        svg{
+            filter: drop-shadow(tokenShadow(1));
+        }
+    }
+    &__dots{
+        div{
+            background-color:tokenColor("set1","color5");
+        }
+    }
+}

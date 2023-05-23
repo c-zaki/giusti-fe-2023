@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+@import
+  '../abstracts/variables',
+  '../abstracts/functions',
+  '../abstracts/mixins',
+  '../abstracts/placeholders'
+;
+
+@import
+  'bootstrap/scss/functions',
+  'bootstrap/scss/variables',
+  'bootstrap/scss/mixins'
+;
+
+$component-prefix : 'c-' !default;

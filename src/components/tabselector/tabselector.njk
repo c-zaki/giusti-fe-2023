@@ -1,0 +1,46 @@
+{# Imports components #}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/card1/card1.njk' as Card1 %}
+{% import 'components/loader/loader.njk' as Loader %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-tabselector' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : []
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {% set groupId = "group-" + groupId | randomString() %}
+
+    <div class="{{_className | join(" ") | trim }}">
+        <div class="{{componentClassName}}__inner">
+            <ul class="{{componentClassName}}__tabs overflow-overlay zaux-gs-scrollbar--1 d-flex flex-row flex-grow align-items-stretch">
+                {% for tab in obj.tabs %}
+                    <li role="presentation">
+                        <button class="{{componentClassName}}__tab {% if tab.active %}--active{% endif %} px-5 py-3" id="tab-{{tab.id}}" data-zaux-toggle="tab" data-zaux-group="{{groupId}}" data-zaux-target="#{{tab.id}}-{{groupId}}" type="button" role="tab" aria-controls="{{tab.id}}" aria-selected="true">{{tab.label}}</button>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="{{componentClassName}}__tabs-content p-6">
+                {% for tab in obj.tabs %}
+                    <div class="{{componentClassName}}__tab-content {% if tab.active %}--active{% endif %} --fade --show c-typo-block-style1--typo-alt1" id="{{tab.id}}-{{groupId}}" role="tabpanel" data-zaux-tab-content data-zaux-group="{{groupId}}" aria-labelledby="tab-{{tab.id}}">
+                        {{tab.content | safe}}
+                    </div>
+                {% endfor %}                
+            </div>
+        </div>  
+    </div>
+    
+{% endmacro %}

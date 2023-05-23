@@ -1,0 +1,102 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Infobox 1"
+} %}
+
+{# Imports components #}
+{% import 'components/infobox1/infobox1.njk' as InfoBox1 %}
+{% import 'components/sharebtn/sharebtn.njk' as ShareBtn %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+    <div class="zaux-theme--light1">
+
+        <h3 class="my-5">Button list</h3>
+        {{ InfoBox1.content(
+          {
+            "icon" : "document",
+            "title" : "Allegati",
+            "type" : "btnList",
+            "buttons" : [
+              { "link" : "#test-link-1", "label" : "Link label here", "icon" : "download" },
+              { "link" : "#test-link-1", "label" : "Link label here", "icon" : "download" }
+            ]
+          }
+        ) }}
+
+        <h3 class="my-5">Text list</h3>
+
+        {{ InfoBox1.content(
+          {
+            "icon" : "phone",
+            "title" : "Contatti utili",
+            "type" : "textList",
+            "textList" : [
+              {
+                "linkable" : true,
+                "url" : "tel:390000000",
+                "key" : "Telefono",
+                "value" : "(+39) 0000000"
+              },
+              {
+                "linkable" : true,
+                "url" : "mailto:test@zaki.it",
+                "key" : "Email",
+                "value" : "info@visitlivorno.it"
+              }
+            ]
+          }
+        ) }}
+
+        <h3 class="my-5">Free text content (supports rich text)</h3>
+
+        {{ InfoBox1.content(
+          {
+            "icon" : "help",
+            "title" : "Informazioni aggiuntive",
+            "type" : "text",
+            "content" : "<p>Al chiuso, raggiungibile in auto</p>"
+          }
+        ) }}
+
+        <h3 class="my-5">No title only content</h3>
+        {{ InfoBox1.content(
+          {
+            "noHead" : true,
+            "type" : "btnList",
+            "buttons" : [
+              { 
+                "type" : "customHTML", 
+                "content" : ShareBtn.content(
+                    {
+                      "toolTipSize" : "small",
+                      "cta" : {
+                        "variations" : ["secondary", "size-s"],
+                        "label" : "Condividi"
+                      },
+                      "socialList" : [
+                          { "url" : "#sample-url", "socialSlug" : "facebook", "icon" : "facebook" },
+                          { "url" : "#sample-url", "socialSlug" : "twitter", "icon" : "twitter" }
+                      ]
+                    }
+                )
+              },
+              { "link" : "#test-link-1", "label" : "Link label here", "icon" : "download" }
+            ]
+          }
+        ) }}
+
+    </div>
+{% endblock %}
+
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

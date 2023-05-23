@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+//@import "../../assets/scss/components/tokens/header.style";
+
+$component: componentClass("richtextblock1");
+$cmp-tokens: ();
+
+@if (variable-exists(zaux-header-style-tokens)){
+    $cmp-tokens : $zaux-header-style-tokens;
+}
+
+.#{$component} {
+    img{
+        border-top-width:2px;
+        height:auto;
+        max-width:100%;
+        object-fit:cover;
+        margin-bottom:tokenSpacer(6);
+        &:last-child{
+            margin-bottom:0;
+        }
+    }
+}

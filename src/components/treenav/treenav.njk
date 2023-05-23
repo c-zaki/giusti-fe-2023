@@ -1,0 +1,110 @@
+{# Imports components #}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/svgdeco1/svgdeco1.njk' as SvgDeco1 %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-treenav' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : [],
+        "titleTag" : "h3",
+        "title" : "Title here",
+        "noHead" : true
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    <div class="{{_className | join(" ")}}">
+        <div class="{{componentClassName}}__inner">
+            {% if obj.noHead == false %}
+                <div class="{{componentClassName}}__head p-9">
+                    <{{obj.titleTag}} class="c-typo-style1-size-title-s text-case-none pb-2">{{obj.title}}</{{obj.titleTag}}>
+                    {% if obj.backBtn %}
+                        {% set btnParams = { "variations" : ["theme-alt3", "size-m", "inline", "inverted"] } %}
+                        {% set btnParams = btnParams | overwriteMerge(obj.backBtn) %}
+                        {{ Button2.content(btnParams) }}
+                    {% endif %}
+                </div>
+            {% endif %}
+            <div class="{{componentClassName}}__body p-6">
+                <ul class="{{componentClassName}}__list {{componentClassName}}__list--main d-flex flex-column">
+                    {% set btnParams = { "variations" : ["size-m", "inline", "inverted", "theme-alt1"] } %}
+                    {% for element in obj.entries %}
+                        <li>
+                            {% set btnParams = btnParams | overwriteMerge(element.mainLevel) %}
+                            {% if element.mainLevel.link and element.mainLevel.highlight !== true %}
+                                {{ 
+                                    Button2.content(btnParams)
+                                }}
+                            {% else %}
+                                {% if element.mainLevel.link %}
+                                    <a {% if btnParams.rel %}rel="{{btnParams.rel}}"{% endif %} {% if btnParams.target %}target="{{btnParams.target}}"{% endif %} title="{{btnParams.label}}" href="{{btnParams.link}}">
+                                    {% endif %}
+                                        <span class="c-typo-style1-size-label-xl{% if btnParams.highlight %} --highlight fw-bold{% endif %}">
+                                            <span class="d-flex gap-2 align-items-center">
+                                                {{Icon.content({"variations" : ["size-2"], "iconName" : "arrow2-right"})}}
+                                                <span>{{btnParams.label}}</span>
+                                            </span>
+                                        </span>
+                                    {% if element.mainLevel.link %}
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                            {# Second level #}
+                            {% if element.subLevel %}
+                                <ul class="{{componentClassName}}__list--sub1 d-flex flex-column ps-6">
+                                    {% for secondLevelElement in element.subLevel %}
+                                        {% set btnParams = btnParams | overwriteMerge(secondLevelElement.mainLevel) %}
+                                        <li>
+                                            {% if secondLevelElement.mainLevel.link and secondLevelElement.mainLevel.highlight !== true %}
+                                                {{ 
+                                                    Button2.content(btnParams)
+                                                }}
+                                            {% else %}
+                                                {% if secondLevelElement.mainLevel.link %}
+                                                    <a {% if btnParams.rel %}rel="{{btnParams.rel}}"{% endif %} {% if btnParams.target %}target="{{btnParams.target}}"{% endif %} title="{{btnParams.label}}" href="{{btnParams.link}}">
+                                                    {% endif %}
+                                                        <span class="d-flex gap-2 align-items-center --highlight fw-bold">
+                                                            {{Icon.content({"variations" : ["size-2"], "iconName" : "arrow2-right"})}}
+                                                            <span>{{btnParams.label}}</span>
+                                                        </span>
+                                                    {% if secondLevelElement.mainLevel.link %}
+                                                    </a>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if secondLevelElement.subLevel %}
+                                                <ul class="{{componentClassName}}__list--sub2 d-flex flex-column ps-6">
+                                                    {% for thirdLevelElement in secondLevelElement.subLevel %}
+                                                        {% set btnParams = btnParams | overwriteMerge(thirdLevelElement.mainLevel) %}
+                                                        <li>
+                                                            {{ 
+                                                                Button2.content(btnParams)
+                                                             }}
+                                                        </li>
+                                                    {% endfor %}                                            
+                                                </ul>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}

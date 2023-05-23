@@ -1,0 +1,58 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Section 1",
+  "noSidePad" : false
+} %}
+
+{# Imports components #}
+{% import 'components/section1/section1.njk' as Section1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+
+    <h3 class="fs-6 my-5">Default theme</h3>
+    {{
+      Section1.content(
+        {
+          "content" : "FREE_HTML_CONTENT_HERE"
+        }
+      )
+    }}
+
+    <h3 class="fs-6 my-5">Theme variant 1</h3>
+
+    {{
+      Section1.content(
+        {
+          "variations" : ["theme-2"],
+          "content" : "FREE_HTML_CONTENT_HERE"
+        }
+      )
+    }}
+
+    <h3 class="fs-6 my-5">Theme variant 2</h3>
+
+    {{
+      Section1.content(
+        {
+          "variations" : ["theme-3"],
+          "content" : "FREE_HTML_CONTENT_HERE"
+        }
+      )
+    }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

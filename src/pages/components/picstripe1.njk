@@ -1,0 +1,42 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Pic Stripe 1"
+} %}
+
+{# Imports components #}
+{% import 'components/picstripe1/picstripe1.njk' as PicStripe1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+  <div class="zaux-theme--light1">
+    {{
+        PicStripe1.content({
+            "pics" : [
+                {
+                    "mainSrc" : "https://placehold.co/512x512/CD2D45/FFF"
+                },
+                {
+                    "mainSrc" : "https://placehold.co/512x512"
+                },
+                {
+                    "mainSrc" : "https://placehold.co/512x512/CD2D45/FFF"
+                },
+                {
+                    "mainSrc" : "https://placehold.co/512x512"
+                }
+            ]
+        })
+    }}
+  </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

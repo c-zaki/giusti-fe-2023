@@ -1,0 +1,61 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+    "data": page_component,
+    "title": "Slideshow 2"
+} %}
+
+{# Imports components #}
+{% import 'components/slideshow2/slideshow2.njk' as SlideShow2 %}
+{% import 'components/cardwide1/cardwide1.njk' as CardWide1 %}
+
+{% block head_css %}
+    <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="zaux-theme--light1">
+
+        {% set cardSample %}
+        {{
+          CardWide1.content(
+            {
+              "className" : ["h-100"],
+              "title" : "Standard title"
+            }
+          )
+        }}
+        {% endset %}
+
+        {% set cardSample2 %}
+        {{
+          CardWide1.content(
+            {
+              "className" : ["h-100"],
+              "title" : "Title 2"
+            }
+          )
+        }}
+        {% endset %}
+
+        {{ SlideShow2.content(
+            {
+                "activateControls" : true,
+                "slides" : [
+                    cardSample,
+                    cardSample2,
+                    cardSample
+                ]
+            }
+        ) }}
+
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+    <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

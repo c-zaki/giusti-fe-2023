@@ -1,0 +1,160 @@
+{
+  "props": {
+    "logo": {
+      "img": {
+        "isFluid": true,
+        "isLazy": true,
+        "src": "https://via.placehold.co/644x120",
+        "width": 220,
+        "height": 48
+      }
+    }
+  },
+  "menu1" : [
+    {
+      "title" : {
+        "label" : "Conosci Nikè"
+      },
+      "items" : [
+          {
+            "label" : "Cos'è Nikè",
+            "url" : "#cosenike"
+          },
+          {
+            "label" : "Scopri i vantaggi di nikè",
+            "url" : "#vantaggi-nike"
+          },
+          {
+            "label" : "Integrazioni e innovazione",
+            "url" : "#integrazioni-e-innovazione"
+          },
+          {
+            "label" : "Specializzazioni",
+            "url" : "#specializzazioni"
+          },
+          {
+            "label" : "Azienda e partner",
+            "url" : "#azienda-partenr"
+          },
+          {
+            "label" : "Case History",
+            "url" : "#case-history"
+          },
+          {
+            "label" : "Contatti",
+            "url" : "#contatti"
+          }
+        ]
+    },
+    {
+      "items" : [
+          {
+            "label" : "Privacy policy",
+            "url" : "#privacy-policy"
+          },
+          {
+            "label" : "Cookie policy",
+            "url" : "#cookie-policy"
+          }
+        ]
+    }
+  ],
+  "menu2" : [
+    {
+      "title" : {
+        "label" : "Specializzazioni"
+      },
+      "items" : [
+          {
+            "label" : "Food",
+            "url" : "#food"
+          },
+          {
+            "label" : "Beverage",
+            "url" : "#beverage"
+          },
+          {
+            "label" : "Vitivinicolo",
+            "url" : "#vitivinicolo"
+          },
+          {
+            "label" : "Giocattoli",
+            "url" : "#giocattoli"
+          },
+          {
+            "label" : "Personal care",
+            "url" : "#personal-care"
+          },
+          {
+            "label" : "Home & Living",
+            "url" : "#home-and-living"
+          },
+          {
+            "label" : "Farmaceutico",
+            "url" : "#farmaceutico"
+          },
+          {
+            "label" : "Parafarmaceutico",
+            "url" : "#parafarmaceutico"
+          }
+        ]
+    }
+  ],
+  "menu3" : [
+    {
+      "title" : {
+        "label" : "Le app nikè"
+      },
+      "items" : [
+          {
+            "label" : "Nikè back office",
+            "url" : "#nike-back-office"
+          },
+          {
+            "label" : "Nikè CRM",
+            "url" : "#nike-crm"
+          },
+          {
+            "label" : "Nikè SFA",
+            "url" : "#nike-sfa"
+          },
+          {
+            "label" : "Funzioni verticali",
+            "url" : "#funzioni-verticali"
+          }
+        ]
+    },
+    {
+      "title" : {
+        "label" : "Nikè per te"
+      },
+      "items" : [
+        {
+          "label" : "Assistenza",
+          "url" : "#assistenza"
+        },
+        {
+          "label" : "Webinar",
+          "url" : "#webinar"
+        },
+        {
+          "label" : "Social wall",
+          "url" : "#social-wall"
+        },
+        {
+          "label" : "Nikè magazine",
+          "url" : "nike-magazine"
+        }
+      ]
+    }
+  ],
+  "social" : [
+    { "label" : "Facebook", "url" : "#fb", "icon" : "facebook" },
+    { "label" : "Youtube", "url" : "#yt", "icon" : "youtube" },
+    { "label" : "Twitter", "url" : "#tw", "icon" : "twitter" },
+    { "label" : "Linkedin", "url" : "#li", "icon" : "linkedin" }
+  ],
+  "copyRightSign" : "© GIUSTI s.r.l. •  Tutti i diritti sono riservati. Parte dei loghi riportati appartengono ai legittimi proprietari e sono utilizzati a titolo puramente esemplificativo.",
+  "textInfo1" : "Via Alberto Franchetti 19 • 50127 Firenze <br/> Partita IVA: IT01551870486",
+  "footerDeets" : "eventi@visitlivorno.it <br/> (+39) 000 0000000 <br/> Piazza del Municipio 1, 57123 Livorno (LI) <br/> P.IVA 0000000000"
+}

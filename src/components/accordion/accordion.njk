@@ -1,0 +1,107 @@
+{% import 'components/icon/icon.njk' as Icon %}
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-accordion' %}
+
+    {% set configDefault = {
+      "className" : [],
+      "headerClasses" : [],
+      "eyelet" : "Eyelet sample",
+      "title" : "Accordion title",
+      "content" : "Sample content here",
+      "accordionTitleTag" : "h2",
+      "eyeletTag" : "h6",
+      "size" : "medium",
+      "customContentSpacing" : ""
+    }
+    %}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+    {% set headerClasses = [componentClassName] + "__header" | mergeArray(obj.headerClasses or configDefault.headerClasses) %}
+    {% set eyelet = obj.eyelet or configDefault.eyelet %}
+    {% set title = obj.title or configDefault.title %}
+    {% set content = obj.content or configDefault.content %}
+    {% set accordionTitleTag = obj.accordionTitleTag or configDefault.accordionTitleTag %}
+    {% set eyeletTag = obj.eyeletTag or configDefault.eyeletTag %}
+    {% set hasIcon = obj.hasIcon %}
+    {% set iconSize = ["size-4", "size-md-6"] %}
+    {% set size = obj.size or configDefault.size %}
+    {% set togglerIconSize = ["size-3", "size-md-4"] %}
+
+    {# Variations depending on size #}
+    {% set titlesClass = {
+      "eyelet" : "fs-1 text-uppercase",
+      "title" : "c-typo-style1-size-title-xxs c-typo-style1-size-md-title-m"
+    } %}
+    {% set spacings = {
+        "eyelet" : "mb-1 mb-md-3",
+        "meta" : "py-4 py-md-5",
+        "icon" : "me-4 me-md-6",
+        "controls" : "py-7 me-1 me-md-5",
+        "body" : "p-4 p-md-6"
+      }
+    %}
+    
+    {% if size == "small" %}
+      {% set titlesClass = {
+        "eyelet" : "fs-1 text-uppercase",
+        "title" : "c-typo-style1-size-title-xxs"
+      } %}
+      {% set iconSize = ["size-4"] %}
+      {% set togglerIconSize = ["size-3"] %}
+      {% set spacings = {
+          "eyelet" : "mb-1",
+          "meta" : "py-4",
+          "icon" : "me-4",
+          "controls" : "py-7 me-1",
+          "body" : "p-4"
+        }
+      %}
+    {% endif %}
+
+
+    {% set randomId = "" | randomString() %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+      {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {% if obj.stacked == true %}
+      {% set _className = (_className.push(componentClassName +"--stacked"), _className) %}
+    {% endif %}
+
+    <div class="{{_className | join(" ")}} accordion-item">
+      <div class="{{componentClassName}}__header accordion-header" id="accordion-heading{{randomId}}" data-bs-toggle="collapse" data-bs-target="#collapse{{randomId}}" aria-expanded="{% if obj.isOpen %}true{% else %}false{% endif %}" aria-controls="collapse{{randomId}}">
+        <div class="{{componentClassName}}__meta {{spacings.meta}} d-flex justify-start">
+          {% if hasIcon %}
+            <div class="{{componentClassName}}__icon-container d-flex justify-content-center flex-column {{spacings.icon}}">
+              <button class="accordion-button collapsed text-left" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{randomId}}" aria-expanded="{% if obj.isOpen %}true{% else %}false{% endif %}" aria-controls="collapse{{randomId}}">
+                {{ Icon.content({ "className" : [componentClassName + "__icon"],"iconName" : obj.iconName, "variations" : iconSize }) }}
+              </button>
+            </div>
+          {% endif %}
+          <div class="{{componentClassName}}__heading">
+            <button class="accordion-button collapsed text-left h-100 justify-content-between flex-column d-flex" type="button" dpata-bs-toggle="collapse" data-bs-target="#collapse{{randomId}}" aria-expanded="{% if obj.isOpen %}true{% else %}false{% endif %}" aria-controls="collapse{{randomId}}">
+              <{{eyeletTag}} class="{{componentClassName}}__eyelet {{titlesClass.eyelet}} {{spacings.eyelet}}">{{eyelet}}</{{eyeletTag}}>
+              <{{accordionTitleTag}} class="{{componentClassName}}__title {{titlesClass.title}}">{{title}}</{{accordionTitleTag}}>
+            </button>
+          </div>
+        </div>
+        <div class="{{componentClassName}}__controls {{spacings.controls}}">
+          <button class="{{componentClassName}}__toggler accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{randomId}}" aria-expanded="{% if obj.isOpen %}true{% else %}false{% endif %}" aria-controls="collapse{{randomId}}">
+            {{ Icon.content({ "iconFamily": "icozaux1", "iconName" : "arrow1-down", "variations" : togglerIconSize }) }}
+          </button>
+        </div>
+      </div>
+      <div id="collapse{{randomId}}" class="{{componentClassName}}__body accordion-collapse collapse{% if obj.isOpen %} show{% endif %}" data-aria-labelledby="accordion-heading-{{randomId}}" {%if obj.hasParent %}data-bs-parent="{{obj.parent}}"{% endif %}>
+        <div class="{{componentClassName}}__content accordion-body c-typo-block-style1-themed {{spacings.body}}">
+          {{content | safe}}
+        </div>
+      </div>
+    </div>
+    
+{% endmacro %}

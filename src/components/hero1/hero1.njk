@@ -1,0 +1,108 @@
+{# Imports components #}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/img/img.njk' as Img%}
+{% import 'components/video/video.njk' as Video %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/badge/badge.njk' as Badge %}
+{% import 'components/svgdeco1/svgdeco1.njk' as SvgDeco1 %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-hero1' %}
+
+    {% set configDefault = {
+        "className": [""],
+        "variations" : [],
+        "titleTag" : "h3",
+        "eyeletTag" : "h5",
+        "preTitleTag" : "h4",
+        "preTitle" : "false",
+        "mediaType" : "img",
+        "extraBottomContent" : false
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}    
+
+    <div class="{{_className | join(" ") | trim}}">
+        <div class="{{componentClassName}}__inner d-flex justify-content-center flex-column">
+            <div class="{{componentClassName}}__deco d-none d-md-block">
+                {{SvgDeco1.content()}}
+            </div>
+            <div class="{{componentClassName}}__media-bg">
+                {% if obj.mediaType == 'img' %}
+                    {% if obj.img %}
+                        {{
+                            Img.content({
+                                "className" : [componentClassName + "__bg"],
+                                "variations" : ["ratio-1", "fluid-xy"],
+                                "mainSrc" : obj.img.mainSrc or '',
+                                "sourceList" : obj.img.sourceList or ''
+                            })
+                        }}
+                    {% endif %}
+                {% elif obj.mediaType == 'video' %}
+                    {% if obj.video %}
+                        {{
+                            Video.content(
+                                {   
+                                    "className" : ["h-100"],
+                                    "sourceList" : obj.video.srcList,
+                                    "options" : obj.video.options
+                                }
+                            )
+                        }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="{{componentClassName}}__body px-4 px-md-8 px-lg-8">
+                <div class="px-0 container-l">
+                    <div class="row g-0">
+                        <div class="{{componentClassName}}__col--1 col-12 col-md-7 d-flex justify-content-center flex-column">
+                            <div>
+                                {% if obj.preTitle !== false %}
+                                    <div class="{{componentClassName}}__pre-title pb-6">
+                                        {{ obj.preTitle | safe }}
+                                    </div>
+                                {% endif %}
+                                {% if obj.title %}
+                                    <{{obj.titleTag}} class="{{componentClassName}}__title fw-semibold c-typo-style1-size-display-3 c-typo-style1-size-md-display-1 pb-4">
+                                        {{obj.title | safe}}
+                                    </{{obj.titleTag}}>
+                                {% endif %}
+                                {% if obj.abstract %}
+                                    <p class="c-typo-style1-size-text-m pb-6 w-80">
+                                        {{ obj.abstract | safe }}
+                                    </p>
+                                {% endif %}
+                                {% if obj.cta %}
+                                    <div class="d-block pb-0 pb-sm-6">
+                                        {% set btnParams = { "variations" : ["secondary", "size-m"], "hasIcon" : true, "icon" : "info", "link" : obj.cta.url, "label" : obj.cta.title } %}
+                                        {% set btnParams = btnParams | overwriteMerge(obj.cta) %}
+                                        {{ Button.content(btnParams) }}
+                                    </div>
+                                {% endif %}
+                                {% if obj.extraBottomContent !== false %}
+                                    <div class="{{componentClassName}}__extra-bottom-content pt-6">
+                                        {{ obj.extraBottomContent | safe }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="{{componentClassName}}__col--2 col-12 d-none d-sm-flex col-md-5 justify-content-end">
+                            {{ obj.col2HTML | safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}

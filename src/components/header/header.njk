@@ -1,0 +1,155 @@
+{# Imports components #}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/searchbar/searchbar.njk' as searchbar %}
+
+{% macro content(obj) %}
+
+  {% set componentClassName = 'c-header' %}
+
+  {% set configDefault = {
+    "className": [],
+    "motto" : "Creative digital agency",
+    "logoTitle" : app.name,
+    "logoURL" : app.websiteURL,
+    "topMenu" : component_header.topMenu,
+    "searchPlaceholder" : "Cerca tra i case o gli articoli",
+    "searchOverlaySelector" : "#search-overlay",
+    "menuItems" : component_header.menuItems,
+    "navMenuTitleId" : "main-nav-menu",
+    "navMenuAriaTitle" : "Main menu",
+    "controlsMenuTitleId" : "header-control-menu",
+    "controlsMenuAriaTitle" : "Controls menu",
+    "searchAriaLabel" : "Open search overlay",
+    "navModalId" : ""
+  }%}
+
+  {% set obj = configDefault | overwriteMerge(obj or {}) %}
+  {% set motto = obj.motto or configDefault.motto %}
+  {% set logoTitle = obj.logoTitle or configDefault.logoTitle %}
+  {% set logoURL = obj.logoURL or configDefault.logoURL %}
+  {% set searchPlaceholder = obj.searchPlaceholder or configDefault.searchPlaceholder %}
+  {% set offCanvasId = obj.offCanvasId or "" %}
+
+  {# Creates new arrays for manipulation) #}
+  {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+  {# Pushes every variation into class attribute (prepending the base class) #}
+  {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+      {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+  {% endfor %}
+
+  <header class="{{_className | join(" ") | trim }}" data-js-component="Header">
+    <div class="{{componentClassName}}__inner">
+      <div class="{{componentClassName}}__row--1 d-none d-md-block py-4 position-relative">
+        <div class="container-l d-flex justify-content-end">
+          {% if obj.topMenu %}
+            <ul class="{{componentClassName}}__topmenu d-flex align-items-center">
+              {% for entry in obj.topMenu %}
+                <li class="px-4">
+                  <a class="d-flex gap-2" href="{{entry.url}}" title="{{entry.label}}">
+                    {{
+                      Icon.content(
+                        {
+                          "variations" : "size-2",
+                          "iconName" : entry.icon
+                        }
+                      )
+                    }}
+                    <span class="fs-1 lh-1 d-sm-block d-none">{{entry.label}}</span>
+                  </a>
+                </li>
+              {% endfor %}
+              <li class="d-flex align-items-center fs-1 lh-1 px-4">
+                <a href="#ita" title="Ita">ITA</span>
+                <span class="px-1">/</span>
+                <a href="#eng" title="Eng">ENG</a>
+              </li>
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+      <div class="{{componentClassName}}__row--2 shadow-1 zi-3 position-relative">
+        <div class="container-l">
+          <div class="row">
+            <div class="col-5 col-sm-3 d-flex flex-column justify-content-center">
+              <div class="{{componentClassName}}__logo-area d-flex justify-content-start text-center align-items-center py-5">
+                <div class="{{componentClassName}}__logo maxw-160px maxw-md-none">
+                  <a title="{{logoTitle}}" href="{{logoURL}}">
+                    {{
+                      Img.content({
+                        "lazyLoad" : false,
+                        "mainSrc" : zaux_config.properties.assetsDistURL + "/img/logo-colored.svg",
+                        "imgWidth" : 225
+                      })
+                    }}
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-7 col-sm-9 d-flex justify-content-end align-items-center">
+              <nav class="d-flex gap-4 gap-sm-7" aria-labelled-by="{{obj.controlsMenuTitleId}}">
+                <h3 id="{{obj.controlsMenuTitleId}}" class="visually-hidden">{{obj.controlsMenuAriaTitle}}</h3>
+                <ul data-navmodal-id="{{obj.navModalId}}" data-js-component="HeaderNav" class="{{componentClassName}}__menu d-none d-lg-flex align-items-center">
+                  {% for entry in obj.menuItems %}
+                    <li data-menu-entry class="{{componentClassName}}__menu-item {% if entry.subMenu %}{{componentClassName}}__menu-item--has-children{% endif %}">
+                      <{% if entry.subMenu %}button data-submenu-trigger role='button'{%else%}a href="{{entry.url}}" title="{{entry.title}}"{%endif%} class="fw-bold d-flex align-items-center gap-2 py-7 px-6">
+                        <span>{{entry.title}}</span>
+                        {% if entry.subMenu %}
+                          {{
+                            Icon.content(
+                              {
+                                "variations" : ["size-1b"],
+                                "iconName" : "arrow2-down"
+                              }
+                            )
+                          }}
+                        {% endif %}
+                      </{% if entry.subMenu %}button{%else%}a{%endif%}>
+                      {% if entry.subMenu %}
+                        <ul 
+                          {% if entry.coverImg %}data-cover-img-src="{{entry.coverImg}}"{% endif %}
+                          {% if entry.logo %}data-logo-src='{{ zaux_config.properties.mediaDistURL + entry.logo }}'{% endif %}
+                          data-submenu-title="{{entry.title}}"                          
+                          data-submenu 
+                          class="d-none">
+                          {% for entry in entry.subMenu %}
+                            <li data-submenu-entry>
+                              <a data-link href="{{entry.url}}" title="{{entry.label}}">
+                                <span data-title>{{entry.label}}</span>
+                                <p data-subtitle>{{entry.subTitle}}</p>
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+                <ul class="{{componentClassName}}__controls d-flex align-items-center justify-content-end gap-6 gap-sm-7">
+                  <li class="{{componentClassName}}__control-item">
+                    <button data-icon-switch='{ "active" : "close", "idle" : "search" }' data-bs-toggle="modal" data-bs-target="{{obj.searchOverlaySelector}}" type="button">
+                      {{Icon.content( { "iconName" : "search", "variations" : ["size-3"] } )}}
+                    </button>
+                  </li> 
+                  <li class="{{componentClassName}}__control-item">
+                    <button data-offcanvas-trigger="{{offCanvasId}}" aria-label="Open off canvas" class="{{componentClassName}}__hamburger" type="button">
+                      <span class="{{componentClassName}}__hamburger-inner">
+                        <span class="{{componentClassName}}__hamburger-line {{componentClassName}}__hamburger-line--1"></span>
+                        <span class="{{componentClassName}}__hamburger-line {{componentClassName}}__hamburger-line--2"></span>
+                        <span class="{{componentClassName}}__hamburger-line {{componentClassName}}__hamburger-line--3"></span>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- .{{componentClassName}} -->
+{% endmacro %}

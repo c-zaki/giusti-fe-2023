@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+$component: componentClass("cardhero");
+$cmp-tokens: ();
+
+.#{$component} {
+    &__content{
+        position:relative;
+        &:before{
+            content:"";
+            top:tokenSpacer(14);
+            border-width: 0 tokenSpacer(11) tokenSpacer(11) 0;
+            transform:rotate(-90deg);
+            right:-#{tokenSpacer(11)-0.2};
+            position:absolute;
+            @include media-breakpoint-down("md"){
+                border-width: 0 tokenSpacer(7) tokenSpacer(7) 0;
+                top:-#{tokenSpacer(7)-0.2};
+                left:auto;
+                transform:rotate(90deg);
+                right:#{tokenSpacer(10)};
+            }
+        }
+    }
+}

@@ -1,0 +1,121 @@
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/icon/icon.njk' as Icon %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-slidertabs1' %}
+
+    {% set configDefault = {
+        "className": [""],
+        "variations" : [],
+        "eyeletTag" : "h6",
+        "titleTag" : "h3",
+        "slidesPerView" : 1,
+        "slidesPerViewMobile" : 1.5,
+        "imgRatio" : "ratio-1",
+        "contained" : true,
+        "overflow" : "visible",
+        "contained" : false,
+        "contentTitleTag" : "h3"
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+    
+    {% set tabGroupId = "tabGroup" + range(1,1000) | random %}
+    {% set sliderId = "sliderID" + range(1,1000) | random  %}
+
+    <div class="{{_className | join(" ")}}">
+        <div class="{{componentClassName}}__slider {% if obj.contained == true %}pe-0 pe-md-5 container-l container--md-spacing1 ps-5 pe-0 pe-md-5{% endif %}">
+            <div data-slider-id={{sliderId}} data-js-component="Slider" class="c-slider swiper-container" 
+                data-config='{
+                    "centeredSlides":false,
+                    "speed":600,
+                    "slidesPerView" : "2.5",
+                    "spaceBetween" : {{zaux_config.tokens.spaces['spacer-width-px'] * zaux_config.tokens.spaces.spaces[5].mul}},
+                    "navigation": {
+                        "nextEl": ".{{componentClassName}}__slider-arrow--next[data-slider-id={{sliderId}}]",
+                        "prevEl": ".{{componentClassName}}__slider-arrow--prev[data-slider-id={{sliderId}}]"
+                    },
+                    "breakpoints" : {
+                        {{token_breakpoints["md"] | dump | replace("px", "") | safe}}: {
+                            "spaceBetween": {{zaux_config.tokens.spaces['spacer-width-px'] * zaux_config.tokens.spaces.spaces[6].mul}},
+                            "slidesPerView": 6
+                        }
+                    }
+                }'>
+                <div class="c-slider__wrapper overflow-visible overflow-md-hidden
+                ">
+                    <div class="c-slider__instance swiper-container">
+                        <ul class="swiper-wrapper overflow-visible">
+                            {% for element in obj.elements %}
+                                <li class="{{componentClassName}}__slide swiper-slide" role="tablist">
+                                    <div class="{{componentClassName}}__tab d-flex justify-content-center flex-column px-3 px-md-5" role="presentation">
+                                        {% set imgParams = element.logo %}
+                                        {% set imgParams = {"variations" : ["fluid"], "className" : [componentClassName + "__img"]} | overwriteMerge(element.logoBW) %}
+                                        {{
+                                            Img.content(imgParams)
+                                        }}
+                                        <button class="{{componentClassName}}__button {% if element.active == true %}--active{% endif %}" id="tab-{{element.id}}" data-zaux-toggle="tab" data-zaux-group="{{tabGroupId}}" data-zaux-target="#tab-content-{{element.id}}" type="button" role="tab" aria-controls="tab-content-{{element.id}}" aria-selected="{% if element.active %}true{% else %}false{% endif %}">
+                                        </button>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div data-slider-id="{{sliderId}}" class="{{componentClassName}}__slider-arrow d-none d-md-block {{componentClassName}}__slider-arrow--prev">
+                    <button type="button">
+                        {{ Icon.content({
+                            "iconName" : "arrow2-left"
+                        })}}
+                    </button>
+                </div>
+                <div data-slider-id="{{sliderId}}" class="{{componentClassName}}__slider-arrow d-none d-md-block {{componentClassName}}__slider-arrow--next">
+                    <button type="button">
+                        {{ Icon.content({
+                            "iconName" : "arrow2-right"
+                        })}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="{{componentClassName}}__tabs-content text-left py-6 py-md-10">
+            {% if obj.contained == true %}
+            <div class="container-l container--spacing1">
+            {% endif %}
+                {% for element in obj.elements %}
+                    <div id="tab-content-{{element.id}}" role="tabpanel" data-zaux-tab-content data-zaux-group="{{tabGroupId}}" aria-labelledby="tab-{{element.id}}" class="{{componentClassName}}__tab-content --fade {% if element.active == true %}--show --active{% endif %}">
+                        <div class="row flex-column-reverse flex-md-row">
+                            <div class="col-12 col-md-4 pe-md-10 pe-14">
+                                {% set imgParams = element.logoColored %}
+                                {% set imgParams = {"variations" : ["fluid"], "className" : [componentClassName + "__img"]} | overwriteMerge(element.logoColored) %}
+                                {{
+                                    Img.content(imgParams)
+                                }}
+                            </div>
+                            <div class="col-12 col-md-8 pb-6 pb-md-0">
+                                <{{obj.contentTitleTag}} class="{{componentClassName}}__content-title pb-3 pb-md-6 c-typo-style1-size-title-xs c-typo-style1-size-md-title-m">
+                                    {{element.title}}
+                                </{{obj.contentTitleTag}}>
+                                <div class="c-typo-block-style1-size">
+                                    {{element.content | safe}}
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% if obj.contained == true %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endmacro %}

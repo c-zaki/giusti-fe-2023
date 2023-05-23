@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+$component: componentClass("navbar2");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+
+.zaux-theme--light1 .#{$component}{
+
+    &__slider{
+        border-bottom-color:tokenColor("set1","color4");
+        border-bottom-style:solid;
+    }
+
+    .#{$component}__tab-selector{
+        &[class*=--active]{
+            &:after{
+                background-color:tokenColor("set1","color1");
+            }
+        }
+    }
+
+    &--theme2{
+        .#{$component}__slider{
+            border-bottom-color:tokenColor("set1","white1");
+            color:tokenColor("set1","white1");
+        }
+        .#{$component}__tab-selector{
+            color:tokenColor("set1","white1");
+            opacity:0.75;
+            &[class*=--active]{
+                opacity:1;
+                &:after{
+                    background-color:tokenColor("set1","white1");
+                }
+            }
+        }
+    }   
+}

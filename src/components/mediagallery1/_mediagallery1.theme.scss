@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+$component: componentClass("mediagallery1");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &__media-strip-element{
+        &-overlay{
+            color:tokenColor("set1","white1");
+            background-color:rgba(tokenColor("set1","black1"), 0.75);
+        }
+    }
+}

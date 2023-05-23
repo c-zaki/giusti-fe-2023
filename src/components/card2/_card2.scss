@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+$component: componentClass("card2");
+$cmp-tokens: ();
+
+.#{$component} {
+    &__media{
+        position:relative;
+        .#{$component}__deco{
+            position:absolute;
+            left:tokenSpacer(6);
+            bottom:-#{tokenSpacer(6)};
+        }
+    }
+}

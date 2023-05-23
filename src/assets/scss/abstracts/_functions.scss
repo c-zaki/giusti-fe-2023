@@ -1,0 +1,294 @@
+@charset "UTF-8";
+
+//////////////////////////////////////////////////
+// UTILS
+//////////////////////////////////////////////////
+
+@function componentClass($componentName) {
+  @return $component-prefix + $componentName;
+}
+
+@function globalStyleClass($globalStyleName){
+  @return tokenDef("app-prefix") + "-gs-" + $globalStyleName;
+}
+
+@function parseInt($n) {
+  @return $n / ($n * 0 + 1);
+}
+
+@function hasCompatibilityLayer() {
+  @return tokenDef("compatibility-layer");
+}
+
+/// Replace `$search` with `$replace` in `$string`
+/// @author Kitty Giraudel
+/// @param {String} $string - Initial string
+/// @param {String} $search - Substring to replace
+/// @param {String} $replace ('') - New value
+/// @return {String} - Updated string
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  
+  @return $string;
+}
+
+@function rem($size, $base: $zaux-font-size-base-px) {
+  @return ($size / $base) * 1rem;
+}
+
+@function em($size, $base: $zaux-font-size-base-px) {
+  @return ($size / $base) * 1em;
+}
+
+@function url-friendly-color($hex) {
+  @return "%23" + str-slice("#{$hex}", 2, -1);
+}
+
+@function cmpToken($source, $key, $fallback:'', $tokenType:''){
+  @if ($source != ''){
+    @if( $tokenType == '' ){
+      @if( map-get($source,$key) ){
+        @return map-get($source,$key);
+      }
+      @else{
+        @return $fallback;
+      }
+    }
+    @else{
+      @if( map-get($source, $tokenType) ){
+        @if( map-get( map-get($source, $tokenType), $key )){
+          @return map-get( map-get($source, $tokenType), $key );
+        }
+        @else{
+          @return $fallback;
+        }
+      }@else{
+        @return $fallback;
+      }
+    }
+  }
+  @return $fallback;
+}
+
+//////////////////////////////////////////////////
+// TOKENS - DEFS
+//////////////////////////////////////////////////
+
+@function tokenDef($key) {
+  @return map-get($zaux-token-defs, $key);
+}
+
+//////////////////////////////////////////////////
+// TOKENS - BREAKPOINTS
+//////////////////////////////////////////////////
+
+@function tokenBreakpoints() {
+  @return $zaux-token-breakpoints;
+}
+
+@function tokenBreakpoint($key) {
+  @return map-get(tokenBreakpoints(), $key);
+}
+
+//////////////////////////////////////////////////
+// TOKENS - LAYOUT
+//////////////////////////////////////////////////
+
+//Spaces 
+
+@function tokenSpace($key) {
+  @return map-get($zaux-token-spaces, $key);
+}
+
+@function tokenSpace($key){
+  @return map-get($zaux-token-spaces, $key);
+}
+
+@function tokenSpacerMul($key) {
+  @return map-get(map-get(tokenSpace("spaces"), $key), "mul");
+}
+
+@function tokenSpacer($key) {
+  @return tokenSpacerMul($key) * rem(tokenSpace("spacer-width-px") * 1px);
+}
+
+//Grid
+
+@function tokenGrid($key){
+  @return map-get($zaux-token-grid, $key);
+}
+
+@function tokenGutterMul($key) {
+  @return map-get(map-get(tokenGrid("gutters"), $key), "mul");
+}
+
+@function tokenZindex($key) {
+  @return map-get($zaux-index-layers, $key);
+}
+
+//////////////////////////////////////////////////
+// TOKENS - SIZES - TYPOGRAPHY
+//////////////////////////////////////////////////
+
+@function tokenTypo($key) {
+  @return map-get($zaux-token-typo, $key);
+}
+
+@function tokenTypoBreakpoints() {
+  @return tokenTypo("breakpoints");
+}
+
+@function tokenTypoSizes() {
+  @return tokenTypo("sizes");
+}
+
+@function tokenTypoLineHeights() {
+  @return tokenTypo("lineHeights");
+}
+
+
+@function tokenTypoSize($key) {
+  @return map-get(tokenTypoSizes(), $key);
+}
+
+@function tokenTypoSizeFs($index) {
+  @return map-get(tokenTypoSizes(), $index);
+}
+
+@function tokenTypoSizeLh($index) {
+  @return map-get(tokenTypoLineHeights(), $index);
+}
+
+@function tokenLetterSpacing($index){
+  @return map-get(tokenTypo("letterSpacing"), $index);
+}
+
+//////////////////////////////////////////////////
+// TOKENS - COLORS
+//////////////////////////////////////////////////
+
+@function tokenColors() {
+  @return $zaux-token-colors;
+}
+
+@function tokenColorSet($setName) {
+  @return map-get($zaux-token-colors, $setName);
+}
+
+@function tokenColor($setName, $colorName) {
+  @return map-get(tokenColorSet($setName), $colorName);
+}
+
+//////////////////////////////////////////////////
+// TOKENS - SHADOWS
+//////////////////////////////////////////////////
+
+@function tokenShadows(){
+  $shadows : ();
+  @each $key, $value in $zaux-token-shadows{
+    $shadows : map-merge($shadows, (
+      $key : #{map-get($value, "spread")} #{map-get($value, "color")}
+    ))
+  }
+  @return $shadows;
+  //@return $zaux-token-shadows;
+}
+
+@function tokenShadow($shadowName, $part : "full"){
+  @if( $part == "spread" ){
+    @return #{map-get( map-get($zaux-token-shadows, $shadowName), "spread" )};
+  }@else if ($part == "color") {
+    @return #{map-get( map-get($zaux-token-shadows, $shadowName), "color" )};
+  }@else{
+    @return #{map-get( map-get($zaux-token-shadows, $shadowName), "spread" )} #{map-get( map-get($zaux-token-shadows, $shadowName), "color" )};
+  }
+}
+
+//////////////////////////////////////////////////
+// TOKENS - ICON SIZES
+//////////////////////////////////////////////////
+
+@function tokenIconSizeFactor(){
+  @return map-get($zaux-token-iconsizes, "sizeFactor");
+}
+
+@function tokenIconSizes(){
+  @return map-get($zaux-token-iconsizes,"sizes");
+}
+
+@function tokenIconSizeUnit(){
+  @return map-get($zaux-token-iconsizes, "unit");
+}
+
+@function tokenIconSize($iconSize){
+  @return #{( map-get( map-get( map-get( $zaux-token-iconsizes, "sizes" ), $iconSize ), "mul" ) ) * tokenIconSizeFactor()}#{tokenIconSizeUnit()};
+}
+
+//////////////////////////////////////////////////
+// TOKENS - CONTAINERS
+//////////////////////////////////////////////////
+@function tokenContainers(){
+  @return $zaux-token-containers;
+}
+
+@function tokenContainer($key){
+  @return map-get( tokenContainers(), $key);
+}
+
+
+//////////////////////////////////////////////////
+// TOKENS - Ratio
+//////////////////////////////////////////////////
+
+@function tokenRatios(){
+  @return $zaux-token-ratios;
+}
+
+@function tokenRatio($key){
+  @if( map-get( tokenRatios(), $key ) ){
+    @return map-get( map-get( tokenRatios(), $key ), "ratio" );
+  }
+}
+
+
+//////////////////////////////////////////////////
+// TOKENS - RADIUSES
+//////////////////////////////////////////////////
+
+@function tokenRadius($radius){
+  @if( map-get($zaux-token-radius, $radius) != ''){
+    @return map-get($zaux-token-radius, $radius);
+  }
+}
+
+//////////////////////////////////////////////////
+// TOKENS - OVERLAY
+//////////////////////////////////////////////////
+
+@function tokenOverlay($key){
+  @if( map-get($zaux-styles-overlay, $key ) != ''){
+    @return map-get($zaux-styles-overlay, $key );
+  }
+}
+
+@function tokenOverlayStyle($key, $attr){
+  @if( map-get( tokenOverlay($key), $attr ) ){
+    @return map-get( tokenOverlay($key), $attr );
+  }
+}
+
+//////////////////////////////////////////////////
+// TOKENS - BLUR
+//////////////////////////////////////////////////
+
+@function tokensBlur(){
+  @return $zaux-token-blur;
+}
+
+@function tokenBlur($key){
+  @return map-get( $zaux-token-blur, $key);
+}

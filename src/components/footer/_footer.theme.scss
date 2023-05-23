@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+$component: componentClass("footer");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component} {
+    background-color: tokenColor('set1', 'color3');
+    color: tokenColor('set1', 'white1');
+
+    &__language-selector{
+        select{
+            color:tokenColor("set1","white1");
+            background-color: transparent;
+            border-radius:0;
+            border:none;
+            background-size: 0.6rem;
+            transition: all $zaux-transition-0;
+            color:tokenColor("set1","white1");
+            $select-arrow-color: tokenColor("set1","white1");
+            $select-arrow-color: str-replace(#{$select-arrow-color}, "#", "%23");
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4' viewBox='0 0 8 4'%3E%3Cpath id='Icon_ionic-md-arrow-dropdown' data-name='Icon ionic-md-arrow-dropdown' d='M9 13.5l4 4 4-4Z' transform='translate(-9 -13.5)' fill='#{$select-arrow-color}'/%3E%3C/svg%3E");
+        }
+    }
+
+    &__menulist{
+        border-left-color:tokenColor("set1","color5");
+        border-left-style:solid;
+    }
+
+    &__row--2{
+        background-color:tokenColor("set1","color1");
+        color:tokenColor("set1","black1");
+    }
+
+}

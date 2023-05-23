@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+
+//@import "../../assets/scss/components/tokens/accordion.style";
+
+$component: componentClass("accordion");
+$cmp-tokens: ();
+
+/*
+@if ($zaux-accordion-style-tokens){
+    $cmp-tokens : $zaux-accordion-style-tokens;
+}
+*/
+
+.#{$component} {
+
+    .#{$component}__header{
+        position:relative;
+        border-bottom-width:cmpToken($cmp-tokens, "unitpx-headerborderbottomwidth", 1px, "layout");
+        border-top-width: cmpToken($cmp-tokens, "unitpx-headerbordertopwidth", 1px, "layout" );
+        cursor:pointer;
+        
+        .#{$component}__controls{
+            position:absolute;
+            top:50%;
+            transform:translateY(-50%);
+            right:0;
+            .#{$component}__toggler{
+                transition: transform $zaux-transition-0;
+                transform-origin: center;
+            }
+            .#{$component}__toggler:not(.collapsed){
+                transform:rotate(180deg);
+            }
+        }
+    }
+
+    &--stacked{
+        &:first-child{
+            border-top-width:1px;
+        }
+        .#{$component}__header{
+            border-top-width:0px;
+        }
+    }
+
+}

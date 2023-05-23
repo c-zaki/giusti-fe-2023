@@ -1,0 +1,84 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Media block",
+  "noSidePad" : true
+} %}
+
+{# Imports components #}
+{% import 'components/mediablock/mediablock.njk' as MediaBlock %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    <br/><br/>
+      <h3 class="px-5">With image</h3>
+    <br/><br/>
+    {{
+      MediaBlock.content()
+    }}
+    <br/><br/>
+      <h3 class="px-5">With video
+
+      </h3>
+    <br/><br/>
+    {{
+      MediaBlock.content({
+        "mediaType" : "video",
+        "videoSettings" : {
+          "srcList" : [
+                { "url" : zaux_config.properties.mediaDistURL + "/video/placeholder1.mp4", "type" : "mp4"}
+          ],
+          "options" : {
+            "autoPlay" : true
+          }
+        }
+      })
+    }}
+    <br/><br/>
+      <h3 class="px-5">Mediablock contained</h3>
+    <br/><br/>
+    {{
+      MediaBlock.content({
+        "contained" : true,
+        "fullView" : false,
+        "contained" : true,
+        "mediaType" : "img",
+        "img" : {
+          "mainSrc" : "https://placehold.co/1024x1024"
+        }
+      })
+    }}
+    <br/><br/>
+      <h3 class="px-5">Mediablock contained video</h3>
+    <br/><br/>
+    {{
+      MediaBlock.content({
+        "contained" : true,
+        "fullView" : false,
+        "contained" : true,
+        "mediaType" : "video",
+        "videoSettings" : {
+          "srcList" : [
+                { "url" : zaux_config.properties.mediaDistURL + "/video/placeholder1.mp4", "type" : "mp4"}
+          ],
+          "options" : {
+            "autoPlay" : true
+          }
+        }
+      })
+    }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

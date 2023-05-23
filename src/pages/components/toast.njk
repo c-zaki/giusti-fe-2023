@@ -1,0 +1,41 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": template_component,
+  "title": "Toast"
+} %}
+
+{# Imports components #}
+{% import 'components/toast/toast.njk' as Toast %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="zaux-theme--light1">
+        <input id="custom-toast-text" value="Custom toast message" placeholder="Insert a custom toast message" type="text"/>
+        <br/><br/>
+        <button id="show-toast" type="button" class="c-btn c-btn--primary">Show a toast</button>
+        <script>
+          document.querySelector("#show-toast").addEventListener("click", (e) => {
+            window.zaux.store.appToast.instance.show(document.querySelector("#custom-toast-text").value);
+          });
+        </script>
+        {{ 
+            Toast.content(
+                {
+                    "content" : "Sample notice here"
+                }
+            ) 
+        }}
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+$component: componentClass("heroslider2");
+$cmp-tokens: ();
+
+.#{$component} {
+
+    &__pagination{
+        position:absolute;
+        width:auto !important;
+        display:flex;
+        flex-flow:column;
+        left:auto !important;
+        bottom:auto !important;
+        top:tokenSpacer(10);
+        right:tokenSpacer(10);
+        z-index: tokenZindex(0);
+        .swiper-pagination-bullet{
+            margin-bottom:tokenSpacer(5) !important;
+            border-radius:0;
+        }
+        @include media-breakpoint-down("md"){
+            top:tokenSpacer(6);
+            right:tokenSpacer(5);
+        }
+    }
+    
+}

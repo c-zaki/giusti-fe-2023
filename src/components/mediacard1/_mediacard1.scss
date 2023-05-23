@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+$component: componentClass("mediacard1");
+$cmp-tokens: ();
+
+.#{$component} {
+    &__media{
+        background-color:tokenColor("set1","color2");
+        &-icon{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+        }
+    }
+}

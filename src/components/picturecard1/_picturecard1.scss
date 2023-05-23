@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+$component: componentClass("picturecard1");
+$cmp-tokens: ();
+
+.#{$component}{
+    display:block;
+    position:relative;
+    &__anchor{
+        display:block;
+        height:100%;
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        z-index:tokenZindex(2);
+    }
+    &__content{
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        z-index:tokenZindex(1);
+    }
+    &__inner{
+        height:inherit;
+    }
+    img{
+        width:100%;
+    }
+    &--wide{
+        width:100%;
+    }
+}

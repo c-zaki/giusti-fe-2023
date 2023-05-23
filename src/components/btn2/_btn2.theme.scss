@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+//@import "../../assets/scss/components/tokens/btn.style";
+
+$component: componentClass("btn2");
+$cmp-tokens: ();
+
+/*
+@if ($zaux-btn-style-tokens){
+    $cmp-tokens : $zaux-btn-style-tokens;
+}
+*/
+
+$c-btn2-hover-color-shift-factor: 10%;
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component} {
+    font-weight:$zaux-typo-fw-regular;
+
+    .#{$component}__label{
+        color:cmpToken($cmp-tokens, "color-label", tokenColor("set1", "color10"), "theme-light1");
+        transition: all $zaux-transition-0;
+    }
+
+    .#{$component}__icon{
+        color:cmpToken($cmp-tokens, "color-label", tokenColor("set1", "color1"), "theme-light1");
+    }
+
+    &:not([class*=theme]){
+        &:hover, &:active, &.active{
+            .#{$component}__label{
+                color: tokenColor("set1","color1");
+            }
+            .#{$component}__icon{
+                color: tokenColor("set1","color1");
+            }
+        }
+    }
+
+    &--theme{
+        &-alt1{
+            .#{$component}__icon, .#{$component}__label{
+                color:tokenColor("set1","white1");
+            }
+            &:hover, &:active, &.active{
+                .#{$component}__icon{
+                    color:tokenColor("set1","color1");
+                }
+                .#{$component}__label{
+                    color:cmpToken($cmp-tokens, "color-labellight", tokenColor("set1", "color1"), "theme-light1");
+                }   
+            }
+        }
+        &-alt2{
+            &:hover, &:active, &.active{
+                .#{$component}__icon{
+                    path{
+                        fill:cmpToken($cmp-tokens, "color-icon", tokenColor("set1","white1"), "theme-light1");
+                    }
+                }
+            }
+            .#{$component}__icon{
+                color: cmpToken($cmp-tokens, "color-icon", tokenColor("set1","white1"), "theme-light1");
+                path{
+                    fill:cmpToken($cmp-tokens, "color-icon", tokenColor("set1","white1"), "theme-light1");
+                }
+            }
+            .#{$component}__label{
+                color:cmpToken($cmp-tokens, "color-labellight", tokenColor("set1", "white1"), "theme-light1");
+                &:hover, &:active, &.active{
+                    color:cmpToken($cmp-tokens, "color-labellight", tokenColor("set1", "white1"), "theme-light1");
+                }
+            }   
+        }
+        &-alt3{
+            
+        }
+    }
+
+}

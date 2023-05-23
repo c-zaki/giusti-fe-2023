@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+$component: componentClass("navmodal1");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &__content-col{
+        background-color:tokenColor("set1","color3");
+        color:tokenColor("set1","white1");
+    }
+    &__close{
+        color:tokenColor("set1","white1");
+    }
+    &__cover-container{
+        background-color:tokenColor("set1","color2");
+    }
+}

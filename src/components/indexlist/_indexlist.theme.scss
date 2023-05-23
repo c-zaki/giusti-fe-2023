@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+$component: componentClass("indexlist");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &__list{
+        border-top-color:tokenColor("set1","color1");
+        border-top-style:dotted;
+        li{
+            border-bottom-color:tokenColor("set1","color1");
+            border-bottom-style:dotted;
+            &:before{
+                color:tokenColor("set1","color1");
+            }
+        }
+    }
+
+    &__title{
+        color:tokenColor("set1","color1");
+    }
+
+    &--theme-alt2{
+        .#{$component}__list{
+            border-top-color:tokenColor("set1","white1");
+            border-top-style:dotted;
+            li{
+                border-bottom-color:tokenColor("set1","white1");
+                color:tokenColor("set1","color3");
+                &:before{
+                    color:tokenColor("set1","white1");
+                }
+            }
+        }
+    }
+}

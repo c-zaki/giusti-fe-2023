@@ -1,0 +1,15 @@
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/btn/btn.njk' as Btn %}
+
+{% macro content(objIcon, objBtn) %}
+
+  {% set _htmlIcon %}
+  {{Icon.content(objIcon)}}
+  {% endset %}
+
+  {{
+    Btn.content(objBtn | merge({
+      "htmlPreLabel": _htmlIcon
+    }) )
+  }}
+{% endmacro %}

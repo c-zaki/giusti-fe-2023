@@ -1,0 +1,111 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": template_component,
+  "title": "Grid list 2",
+  "noSidePad" : true
+} %}
+
+{# Imports components #}
+{% import 'components/gridlist2/gridlist2.njk' as GridList2 %}
+{% import 'components/picturecard1/picturecard1.njk' as PictureCard1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+  <div class="zaux-theme--light1">
+    {{ GridList2.content({
+        "elements" : [
+            {
+                "content" : PictureCard1.content({
+                    "title" : "Default/Square picture card",
+                    "cta" : {
+                        "label" : "Test label",
+                        "url" : "#test-url"
+                    }
+                })
+            },
+            {
+                "content" : PictureCard1.content({
+                    "title" : "Default/Square picture card",
+                    "cta" : {
+                        "label" : "Test label",
+                        "url" : "#test-url"
+                    }
+                })
+            },
+            {
+                "content" : PictureCard1.content({
+                    "title" : "Default/Square picture card",
+                    "cta" : {
+                        "label" : "Test label",
+                        "url" : "#test-url"
+                    }
+                })
+            },
+                        {
+                "content" : PictureCard1.content({
+                    "title" : "Default/Square picture card",
+                    "cta" : {
+                        "label" : "Test label",
+                        "url" : "#test-url"
+                    }
+                })
+            },
+            {
+                "content" : PictureCard1.content({
+                    "title" : "Default/Square picture card",
+                    "cta" : {
+                        "label" : "Test label",
+                        "url" : "#test-url"
+                    }
+                })
+            },
+            {
+                "content" : PictureCard1.content({
+                    "title" : "Default/Square picture card",
+                    "cta" : {
+                        "label" : "Test label",
+                        "url" : "#test-url"
+                    }
+                })
+            },
+                        {
+                "content" : PictureCard1.content({
+                    "title" : "Default/Square picture card",
+                    "cta" : {
+                        "label" : "Test label",
+                        "url" : "#test-url"
+                    }
+                })
+            },
+            {
+                "content" : PictureCard1.content({
+                    "title" : "Default/Square picture card",
+                    "cta" : {
+                        "label" : "Test label",
+                        "url" : "#test-url"
+                    }
+                })
+            },
+            {
+                "content" : PictureCard1.content({
+                    "title" : "Default/Square picture card",
+                    "cta" : {
+                        "label" : "Test label",
+                        "url" : "#test-url"
+                    }
+                })
+            }
+        ]
+    }) }}
+  </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+$component: componentClass("sepline");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    border-top-style:solid;
+    border-top-color: tokenColor("set1","color3");
+}

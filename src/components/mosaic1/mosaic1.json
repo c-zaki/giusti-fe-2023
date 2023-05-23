@@ -1,0 +1,59 @@
+{
+    "content" : [
+        { 
+            "type" : "square",
+            "img" : {
+                "mainSrc" : "https://placehold.co/960x960"
+            },
+            "title" : "Picture title here",
+            "cta" : {
+                "label" : "Cta label",
+                "url" : "#cta-label"
+            }
+        },
+        { 
+            "type" : "square",
+            "img" : {
+                "mainSrc" : "https://placehold.co/960x960"
+            },
+            "title" : "Picture title here",
+            "cta" : {
+                "label" : "Cta label",
+                "url" : "#cta-label"
+            }
+        },
+        { 
+            "type" : "wide",
+            "img" : {
+                "mainSrc" : "https://placehold.co/1920x1080"
+            },
+            "title" : "Picture title here",
+            "cta" : {
+                "label" : "Cta label",
+                "url" : "#cta-label"
+            }
+        },
+        { 
+            "type" : "square",
+            "img" : {
+                "mainSrc" : "https://placehold.co/960x960"
+            },
+            "title" : "Picture title here",
+            "cta" : {
+                "label" : "Cta label",
+                "url" : "#cta-label"
+            }
+        },
+        { 
+            "type" : "square",
+            "img" : {
+                "mainSrc" : "https://placehold.co/960x960"
+            },
+            "title" : "Picture title here",
+            "cta" : {
+                "label" : "Cta label",
+                "url" : "#cta-label"
+            }
+        }
+    ]   
+}

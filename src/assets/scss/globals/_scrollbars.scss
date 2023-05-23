@@ -1,0 +1,15 @@
+$global-style-name: globalStyleClass("scrollbar");
+
+
+.zaux-theme--light1 .#{$global-style-name}{
+
+    &--1{
+        @include scrollbars(
+            6px,
+            rgba(tokenColor("set1", "black1"), 0.25),
+            transparent,
+            6px
+        );
+    }
+
+}

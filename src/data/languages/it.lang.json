@@ -1,0 +1,10 @@
+{
+  "html5_video_no_support": "Il tuo browser web non supporta il tag video HTML5.",
+  "zaux_form_send_success": "Form inviato correttamente",
+  "zaux_form_send_error" : "Errore nell'invio del form",
+  "zaux_form_try_later" : "Non è possibile inviare il form al momento, riprova più tardi o ricarica la pagina",
+  "zaux_field_required" : "Il campo è richiesto",
+  "zaux_field_format_invalid" : "Il formato del campo non è valido",
+  "zaux_email_format_invalid" : "Il formato dell'email non è valido",
+  "zaux_datalayer_call_error" : "Errore durante l'invio della richiesta"
+}

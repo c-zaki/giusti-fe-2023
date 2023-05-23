@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+// Configuration and helpers
+@import "abstracts/variables";
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/placeholders";
+
+// Components (vars, mixins, functions)
+@import "../../components/typo/typo.mixins";
+@import "../../components/icon/icon.mixins";
+
+// Vendor's SCSS files
+@import "vendor/bootstrap";
+//@import "vendor/aos";
+@import "vendor/airdatepicker";
+@import "vendor/fancybox";
+//@import "vendor/hamburgers";
+@import "vendor/swiper";
+@import "vendor/cf7";
+
+// Helpers
+@import "helpers/color";
+@import "helpers/fit";
+@import "helpers/misc";
+@import "helpers/positioning";
+@import "helpers/containers";
+@import "helpers/graphics";
+@import "helpers/ratios";
+
+//Modules
+@import "modules/tabs";
+@import "modules/spoilers";
+
+// Base
+@import "base/reset";
+@import "base/fonts";
+@import "base/base";
+@import "base/animations";

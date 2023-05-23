@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+$component: componentClass("sharebar");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    color:tokenColor("set1","color3");
+    border-color:tokenColor("set1","color1");
+    border-top-width:1px;
+    border-bottom-width:1px;
+    border-bottom-style:solid;
+    border-top-style:solid;
+    .#{$component-prefix}icon{
+        color:tokenColor("set1","color1");
+    }
+    .#{$component}__social-list{
+        .#{$component-prefix}icon{
+            color:tokenColor("set1","color3");
+        }
+    }
+}

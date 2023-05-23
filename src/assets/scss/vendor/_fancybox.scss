@@ -1,0 +1,9 @@
+@import "@fancyapps/ui/dist/fancybox";
+
+.fancybox__container{
+    z-index:tokenZindex(5);
+}
+
+[data-fancybox]{
+    cursor:pointer;
+}

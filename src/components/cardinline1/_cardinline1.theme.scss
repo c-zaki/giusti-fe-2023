@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+$component: componentClass("cardinline1");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    color:tokenColor("set1","black1");
+    &__content{
+        background-color:tokenColor("set1","color2");
+    }
+    &__tag{
+        background-color:tokenColor("set1","color1");
+        color:tokenColor("set1","white1");
+    }
+    &__date{
+        color:tokenColor("set1","color1");
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "slides" : [
+        {
+            "category" : "Content and digital product",
+            "preTitle" : "Parchi della val di cornia",
+            "title" : "Arriva Effetto Venezia 2023!",
+            "abstract" : "Sarà un Effetto Venezia all’insegna del cinema, quello dell’edizione numero 38 che si svolgerà dal 2 al 6 agosto 2023. Protagonista il teatro di strada per richiamare la matrice circense della macchina cinema, e poi musica, teatro, ospiti nazionali e internazionali, mostre, buona cucina.",
+            "mediaType" : "video",
+            "video" : {
+                "srcList" : [
+                    { "url" : "../media/video/placeholder2.mp4", "type" : "mp4" }
+                ],
+                "options" : { "autoplay" : true, "loop" : true }
+            },
+            "cta" : {
+                "title" : "Scopri il programma",
+                "url" : "#scopri-programma"
+            }
+        }
+    ] 
+}

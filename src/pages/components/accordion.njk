@@ -1,0 +1,65 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Accordion"
+} %}
+
+{# Imports components #}
+{% import 'components/accordion/accordion.njk' as accordion %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {% set richTextSample %}
+    {% include "layouts/partials/richtext.njk" %}
+    {% endset %}
+    {{ accordion.content( 
+      {
+        "title" : "Simple accordion",
+        "content" : richTextSample
+      } 
+    ) }}
+    <br/><br/>
+    {{ accordion.content( 
+      {
+        "hasIcon" : true,
+        "iconName" : zaux_config.tokens.defs.activeIcons | getRandomIndexElement,
+        "title" : "Accordion with icon",
+        "content" : richTextSample
+      } 
+    ) }}
+    <br/><br>
+    {{ accordion.content( 
+      {
+        "size" : "small",
+        "variations" : ["small"],
+        "title" : "Simple accordion small",
+        "content" : richTextSample
+      } 
+    ) }}
+    <br/><br/>
+    {{ accordion.content( 
+      {
+        "size" : "small",
+        "variations" : ["small"],
+        "hasIcon" : true,
+        "iconName" : zaux_config.tokens.defs.activeIcons | getRandomIndexElement,
+        "title" : "Accordion with icon small",
+        "content" : richTextSample
+      } 
+    ) }}
+
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

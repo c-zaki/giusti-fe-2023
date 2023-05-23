@@ -1,0 +1,391 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/default.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": template_home,
+  "title": "Single app",
+  "className" : "zaux-theme--light1",
+  "isHome" : true
+} %}
+
+{# Imports components #}
+{% import 'components/emptyblock/emptyblock.njk' as EmptyBlock %}
+{% import 'components/header/header.njk' as header %}
+{% import 'components/newsletterbox1/newsletterbox1.njk' as NewsletterBox1 %}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/herocomp1/herocomp1.njk' as HeroComp1 %}
+{% import 'components/section1/section1.njk' as Section1 %}
+{% import 'components/section4/section4.njk' as Section4 %}
+{% import 'components/section6/section6.njk' as Section6 %}
+{% import 'components/gridlist1/gridlist1.njk' as GridList1 %}
+{% import 'components/contactbox1/contactbox1.njk' as ContactBox1 %}
+{% import 'components/card1/card1.njk' as Card1 %}
+{% import 'components/card2/card2.njk' as Card2 %}
+{% import 'components/card3/card3.njk' as Card3 %}
+{% import 'components/bulletlist/bulletlist.njk' as BulletList %}
+{% import 'components/map/map.njk' as Map %}
+{% import 'components/cardicon/cardicon.njk' as CardIcon %}
+{% import 'components/sliderstrip1/sliderstrip1.njk' as SliderStrip1 %}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/bannerimg1/bannerimg1.njk' as BannerImg1 %}
+{% import 'components/titlebanner/titlebanner.njk' as TitleBanner %}
+{% import 'components/breadcrumbs1/breadcrumbs1.njk' as Breadcrumbs %}
+{% import 'components/contentlayout1/contentlayout1.njk' as ContentLayout1 %}
+{% import 'components/summarymenu/summarymenu.njk' as SummaryMenu %}
+{% import 'components/cardlink/cardlink.njk' as CardLink %}
+{% import 'components/sharebar/sharebar.njk' as ShareBar %}
+{% import 'components/richtextblock1/richtextblock1.njk' as RichTextBlock1 %}
+{% import 'components/indexlist/indexlist.njk' as IndexList %}
+{% import 'components/mediacard1/mediacard1.njk' as MediaCard1 %}
+{% import 'components/tabselector/tabselector.njk' as TabSelector %}
+{% import 'components/slideshow1/slideshow1.njk' as SlideShow1 %}
+
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Hero Banner -->
+        {{ BannerImg1.content() }}
+    <!-- End of hero banner -->
+
+    <!-- Breadcrumbs -->
+        <div class="container-l pb-5 pt-7 pt-md-9 pb-md-7">
+            {{ Breadcrumbs.content() }}
+        </div>
+    <!-- End of breadcrumbs -->
+
+    <!-- Content layout -->
+
+        {# START OF CONTENT BUFFER #}
+
+            {# Content #}
+                {% set titleBannerContent %}
+                    <!-- Title banner -->
+                        {{
+                            TitleBanner.content(
+                                {
+                                    "contained" : false,
+                                    "logo": {
+                                        "mainSrc" : zaux_config.properties.mediaDistURL + "/img/nike-b2c-logo.svg"
+                                    },
+                                    "title" : false,
+                                    "subtitle" : "NikèB2C: l’e-commerce con una UX memorabile"
+                                }
+                            )
+                        }}
+                    <!-- End of title banner -->
+                {% endset %}
+                {% set richTextBlock %}
+                    {% set richTextSample %}
+                        {% include 'layouts/partials/richtext2.njk' %}
+                    {% endset %}
+                    {{ RichTextBlock1.content({"content" : richTextSample }) }}
+                {% endset %}
+                {% set richTextBlock2 %}
+                    {% set richTextSample %}
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quid enim tanto opus est instrumento in optimis artibus comparandis? Satis est tibi in te, satis in legibus, satis in mediocribus amicitiis praesidii. Ergo illi intellegunt quid Epicurus dicat, ego non intellego? Teneo, inquit, finem illi videri nihil dolere. Quid ad utilitatem tantae pecuniae? Res enim fortasse verae, certe graves, non ita tractantur, ut debent, sed aliquanto minutius. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis.
+                        </p>
+                    {% endset %}
+                    {{ RichTextBlock1.content({"content" : richTextSample }) }}
+                {% endset %}
+                {% set indexList %}
+                    <!-- Index list -->
+                    {{IndexList.content(
+                        {
+                            "items" : [
+                                {"title" : "Esperienza di navigazione coinvolgente", "anchor" : "#anchor1"},
+                                {"title" : "Layout personalizzabile", "anchor" : "#anchor1"},
+                                {"title" : "Percorsi operativi pratici e intuitivi", "anchor" : "#anchor1"},
+                                {"title" : "Raccolta ordini indirizzata sull’utente finale", "anchor" : "#anchor1"}
+                            ]
+                        }
+                    )}}
+                    <!-- end of index list -->
+                {% endset %}
+                {% set tabSelector %}
+                    {% set tabContentDummy %}
+                      <h6>Funzionalità</h6>
+                      <h3>Allarga la platea dei tuoi clienti</h3>
+                      <p>
+                        Nikè B2C ha tutte le funzionalità che ci si aspetta da un e commerce: input ordini, informazioni e automatismi legati agli articoli e alle condizioni commerciali…
+                        Ma sono i dettagli che possono fare la differenza e fidelizzare i clienti. In particolare Nikè B2C consente all’utente un’esperienza di navigazione forte e coinvolgente, oltre alla possibilità per l’azienda di customizzare la grafica in accordo con la propria brand identity. 
+                        Come per tutte le app della galassia Nikè, anche Nikè B2C ha un alleato efficiente: il Back Office. Un elemento versatile con pochi riscontri nei sistemi dei competitor. 
+                        Ogni dato necessario al funzionamento tecnico e operativo di Nikè B2B può essere gestito indifferentemente su Nikè Back Office e/o provenire dal sistema gestionale aziendale.
+
+                        Lo scambio dei dati da e per il gestionale aziendale è immediato, utilizzando i connettori già attivi e funzionanti per i software più comuni, oppure tramite l’utilizzo di API o file CSV/Excel.  
+                        Se necessario, con facilità e spesa ridotta, è possibile sviluppare nuovi connettori di scambio dati.
+                        Infine, il percorso costante di sviluppo e aggiornamento delle app da parte di Giusti Software assicura il continuo miglioramento di tutti gli aspetti funzionali e operativi, per agevolare il tuo lavoro, sul campo o dall’ufficio. 
+                      </p>
+                    {% endset %}
+                    {{TabSelector.content(
+                      {
+                        "tabs" : [
+                          {
+                            "id" : "funzionalita",
+                            "active" : true,
+                            "label" : "Funzionalità",
+                            "content" : tabContentDummy
+                          },
+                          {
+                            "id" : "vantaggi",
+                            "label" : "Vantaggi",
+                            "content" : tabContentDummy
+                          },
+                          {
+                            "id" : "integraz",
+                            "label" : "Integrazioni",
+                            "content" : tabContentDummy
+                          }
+                        ]
+                      }
+                    )}}
+                {% endset %}
+                {% set slideShow %}
+                  {{ SlideShow1.content(
+                      {
+                        "activateControls" : true,
+                        "contained" : false,
+                        "slides" : [
+                            { "img" : { "mainSrc" : "https://placehold.co/1920x1080?text=Slide1" } },
+                            { "img" : { "mainSrc" : "https://placehold.co/512x512?text=Slide2" } },
+                            { "img" : { "mainSrc" : "https://placehold.co/1920x1080?text=Slide3" } }
+                        ]
+                      }
+                  ) }}
+                {% endset %}
+            {# End of content #}
+
+            {# Sidebar #}
+              {% set CardLinkList %}
+                  <!-- Card link list -->
+                  {% set videoList %}
+                    <!-- Video list -->
+                      {% set mediaCardSample %}
+                        {{ MediaCard1.content() }}
+                      {% endset %}
+                      {{ 
+                        GridList1.content({
+                          "layout" : "layout4",
+                          "elements" : [
+                            { "content" : mediaCardSample },
+                            { "content" : mediaCardSample },
+                            { "content" : mediaCardSample },
+                            { "content" : mediaCardSample },
+                            { "content" : mediaCardSample }
+                          ]
+                        })
+                      }}
+                    <!-- End of video list -->
+                  {% endset %}
+                  {{
+                    CardLink.content(
+                        {
+                          "title" : "Uno sguardo a NikèB2C",
+                          "subTitle" : false,
+                          "cta" : false,
+                          "freeHTML" : videoList
+                        }
+                    )
+                  }}
+              {% endset %}
+              {% set CardLinkImg %}
+                  {{
+                    CardLink.content(
+                      {
+                        "title" : "Related case history",
+                        "media" : {
+                          "mainSrc" : "https://placehold.co/336x190"
+                        }
+                      }
+                    )
+                  }}
+              {% endset %} 
+            {# End of sidebar #}
+
+        {# END OF CONTENT BUFFER #}
+
+        {{
+            ContentLayout1.content(
+                {
+                    "className" : ["pb-10"],
+                    "layout" : "layout2",
+                    "pullUpSideBar" : true,
+                    "col1Content" : [
+                        { "content" : titleBannerContent },
+                        { "content" : indexList },
+                        { "content" : richTextBlock2 },
+                        { "content" : tabSelector },
+                        { "content" : slideShow },
+                        { "content" : richTextBlock }
+                    ],
+                    "col2Content" : [
+                        { "content" : CardLinkList },
+                        { "content" : CardLinkImg }
+                    ]
+                }
+            )
+        }}
+
+    <!-- End of content layout -->
+
+    <!-- App correlate -->
+        {{
+            TitleBanner.content(
+                {
+                    "contained" : true,
+                    "title" : "App correlate",
+                    "subtitle" : undefined
+                }
+            )
+        }}
+        {% set sliderStripContentSample %}
+          {{
+              CardLink.content(
+                  {
+                    "preTitle" : "Eyelet",
+                    "title" : "With eyelet",
+                    "subTitle" : "Monitoraggio marketing nei punti vendita"
+                  }
+              )
+          }}
+        {% endset %}
+        <div class="container-l">
+          {{ SliderStrip1.content({
+            "className" : ["pb-8"],
+            "slidesPerView" : 4,
+            "slides" : [
+              {
+                "content" : sliderStripContentSample
+              },
+              {
+                "content" : sliderStripContentSample
+              },
+              {
+                "content" : sliderStripContentSample
+              },
+              {
+                "content" : sliderStripContentSample
+              },
+              {
+                "content" : sliderStripContentSample
+              },
+              {
+                "content" : sliderStripContentSample
+              },
+              {
+                "content" : sliderStripContentSample
+              },
+              {
+                "content" : sliderStripContentSample
+              },
+              {
+                "content" : sliderStripContentSample
+              },
+              {
+                "content" : sliderStripContentSample
+              }
+            ]
+          }) }}
+        </div>
+    <!-- End of app correlate -->
+
+    <!-- Prova nikè -->
+      {% set contentHTML %}
+        {% set gridContent1 %}
+          {{
+              CardIcon.content(
+                {
+                  "className" : ["h-100"]
+                }
+              )
+          }}
+        {% endset %}
+        {% set gridContent2 %}
+          {{
+              CardIcon.content(
+                {
+                  "className" : ["h-100"],
+                  "variations" : ["theme-2"], 
+                  "iconName" : "user",
+                  "title" : "Richiedi una consulenza gratuita",
+                  "subTitle" : "Compila il form per prenotare senza impegno una consulenza gratuita di primo livello."
+                }
+              )
+          }}
+        {% endset %}
+        {{
+          GridList1.content(
+            {
+              "cols" : "col-12 col-sm-6",
+              "elements" : [
+                {
+                  "content" : gridContent1
+                },
+                {
+                  "content" : gridContent2
+                }
+              ]
+            }
+          )
+        }}
+      {% endset %}
+      {{
+        Section1.content(
+          {
+            "txtAlignContent" : "text-left",
+            "variations" : ["theme-2"],
+            "preTitle" : "Prova nikè",
+            "title" : "Richiedi una demo di Nikè CRM o una consulenza gratuita e scopri come può portare la tua azienda verso il successo",
+            "content" : contentHTML
+          }
+        )
+      }}
+    <!-- End of prova nikè -->
+    
+    <!-- Newsletter -->
+      {% set sampleContent %}
+          {{
+              NewsletterBox1.content()
+          }}
+      {% endset %}
+      {{
+          Section6.content(
+              {
+                  "content" : sampleContent
+              }
+          )
+      }}
+    <!-- End of newsletter -->
+
+    <!-- Contatti -->
+      {% set mapContent %}
+        {{
+          Map.content(
+            {
+              "className" : ["h-100", "w-100"],
+              "src" : "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5759.862461651769!2d11.209139!3d43.79504000000001!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a56e190990909%3A0x70c0443cebc153ba!2sVia%20Alberto%20Franchetti%2C%2019%2C%2050127%20Firenze%20FI!5e0!3m2!1sit!2sit!4v1684190719849!5m2!1sit!2sit"
+            }
+          )
+        }}
+      {% endset %}
+      {{
+        ContactBox1.content(
+          {
+            "title" : "Contatti",
+            "frameContent" : mapContent
+          }
+        )
+      }}
+    <!-- End of contatti -->
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

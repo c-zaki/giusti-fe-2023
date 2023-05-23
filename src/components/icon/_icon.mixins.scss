@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+
+$component: componentClass("icon");
+
+@mixin c-generate-icon-sizes{
+    @each $i, $key in tokenIconSizes() {
+        .#{$component}--size-#{$i}{
+            font-size:tokenIconSize($i);
+        }
+        .#{$component}--size-#{$i}-imp{
+            font-size:tokenIconSize($i) !important;
+        }
+    }
+    @each $i, $props in tokenIconSizes() {
+        @each $k in tokenTypoBreakpoints() {
+            @include media-breakpoint-up(#{$k}) {
+                .#{$component}--size-#{$k}-#{$i}{
+                    font-size:#{tokenIconSize($i)};
+                }
+                .#{$component}--size-#{$k}-#{$i}-imp{
+                    font-size:#{tokenIconSize($i)} !important;
+                }
+            }
+        }
+    }
+}

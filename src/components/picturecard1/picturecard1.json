@@ -1,0 +1,8 @@
+{
+    "defaultSquareImg" : {
+        "mainSrc" : "https://placehold.co/960x960"
+    },
+    "defaultWideImg" : {
+        "mainSrc" : "https://placehold.co/1920x1080"
+    }
+}

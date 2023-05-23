@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+//@import "../../assets/scss/components/tokens/img.style";
+
+$component: componentClass("img");
+$cmp-tokens: ();
+
+@if (variable-exists(zaux-img-style-tokens)){
+    $cmp-tokens : $zaux-img-style-tokens;
+}
+
+.#{$component} {
+
+    //Defaults
+    img{
+        object-fit:cover;
+        max-height:100%;
+        max-width:100%;
+    }
+
+    &:not([class*=--hunset],[class*=--fluid-xy], [class*=--fluid-y]){
+        img{
+            height:auto;
+        }
+    }
+    
+    &--fluid{
+        img{
+            width:100%;
+        }
+    }
+
+    &--fluid-y{
+        img{
+            height:100%;
+        }
+    }
+
+    &--fluid-xy{
+        img{
+            height:100%;
+            width:100%;
+        }
+    }
+
+    &--hauto{
+        img{
+            height:auto;
+        }
+    }
+
+    &--wauto{
+        img{
+            width:auto;
+        }
+    }
+
+    //Ratios
+    @each $ratioIndex, $ratio in $zaux-token-ratios{
+        &--ratio-#{$ratioIndex}{
+            img{
+                $aspRatio : #{map-get($ratio, "ratioW")} / #{map-get($ratio, "ratioH")};
+                aspect-ratio: $aspRatio;
+            }
+        }
+        &--ratio-#{map-get($ratio, "ratioW")}-#{map-get($ratio, "ratioH")}{
+            img{
+                $aspRatio : #{map-get($ratio, "ratioW")} / #{map-get($ratio, "ratioH")};
+                aspect-ratio: $aspRatio;
+            }
+        }
+    }
+
+    @each $ratioIndex, $ratio in $zaux-token-ratios{
+        @each $bpName, $bpVal in tokenBreakpoints(){
+            @include media-breakpoint-up($bpName){
+                &--ratio-#{$bpName}-#{$ratioIndex}{
+                    img{
+                        $aspRatio : #{map-get($ratio, "ratioW")} / #{map-get($ratio, "ratioH")};
+                        aspect-ratio: $aspRatio;
+                    }
+                }
+                &--ratio-#{$bpName}-#{map-get($ratio, "ratioW")}-#{map-get($ratio, "ratioH")}{
+                    img{
+                        $aspRatio : #{map-get($ratio, "ratioW")} / #{map-get($ratio, "ratioH")};
+                        aspect-ratio: $aspRatio;
+                    }
+                }
+                &--#{$bpName}-fluid{
+                    img{
+                        width:100%;
+                    }
+                }
+                &--#{$bpName}-fluid-y{
+                    img{
+                        height:100%;
+                    }
+                }
+                &--#{$bpName}-wauto{
+                    img{
+                        width:auto;
+                    }
+                }
+                &--#{$bpName}-hauto{
+                    img{
+                        height:auto;
+                    }
+                }
+            }
+        }
+    }
+
+}

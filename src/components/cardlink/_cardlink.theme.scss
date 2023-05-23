@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+$component: componentClass("cardlink");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    background-color:tokenColor("set1","color3");
+    color:tokenColor("set1","white1");
+    border-top-width:tokenSpacer(4);
+    border-top-color:tokenColor("set1","color1");
+    border-top-style:solid;
+    &__title,&__eyelet{
+        color:tokenColor("set1","color1");
+        &--style2{
+            color:tokenColor("set1","white1");
+        }
+    }
+}

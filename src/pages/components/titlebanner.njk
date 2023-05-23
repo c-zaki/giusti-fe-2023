@@ -1,0 +1,30 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": template_component,
+  "title": "Title banner"
+} %}
+
+{# Imports components #}
+{% import 'components/titlebanner/titlebanner.njk' as TitleBanner %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="zaux-theme--light1">
+        <h3 class="my-5">Title only</h3>
+        {{TitleBanner.content()}}
+        <h3 class="my-5">Title + subtitle</h3>
+        {{TitleBanner.content({"subtitle" : "Lorem ipsum dolor sit amet dolorem sparekum astrakantus maruzis sperimentum"})}}
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

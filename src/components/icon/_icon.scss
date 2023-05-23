@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+
+$component: componentClass("icon");
+
+////////////////////////////////////////////////////
+// Generic icon sizes
+////////////////////////////////////////////////////
+
+@include c-generate-icon-sizes;
+
+.#{$component} {
+  display: inline-block;
+  line-height: 0;
+
+  &,
+  &[class*="-fs"] {
+    line-height: 0 !important;
+  }
+
+  svg{
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+  }
+
+  &:not([class*=--ani]){
+    transition: all $zaux-transition-0;
+    &[class*=--icon-switching]{
+      transform:scale(1.5);
+    }
+  }
+
+  //////////////////////////////////////////////////
+  // DEBUG
+  //////////////////////////////////////////////////
+
+  // background-color: rgba(255, 0, 0, 0.2);
+}

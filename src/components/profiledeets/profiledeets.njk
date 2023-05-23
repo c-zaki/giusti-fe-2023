@@ -1,0 +1,53 @@
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/img/img.njk' as Img %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-profiledeets' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : [],
+        "titleTag" : "h4",
+        "img" : {}
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+    {% set label = obj.label or configDefault.label %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    <div {% if obj.customAttr %}{{obj.customAttr}}{% endif %} class="{{_className | join(" ") | trim}}">
+        {% if obj.url %}
+        <a href="{{obj.url}}" title="{{obj.authorName}}">
+        {% endif %}
+            <div class="{{componentClassName}}__inner d-flex gap-5">
+                <div class="{{componentClassName}}__pic">
+                    {% set imgParams = { "imgClasses" : ["rounded-full"], "variations" : ["ratio-1"], "imgHeight" : "75", "imgWidth" : "75" } %}
+                    {% set imgParams = imgParams | overwriteMerge(obj.img) %}
+                    {{
+                        Img.content(imgParams)
+                    }}
+                </div>
+                <div class="{{componentClassName}}__bio d-flex flex-column justify-content-center">
+                    <{{obj.titleTag}} class="{{componentClassName}}__author c-typo-style1-text-m fw-bold">{{obj.authorName}}</{{obj.titleTag}}>
+                    {% if obj.qualification %}
+                        <span class="{{componentClassName}}__qualificiation c-typo-style1-text-s">{{obj.qualification}}</span>
+                    {% endif %}
+                </div>
+            </div>
+        {% if obj.url %}
+        </a>
+        {% endif %}
+    </div>
+
+{% endmacro %}

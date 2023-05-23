@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+$component: componentClass("offcanvasnav");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+
+.zaux-theme--light1 .#{$component}{
+    background-color:tokenColor("set1","color3");
+    color: tokenColor("set1","white1");
+    &__menu{
+        .#{$component}__list{
+            li{
+                transition: text-shadow $zaux-transition-1, transform $zaux-transition-1, opacity $zaux-transition-1;
+                &:hover{
+                    transform:translateX(tokenSpacer(3));
+                    text-shadow:tokenShadow(1);
+                }
+                &:active{
+                    transform:scale(0.98);
+                    opacity:0.8;
+                }
+            }
+        }
+    }
+    .#{$component-prefix}icon{
+        color: tokenColor("set1","color1");
+    }
+    &__title{
+        color:tokenColor("set1","color1");
+    }
+    &__language-selector{
+        border-bottom-color:tokenColor("set1","color5");
+        border-bottom-style:solid;
+        select{
+            background-color:transparent;
+            border:none;
+            color:tokenColor("set1","white1");
+            background-position: right 0.4rem !important;
+        }
+    }
+}

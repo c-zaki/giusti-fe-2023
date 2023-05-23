@@ -1,0 +1,48 @@
+{# Imports components #}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/svgdeco1/svgdeco1.njk' as SvgDeco1 %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-bannerimg1' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : [],
+        "img" : {
+            "mainSrc" : "https://placehold.co/1920x545?text=21:9"
+        },
+        "constrained" : false
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {% if obj.constrained %}
+        {% set _className = (_className.push(componentClassName +"--constrained"), _className) %}
+    {% endif %}
+
+
+    <div class="{{_className | join(" ")}} overflow-hidden">
+        <div class="{{componentClassName}}__inner position-relative">
+            <div class="{{componentClassName}}__bg-container position-absolute {% if obj.constrained == false %}h-100 w-100 top-0 start-0{% endif %}">
+                {% set imgParams = {} %}
+                {% if obj.constrained == false %}
+                    {% set imgParams = { "variations" : ["fluid-xy"] } %}
+                {% endif %}
+                {% set imgParams = imgParams | overwriteMerge(obj.img) %}
+                {{
+                    Img.content(imgParams)
+                }}
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}

@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+//////////////////////////////////////////////////
+// CONTAINER - HELPERS
+//////////////////////////////////////////////////
+
+.container{
+    &--min-w1{
+        min-width:$container-min-w1;
+    }
+    &--res1{
+        padding-left:0px;
+        padding-right:0px;
+        @include media-breakpoint-down("lg"){
+            padding: 0 tokenSpacer(6);
+        }
+        @media(max-width: #{tokenBreakpoint(_high-xs)}){
+            padding: 0 tokenSpacer(5);
+        }
+    }
+}

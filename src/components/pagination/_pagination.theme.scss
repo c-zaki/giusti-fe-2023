@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+$component: componentClass("pagination");
+$cmp-tokens: ();
+
+$hover-factor: 15%;
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+
+    --bg-color: transparent;
+    --arrows-color: #{cmpToken($cmp-tokens, "color-arrowscolor", tokenColor("set1", "color1"), "theme-light1")};
+    --text-color: #{cmpToken($cmp-tokens, "color-text", tokenColor("set1", "color7"), "theme-light1")};
+    --border-color: #{cmpToken($cmp-tokens, "color-border", tokenColor("set1","color1"), "theme-light1")};
+    --border-style : solid;
+    --nextpost-link-hover: #{rgba(cmpToken($cmp-tokens, "color-bgactive", tokenColor("set1", "color1"), "theme-light1"), 0.1 )};
+    --nextpost-link-active: #{rgba(cmpToken($cmp-tokens, "color-bgactive", tokenColor("set1", "color1"), "theme-light1"), 0.2 )};
+    --current-page-bg: #{tokenColor("set1","color1")};
+    --current-page-color: #{tokenColor("set1","white1")};
+    --cmp-border-top-color: #{tokenColor("set1","color2")};
+
+    border-top-color:var(--cmp-border-top-color);
+    border-top-style:solid;
+    
+    background-color: var(--bg-color);
+    .wp-pagenavi{
+        $arrowsColor :  #{cmpToken($cmp-tokens, "color-arrowscolor", tokenColor("set1", "color1"), "theme-light1")};
+        color: var(--text-color);
+        font-weight:$zaux-typo-fw-bold;
+        //border-color: var(--border-color);
+        //border-style:var(--border-style);
+
+        .previouspostslink, .nextpostslink{
+            transition:background-color $zaux-transition-0;
+            &:hover{
+                background-color: var(--nextpost-link-hover);
+            }
+            &:active{
+                background-color: var(--nextpost-link-active);
+            }
+            position:relative;
+            &:before{
+                background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='#{str-replace($arrowsColor, '#', '%23')}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+            }
+        }
+        > * {
+            border-color:var(--border-color);
+            border-style:solid;
+            //border-right-style:solid;
+            &:first-child{
+                border:none;
+            }
+            &:last-child{
+                border:none;
+            }
+        }
+        .current{
+            background-color: var(--current-page-bg);
+            color: var(--current-page-color);
+        }
+    }
+
+    &--theme2{
+        --bg-color:  #{tokenColor("set1","color1")};
+        --arrows-color: #{cmpToken($cmp-tokens, "color-arrowscolor", tokenColor("set1", "white1"), "theme-light1")};
+        --text-color: #{cmpToken($cmp-tokens, "color-text", tokenColor("set1", "white1"), "theme-light1")};
+        --border-color: #{cmpToken($cmp-tokens, "color-border", tokenColor("set1","white1"), "theme-light1")};
+        --border-style : solid;
+        --nextpost-link-hover: #{rgba(cmpToken($cmp-tokens, "color-bgactive", tokenColor("set1", "white1"), "theme-light1"), 0.1 )};
+        --nextpost-link-active: #{rgba(cmpToken($cmp-tokens, "color-bgactive", tokenColor("set1", "white1"), "theme-light1"), 0.2 )};
+        --current-page-bg: #{tokenColor("set1","white1")};
+        --current-page-color: #{tokenColor("set1","color1")};
+        $arrowsColor: #{tokenColor("set1","white1")};
+        .wp-pagenavi{
+            .previouspostslink, .nextpostslink{
+                &:before{
+                    background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='#{str-replace($arrowsColor, '#', '%23')}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+                }
+            }
+        }
+    }
+
+}

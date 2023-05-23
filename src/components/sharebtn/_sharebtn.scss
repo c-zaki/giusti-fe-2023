@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+$component: componentClass("sharebtn");
+$cmp-tokens: ();
+
+.#{$component}{
+    position:relative;
+    display:inline-block;
+    --tooltip-offset : #{tokenSpacer(7)};
+    --tooltip-side-offset : #{tokenSpacer(2)};
+    
+    &__tooltip{
+        position:absolute;
+        opacity:0;
+        pointer-events:none;
+
+        &--small{
+            --tooltip-offset: #{tokenSpacer(7) - 0.6};
+            --tooltip-side-offset : #{tokenSpacer(1)};
+        }
+
+        &[class*=--show]{
+            opacity:1;
+            pointer-events: all;
+        }
+
+        &--top{
+            top:0;
+            left:50%;
+            transform:translateX(-50%);
+            &[class*=--show]{
+                top:calc( var(--tooltip-offset) * -1 );
+            }
+            @include media-breakpoint-down("md"){
+                margin-top:-#{tokenSpacer(2)};
+            }
+        }
+        &--bottom{
+            top:auto;
+            bottom:0;
+            left:50%;
+            transform:translateX(-50%);
+            &[class*=--show]{
+                bottom:calc( var(--tooltip-offset) * -1 );
+            }
+            @include media-breakpoint-down("md"){
+                margin-bottom:-#{tokenSpacer(2)};
+            }
+        }
+        &--right{
+            top:50%;
+            transform:translateY(-50%);
+            bottom:auto;
+            right:0;
+            &[class*=--show]{
+                margin-right:calc( var(--tooltip-side-offset) * -1 );
+                right:calc( var(--tooltip-offset) * -1 );
+            }
+        }
+        &--left{
+            top:50%;
+            transform:translateY(-50%);
+            bottom:auto;
+            left:0;
+            &[class*=--show]{
+                margin-left:calc( var(--tooltip-side-offset) * -1 );
+                left:calc( var(--tooltip-offset) * -1 );
+            }
+        }
+    }
+}

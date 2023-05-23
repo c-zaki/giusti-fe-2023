@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+$component: componentClass("hero1");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    background-color:tokenColor("set1","black1");
+    color:tokenColor("set1","white1");
+    &__deco{
+        svg{
+            path{
+                fill:tokenColor("set1", "white1");
+            }
+        }
+    }
+    &__title, &__pre-title{
+        text-shadow:tokenShadow(1);
+    }
+}

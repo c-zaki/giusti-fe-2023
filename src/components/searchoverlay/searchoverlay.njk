@@ -1,0 +1,54 @@
+{# Imports components #}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/card1/card1.njk' as Card1 %}
+{% import 'components/loader/loader.njk' as Loader %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-searchoverlay' %}
+
+    {% set configDefault = {
+        "className": [""],
+        "variations" : [],
+        "searchPlaceHolder" : "Cerca nel sito",
+        "txtAlign" : "center",
+        "modalId" : "search-overlay",
+        "searchEndPoint" : "",
+        "noResultsFound" : "Nessun risultato trovato",
+        "ariaLabelledBy" : "exmapleModalLabel",
+        "closeBtnAriaLabel" : "Close search",
+        "searchBtnAriaLabeL" : "Start search"
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+    {% set label = obj.label or configDefault.label %}
+
+    {# data-js-component="SearchOverlay", if used requires search endpoint #}
+    <div data-js-component="SearchOverlay" class="{{_className | join(" ") | trim }} modal fade" id="{{obj.modalId}}" tabindex="-1" aria-labelledby="{{obj.ariaLabelledBy}}" aria-hidden="true">
+        <div class="{{componentClassName}}__dialog modal-dialog">
+            <div class="{{componentClassName}}__content modal-content d-flex flex-column align-content-stretch align-items-stretch justify-content-start">
+                <div class="{{componentClassName}}__search pb-4 pb-md-5 pt-md-4 d-flex justify-content-center position-relative">
+                    <form method="{{obj.method or "GET"}}" action="{{obj.action}}" class="w-100 position-relative container-l">
+                        <input data-search-input name="s" type="text" placeholder="{{obj.searchPlaceHolder}}" class="text-left px-0 c-form__field pt-4 c-form__field--theme-alt3 c-form__field--size-l w-100 --responsive1"/>
+                        <div class="{{componentClassName}}__controls d-flex gap-5">
+                            <button type="submit" aria-label="{{obj.searchBtnAriaLabel}}">
+                                {{ Icon.content({ "iconName" : "search", "variations" : ["size-3", "size-md-3"] }) }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endmacro %}

@@ -1,0 +1,100 @@
+{# Imports components #}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/img/img.njk' as Img %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-slideshow1' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : [],
+        "slidesPerView" : 1,
+        "slidesPerViewMobile" : 1,
+        "autoPlay" : "true",
+        "autoPlayDelay" : 3000,
+        "contained" : true,
+        "activateControls" : false
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {% set arrowVariations = ["primary", "size-m"] %}
+
+    <div class="{{_className | join(" ")}}">
+        <div class="{{componentClassName}}__inner">
+            {% set sliderId = "sliderID" + range(1,1000) | random  %}
+            <div class="{{componentClassName}}__slider {% if obj.contained %}container-l container--md-spacing1{% endif %}">
+                <div data-slider-id={{sliderId}} data-js-component="Slider" class="c-slider swiper-container" 
+                    data-config='{
+                        "centeredSlides":false,
+                        "speed":600,
+                        "effect": "fade",
+                        {% if obj.autoPlay %}
+                        "autoplay" : {
+                            "delay" : "{{obj.autoPlayDelay}}"
+                        },
+                        {% endif %}
+                        {% if obj.activateControls %}
+                        "navigation": {
+                            "nextEl": ".{{componentClassName}}__slider-arrow--next[data-slider-id={{sliderId}}]",
+                            "prevEl": ".{{componentClassName}}__slider-arrow--prev[data-slider-id={{sliderId}}]"
+                        },
+                        {% endif %}
+                        "slidesPerView" : {{obj.slidesPerViewMobile}},
+                        "spaceBetween" : {{zaux_config.tokens.spaces['spacer-width-px'] * zaux_config.tokens.spaces.spaces[5].mul}},
+                        "breakpoints" : {
+                            {{token_breakpoints["md"] | dump | replace("px", "") | safe}}: {
+                                {% if obj.autoPlay %}
+                                "autoplay" : {
+                                    "delay" : "{{obj.autoPlayDelay}}"
+                                },
+                                {% endif %}
+                                "effect": "fade",
+                                "spaceBetween": {{zaux_config.tokens.spaces['spacer-width-px'] * zaux_config.tokens.spaces.spaces[6].mul}},
+                                "slidesPerView": {{obj.slidesPerView}}
+                            }
+                        }
+                    }'>
+                    <div class="c-slider__wrapper overflow-visible overflow-md-hidden
+                    ">
+                        <div class="c-slider__instance swiper-container">
+                            <div class="swiper-wrapper overflow-visible">
+                                {% for element in obj.slides %}
+                                    <div class="{{componentClassName}}__slide swiper-slide">
+                                        {% set imgParams = element.img %}
+                                        {% set imgParams = {"variations" : ["fluid", "ratio-2"]} | overwriteMerge(element.img) %}
+                                        {{
+                                            Img.content(imgParams)
+                                        }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if obj.activateControls %}
+                <div class="{{componentClassName}}__control-bar py-6 gap-6 d-flex justify-content-center align-items-center">
+                    <div data-slider-id="{{sliderId}}" class="{{componentClassName}}__slider-arrow {{componentClassName}}__slider-arrow--prev {{obj.arrowClasses}}">
+                        {{ Button.content({ "type" : "button", "variations" : arrowVariations, "iconOnly" : true, "iconSize" : "2", "hasIcon" : true, "icon" : "arrow1-left" }) }}
+                    </div>
+                    <div aria-label="Next slide" data-slider-id="{{sliderId}}" class="{{componentClassName}}__slider-arrow {{componentClassName}}__slider-arrow--next {{obj.arrowClasses}}">
+                        {{ Button.content({ "type" : "button", "variations" : arrowVariations, "iconOnly" : true, "iconSize" : "2", "hasIcon" : true, "icon" : "arrow1-right" }) }}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endmacro %}

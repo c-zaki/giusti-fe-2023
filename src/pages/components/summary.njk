@@ -1,0 +1,116 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Summary"
+} %}
+
+{# Imports components #}
+{% import 'components/summary/summary.njk' as Summary %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/breadcrumbs1/breadcrumbs1.njk' as Breadcrumbs %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {% set breadCrumbs %}
+        {{ Breadcrumbs.content() }}
+    {% endset %}
+    
+    {% 
+        set dataLayerEvent = {
+            "eventType" : "click",
+            "eventName" : "toggleFave",
+            "domain" : "Favourites",
+            "data" : {
+                "id" : "elementID"
+            }
+        }
+    %}
+
+    {% set iconSwitchAttr = {
+    "idle" : "favourites-unchecked",
+    "active" : "favourites-checked",
+    "direct" : false
+    } %}
+
+    {{ Summary.content(
+        {
+            "preHeadHTML" : breadCrumbs,
+            "title" : "Museo della città",
+            "infos" : [
+                { "part1" : "Lunedì - Venerdì", "part2" : "10:00 - 20:00" },
+                { "part1" : "Lunedì - Venerdì", "part2" : "10:00 - 20:00" }
+            ],
+            "infoLink" : {
+                "url" : "#test-infolink-url",
+                "title" : "Piazza del Luogo Pio 19, 57123 Livorno"
+            },
+            "controlBar1" : [
+                Button.content({ "jsComp" : true, "customAttr" : "data-zaux-datalayer-event='" + dataLayerEvent | dump + "' data-icon-switch='" + iconSwitchAttr | dump + "'", "variations" : ["secondary", "size-s"], "hasIcon" : true, "icon" : "favourites-unchecked", "label" : "Preferiti" }),
+                Button.content({ "variations" : ["secondary", "size-s"], "hasIcon" : true, "icon" : "share", "label" : "Condividi" }),
+                Button.content({ "variations" : ["secondary", "size-s"], "hasIcon" : true, "icon" : "link", "label" : "Sito web" }),
+                Button.content({ "variations" : ["secondary", "size-s"], "hasIcon" : true, "iconOnly" : true, "icon" : "facebook", "label" : "Facebook" }),
+                Button.content({ "variations" : ["secondary", "size-s"], "hasIcon" : true, "iconOnly" : true, "icon" : "instagram", "label" : "Instagram" }),
+                Button.content({ "variations" : ["secondary", "size-s"], "hasIcon" : true, "iconOnly" : true, "icon" : "youtube", "label" : "Youtube" })
+            ],
+            "mediaGallery" : {
+                "featImg": {
+                    "mainSrc" : "https://placehold.co/1280x720?text=16:9"
+                },
+                "elements" : [
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    },
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    },
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    },
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    },
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    },
+                    {
+                        "type" : "img",
+                        "img" : {
+                            "mainSrc" : "https://placehold.co/512x512?text=1:1"
+                        }
+                    }
+                ]
+            },
+            "subtitle" : "<p>Il nuovo Museo della Città di Livorno è stato inaugurato il 30 aprile 2018 e fa parte del Polo Culturale Bottini dell’Olio, incastonato nel cuore dello storico quartiere della Venezia Nuova.</p>"
+        }
+    ) }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

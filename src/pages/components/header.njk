@@ -1,0 +1,40 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Header",
+  "fullPage" : true
+} %}
+
+{# Imports components #}
+{# import 'components/herovideo/herovideo.njk' as HeroVideo #}
+{% import 'components/header/header.njk' as Header %}
+{% import 'components/offcanvasnav/offcanvasnav.njk' as OffCanvasNav %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1 zaux-bg-set1-color7 vw-100 vh-100 justify-content-center flex-column align-items-center d-flex">
+    {{
+      OffCanvasNav.content({"id" : "offcanvas1"})
+    }}
+    {{
+      Header.content()
+    }}
+    <button id="switch-header" class="c-btn c-btn--secondary">Activate scroll mode</button>
+    <script>
+      document.querySelector("#switch-header").addEventListener("click", (e) => {
+        window.zaux.store.appHeader.instance.activateCompactMode();
+      });
+    </script>
+  </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+$component: componentClass("sharebtn");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &__tooltip{
+        transition: all $zaux-transition-1;
+        background-color:tokenColor("set1","color7");
+        color:tokenColor("set1","white1");
+        .#{$component-prefix}icon{
+            color:tokenColor("set1","white1");
+        }
+    }
+}

@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+$component: componentClass("bannerimg2");
+$cmp-tokens: ();
+
+.#{$component} {
+
+    --height: 400px;
+    
+    &__bg-container{
+    }
+
+    &__inner{
+        max-height:var(--height);
+        @include media-breakpoint-down("lg"){
+            --height:250px;
+        }
+        @include media-breakpoint-down("md"){
+            --height:120px;
+        }
+    }
+    &--constrained{
+        .#{$component}__bg-container{
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+        }
+    }
+}

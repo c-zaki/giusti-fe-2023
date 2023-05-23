@@ -1,0 +1,266 @@
+{
+    "menu1" : [
+        {
+            "title" : "Conosci nikè",
+            "entries" : [
+                {
+                    "title" : "Title entry 1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 2",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 3",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 4",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 5",
+                    "url" : "#link-entry-1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+                }
+            ]
+        }
+    ],
+    "menu2" : [
+        {
+            "title" : "Specializzazioni",
+            "entries" : [
+                {
+                    "title" : "Title entry 1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 2",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 3",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 4",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 5",
+                    "url" : "#link-entry-1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+                }
+            ]
+        }
+    ],
+    "menu3" : [
+        {
+            "title" : "Nikè per te",
+            "entries" : [
+                {
+                    "title" : "Title entry 1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 2",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 3",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 4",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 5",
+                    "url" : "#link-entry-1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+                }
+            ]
+        },
+        {
+            "title" : "Nikè magazine",
+            "logo" : "/img/logo-magazine.svg",
+            "entries" : [
+                {
+                    "title" : "Title entry 1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 2",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 3",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 4",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 5",
+                    "url" : "#link-entry-1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+                }
+            ]
+        }
+    ],
+    "menuMobile" : [
+        {
+            "title" : "Nikè SFA",
+            "logo" : "/img/nike-sfa-logo.svg",
+            "entries" : [
+                {
+                    "title" : "Title entry 1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 2",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 3",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 4",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 5",
+                    "url" : "#link-entry-1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+                }
+            ]
+        },
+        {
+            "title" : "App trasversali",
+            "entries" : [
+                {
+                    "title" : "Title entry 1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 2",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 3",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 4",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+
+                },
+                {
+                    "title" : "Title entry 5",
+                    "url" : "#link-entry-1",
+                    "cta" : {
+                        "link" : "#entry-link"
+                    }
+                }
+            ]
+        }
+    ],
+    "menuEntries" : [
+        { "url" : "#entry", "title" : "Teatri"},
+        { "url" : "#entry", "title" : "Musei"},
+        { "url" : "#entry", "title" : "Festival"},
+        { "url" : "#entry", "title" : "Personalizza esperienza"},
+        { "url" : "#entry", "title" : "Segnala un evento"},
+        { "url" : "#entry", "title" : "News"}
+    ],
+    "social" : [
+        { "label" : "Facebook", "url" : "#fb", "icon" : "facebook" },
+        { "label" : "Youtube", "url" : "#yt", "icon" : "youtube" },
+        { "label" : "Twitter", "url" : "#tw", "icon" : "twitter" },
+        { "label" : "Linkedin", "url" : "#li", "icon" : "linkedin" }
+    ]
+}

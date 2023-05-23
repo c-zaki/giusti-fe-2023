@@ -1,0 +1,86 @@
+{% macro content(obj) %}
+    
+    {% set formComponentClassName = "c-form" %}
+    {% set componentClassName = formComponentClassName + '__field' %}
+    {% set configDefault = {
+        "className" : [],
+        "variations" : ["checkbox"],
+        "wrapClasses" : ["checkbox"],
+        "labelClasses" : [],
+        "validationPotClasses" : [],
+        "hasWrapper" : true,
+        "label" : "",
+        "labelWrap" : true
+    }
+    %}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+    {% set _wrapClasses = [] %}
+    {% set _labelClasses = [] %}
+    {% set _validationPotClasses = [] %}
+
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+    {% set placeHolder = obj.placeHolder or configDefault.placeHolder %}
+    {% set hasWrapper =  obj.hasWrapper or configDefault.hasWrapper %}
+    {% set label = obj.label or configDefault.label %}
+    {% set labelWrap = obj.labelWrap or configDefault.labelWrap %}
+    {% set name = obj.name or "name" %}
+    {% set value = obj.value or "" %}
+    
+    {% if obj.checked %}
+        {% set checked = "checked" %}
+    {% endif %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+        {% if "size" in variation %}
+            {% set _wrapClasses = (_wrapClasses.push(componentClassName +"-wrap" + "--input-" + variation), _wrapClasses) %}
+            {% set _labelClasses = (_labelClasses.push(componentClassName + "-label--" + variation), _labelClasses) %}
+        {% endif %}
+    {% endfor %}
+
+    {# Pushes every wrap class on the wrapper (prepending the base class + -wrap) #}
+    {% for wrapClass in ( configDefault.wrapClasses | mergeArray(obj.wrapClasses or configDefault.wrapClasses) ) %}
+        {% set _wrapClasses = (_wrapClasses.push(componentClassName +"-wrap" + "--" + wrapClass), _wrapClasses) %}
+    {% endfor %}
+
+    {# Pushes every label class on the wrapper (prepending the base class + -wrap) #}
+    {% for labelClass in ( configDefault.labelClasses | mergeArray(obj.labelClasses or configDefault.labelClasses) ) %}
+        {% set _labelClasses = (_labelClasses.push(componentClassName +"-label" + "--" + labelClass), _labelClasses) %}
+    {% endfor %}
+    
+    {# Pushes every validation pot class on the wrapper (prepending the base class + -wrap) #}
+    {% for validationPotClass in ( configDefault.validationPotClasses | mergeArray(obj.validationPotClasses or configDefault.validationPotClasses) ) %}
+        {% set _validationPotClasses = (_validationPotClasses.push(validationPotClass), _validationPotClasses) %}
+    {% endfor %}
+
+    {% if hasWrapper %}
+    {# {% if labelWrap == false %} d-flex align-items-center gap-2{% endif %} #}
+    <div class="{{componentClassName}}-wrap {{_wrapClasses | join(" ")}} {% if label !== '' %} {{componentClassName}}-wrap--sidelabel{% endif %}">
+    {%endif%}
+
+        <div class="{{formComponentClassName}}__input-wrap">
+            {% if label != '' or labelWrap == true %}
+                <label class="d-flex align-items-center gap-2">
+            {% endif %}
+
+                <input {% if obj.customAttr %}{{obj.customAttr | safe}}{% endif %} {% if obj.required %}required{% endif %} {% if obj.checked %}checked="{{checked}}"{% endif %} value="{{value}}" name="{{name}}" type="checkbox" class="{{_className | join(" ")}}"/>
+                {% if label !== '' %}
+                <span class="c-form__field-label {{_labelClasses | join(" ")}}">{{label | safe}}</span>
+                {% endif %}    
+                
+            {% if label != '' %}
+                </label>
+            {% endif %}
+        </div>
+
+        {% if obj.validationPot %}
+            <div class="{{formComponentClassName}}__validation-pot {{_validationPotClasses | join(" ")}}"></div>
+        {% endif %}
+
+    {% if hasWrapper %}
+    </div>
+    {% endif %}
+
+{% endmacro %}

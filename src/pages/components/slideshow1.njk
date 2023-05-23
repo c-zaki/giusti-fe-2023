@@ -1,0 +1,46 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Slideshow 1"
+} %}
+
+{# Imports components #}
+{% import 'components/slideshow1/slideshow1.njk' as SlideShow1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {{ SlideShow1.content(
+        {
+          "slides" : [
+              { "img" : { "mainSrc" : "https://placehold.co/1920x1080?text=Slide1" } },
+              { "img" : { "mainSrc" : "https://placehold.co/512x512?text=Slide2" } },
+              { "img" : { "mainSrc" : "https://placehold.co/1920x1080?text=Slide3" } }
+          ]
+        }
+    ) }}
+    <br/><br/>
+    {{ SlideShow1.content(
+        {
+          "activateControls" : true,
+          "slides" : [
+              { "img" : { "mainSrc" : "https://placehold.co/1920x1080?text=Slide1" } },
+              { "img" : { "mainSrc" : "https://placehold.co/512x512?text=Slide2" } },
+              { "img" : { "mainSrc" : "https://placehold.co/1920x1080?text=Slide3" } }
+          ]
+        }
+    ) }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

@@ -1,0 +1,80 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Content layout 2"
+} %}
+
+{# Imports components #}
+{% import 'components/contentlayout2/contentlayout2.njk' as ContentLayout2 %}
+{% import 'components/breadcrumbs1/breadcrumbs1.njk' as Breadcrumbs %}
+{% import 'components/richtextblock1/richtextblock1.njk' as RichTextBlock1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+    <div class="zaux-theme--light1">
+        
+        <div class="py-8"></div>
+
+        {% set SampleContent1 %}
+            <div class="p-10 zaux-bg-set1-color4 text-center">
+                <span class="fs-4">Content free HTML left</span>
+            </div>
+        {% endset %}
+        
+        {% set SampleContent2 %}
+            <div class="p-10 zaux-bg-set1-color4 h-390px text-center">
+                <span class="fs-6 d-block">Content free HTML Middle</span>
+            </div>
+            <div class="p-10 zaux-bg-set1-color4 h-390px text-center">
+            </div>
+        {% endset %}
+
+        {% set SampleContent3 %}
+            <div class="p-10 zaux-bg-set1-color4 text-center">
+                <span class="fs-4">Content free HTML right</span>
+            </div>
+        {% endset %}
+
+        {{ ContentLayout2.content(
+            {
+                "pullMiddleUp" : false,
+                "col1Content" : [
+                    { "content" : SampleContent1 }
+                ],
+                "col2Content" : [
+                    { "content" : SampleContent2 }
+                ],
+                "col3Content" : [
+                    { "content" : SampleContent3 }
+                ]
+            }
+        ) }}
+
+        <h3 class="mt-14 mb-14 text-center">Middle content pulled up</h3>
+        <br/><br/>
+        {{ ContentLayout2.content(
+            {
+                "col1Content" : [
+                    { "content" : SampleContent1 }
+                ],
+                "col2Content" : [
+                    { "content" : SampleContent2 }
+                ],
+                "col3Content" : [
+                    { "content" : SampleContent3 }
+                ]
+            }
+        ) }}
+    </div>
+{% endblock %}
+
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

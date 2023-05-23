@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+$component: componentClass("slidertabs1");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+
+    &__slider-arrow{
+        i{
+            color:tokenColor("set1","color1");
+        }
+    }
+
+    &__tab{
+        button{
+            background-color: tokenColor("set1","color3");
+            transition: background-color $zaux-transition-1;
+            &.active, &.--active{
+                background-color: tokenColor("set1","white1");
+            }
+        }
+        .#{$component}__img{
+            position:relative;
+            z-index:tokenZindex(2);
+        }
+    }
+
+    &--theme-alt2{
+        .#{$component}__slider-arrow{
+            i{
+                color:tokenColor("set1","white1");
+            }
+        }
+        .#{$component}__tabs-content{
+            background-color:tokenColor("set1","white1");
+            color:tokenColor("set1","color3");
+        }
+        .#{$component}__content-title{
+            color:tokenColor("set1","color1");
+        }
+    }
+
+}

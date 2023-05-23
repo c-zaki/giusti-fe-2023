@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+$component: componentClass("stepindex");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    border-top-color:tokenColor("set1","color1");
+    border-top-style:solid;
+    &__indicator{
+        background-color:tokenColor("set1","color1");
+        color:tokenColor("set1","white1");
+    }
+    &__title{
+        color:tokenColor("set1","color1");
+    }
+}

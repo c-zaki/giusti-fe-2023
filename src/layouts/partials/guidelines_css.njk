@@ -1,0 +1,72 @@
+<style>
+    html{
+        padding:0;
+    }
+    :root{
+        --guideline-fontfam: '{{token_defs.mainFont}}', sans-serif;
+        --guideline-color-main: {{token_colors.app.theme}};
+        --guideline-color-2: #e8e8e8;
+        --guideline-color-3: #ecf2f6;
+        --guideline-color-4: #262626;
+        --guideline-color-5: rgba(0,0,0, 0.15);
+        --guideline-color-text: #212121;
+        --guideline-fsize-1: 64px;
+        --guideline-fsize-2: 52px;
+        --guideline-space1: 64px;
+    }
+    
+    .guidelines{
+        font-family: var(--guideline-fontfam);
+        background-color:var(--guideline-color-3);
+        /*padding: var(--guideline-space1);*/
+        color:var(--guideline-color-text);
+    }
+
+    body{
+        font-family: var(--guideline-fontfam);
+    }
+
+    body.guideline-page{
+        background-color:var(--guideline-color-3);
+    }
+
+    .guideline-page a{
+        text-decoration:none;
+        color: var(--guideline-color-main);
+    }
+
+    .guideline-block--colors .guideline-block__color-swatch{
+        width:150px;
+        background-color:white;
+    }
+    .guideline-block__color-square{
+        height:150px;
+        width:100%;
+    }
+    .guideline__title{
+        font-size: var(--guideline-fsize-1);
+    }
+    .guideline-separator{
+        appearance:none;
+        border-top:none;
+        background:none;
+        border-bottom:1px solid var(--guideline-color-2);
+    }
+    .guideline-component-stage{
+        padding: var(--guideline-space1);
+    }
+    @media (prefers-color-scheme: dark) {
+        :root{
+            --guideline-color-3: #212121;
+            --guideline-color-text: white;
+            --guideline-color-4: #ddd;
+            --guideline-color-5: rgba(255,255,255, 0.15);
+        }
+        .guideline-block--colors .guideline-block__color-swatch{
+            background-color:var(--guideline-color-4);
+        }
+    }
+    .guideline-component{
+
+    }
+</style>

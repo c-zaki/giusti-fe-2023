@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+$component: componentClass("badge");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component} {
+
+    background-color:transparent;
+    color:tokenColor("set1", "color7");
+    border-color:tokenColor("set1","color3");
+    border-radius:tokenRadius(2);
+    border-style:solid;
+    transition:all $zaux-transition-1;
+
+    &--has-link{
+        &:hover{
+            background-color:darken(tokenColor("set1","white1"), $darken-hover-factor);
+        }
+    }
+
+    &--outline1{
+        background-color:transparent;
+        color:tokenColor("set1","white1");
+        border-color:tokenColor("set1","white1");
+        border-style:solid;
+        &.#{$component}--has-link{
+            &:hover{
+                background-color:tokenColor("set1","white1");
+                color:tokenColor("set1","color7");
+            }
+        }
+    }
+
+    &--outline2{
+        background-color:transparent;
+        color:tokenColor("set1","color7");
+        border-color:tokenColor("set1","white1");
+        border-style:solid;
+        &.#{$component}--has-link{
+            &:hover{
+                background-color:tokenColor("set1","white1");
+                color:tokenColor("set1","color7");
+            }
+        }
+    }
+
+}

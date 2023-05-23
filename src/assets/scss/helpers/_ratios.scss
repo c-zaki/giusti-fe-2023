@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+$zaux-helper-name: "ratio";
+
+
+.#{tokenDef("app-prefix")}-#{$zaux-helper-name} {
+
+    @each $ratioIndex, $ratio in $zaux-token-ratios{
+        &--#{$ratioIndex}{
+            $aspRatio : #{map-get($ratio, "ratioW")} / #{map-get($ratio, "ratioH")};
+            aspect-ratio: $aspRatio;
+        }
+        &--#{map-get($ratio, "ratioW")}-#{map-get($ratio, "ratioH")}{
+            $aspRatio : #{map-get($ratio, "ratioW")} / #{map-get($ratio, "ratioH")};
+            aspect-ratio: $aspRatio;
+        }
+        &--unset{
+            aspect-ratio:unset;
+        }
+        @each $bpName, $bpVal in tokenBreakpoints(){
+            @include media-breakpoint-up($bpName){
+                &-#{$bpName}--#{$ratioIndex}{
+                    $aspRatio : #{map-get($ratio, "ratioW")} / #{map-get($ratio, "ratioH")};
+                    aspect-ratio: $aspRatio;
+                }
+                &-#{$bpName}--#{map-get($ratio, "ratioW")}-#{map-get($ratio, "ratioH")}{
+                    $aspRatio : #{map-get($ratio, "ratioW")} / #{map-get($ratio, "ratioH")};
+                    aspect-ratio: $aspRatio;
+                }
+                &-#{$bpName}--unset{
+                    aspect-ratio:unset;
+                }
+            }
+        }
+    }
+
+}

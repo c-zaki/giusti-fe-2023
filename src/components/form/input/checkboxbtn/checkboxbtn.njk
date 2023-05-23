@@ -1,0 +1,84 @@
+{# Import components #}
+{% import 'components/icon/icon.njk' as Icon %}
+
+
+{% macro content(obj) %}
+    
+    {% set componentClassName = 'c-checkboxbtn' %}
+    {% set configDefault = {
+        "className" : [],
+        "variations" : ["checkboxbtn"],
+        "wrapClasses" : ["checkboxbtn"],
+        "labelClasses" : [],
+        "hasWrapper" : true,
+        "label" : "",
+        "labelWrap" : true,
+        "fieldSize" : "size-s"
+    }
+    %}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+    {% set _wrapClasses = [] %}
+    {% set _labelClasses = [] %}
+
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+    {% set placeHolder = obj.placeHolder or configDefault.placeHolder %}
+    {% set hasWrapper =  obj.hasWrapper or configDefault.hasWrapper %}
+    {% set label = obj.label or configDefault.label %}
+    {% set labelWrap = obj.labelWrap or configDefault.labelWrap %}
+    {% set name = obj.name or "name" %}
+    {% set value = obj.value or "" %}
+    
+    {% if obj.checked %}
+        {% set checked = "checked" %}
+    {% endif %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+        {% if "size" in variation %}
+            {% set _wrapClasses = (_wrapClasses.push(componentClassName +"-wrap" + "--input-" + variation), _wrapClasses) %}
+            {% set _labelClasses = (_labelClasses.push(componentClassName + "-label--" + variation), _labelClasses) %}
+        {% endif %}
+    {% endfor %}
+
+    {# Pushes every wrap class on the wrapper (prepending the base class + -wrap) #}
+    {% for wrapClass in ( configDefault.wrapClasses | mergeArray(obj.wrapClasses or configDefault.wrapClasses) ) %}
+        {% set _wrapClasses = (_wrapClasses.push(componentClassName +"-wrap" + "--" + wrapClass), _wrapClasses) %}
+    {% endfor %}
+
+    {# Pushes every wrap class on the wrapper (prepending the base class + -wrap) #}
+    {% for labelClass in ( configDefault.labelClasses | mergeArray(obj.labelClasses or configDefault.labelClasses) ) %}
+        {% set _labelClasses = (_labelClasses.push(componentClassName +"-label" + "--" + labelClass), _labelClasses) %}
+    {% endfor %}
+
+    {% if obj.labelWrap == true %}
+        {% set _className = (_className.push(componentClassName +"--label-wrapped"), _className) %}
+    {% endif %}
+
+    <div class="{{_className | join(" ") | trim }}">
+        {% if label != '' or labelWrap == true %}
+            <label class="{{componentClassName}}__label-wrap d-flex align-items-center justify-content-between position-relative">
+        {% endif %}
+
+                <div class="{{componentClassName}}__label-text position-relative d-flex align-items-center">  
+                    {% set iconParams = {"className" : [componentClassName + "__icon"] } %}
+                    {% set iconParams = iconParams | overwriteMerge(obj.icon) %}
+                    {{ Icon.content(iconParams) }}
+                    {% if label !== '' %}
+                    <span class="{{componentClassName}}__label {{_labelClasses | join(" ")}}">{{label | safe}}</span>
+                    {% endif %}    
+                </div>
+                
+                <input {% if obj.customAttr %}{{obj.customAttr | safe}}{% endif %} {% if obj.required %}required{% endif %} {% if obj.checked %}checked="{{checked}}"{% endif %} value="{{value}}" name="{{name}}" type="checkbox" class="{{componentClassName}}__input c-form__field--{{obj.fieldSize}} position-relative"/>
+                
+                <div aria-hidden="true" class="{{componentClassName}}__focus-bg"></div>
+        {% if label != '' %}
+            </label>
+        {% endif %}
+        {% if obj.validationPot %}
+            <div class="{{formComponentClassName}}__validation-pot"></div>
+        {% endif %}
+    </div>
+
+{% endmacro %}

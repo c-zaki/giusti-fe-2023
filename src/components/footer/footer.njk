@@ -1,0 +1,205 @@
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/newsletterbox1/newsletterbox1.njk' as NewsletterBox %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+
+{% macro content(obj) %}
+
+  {% set componentClassName = 'c-footer' %}
+
+  {% set configDefault = {
+      "className": [""],
+      "variations" : [],
+      "socialList" : component_footer.social,
+      "textInfo1" : component_footer.textInfo1,
+      "copyRightSign" : component_footer.copyRightSign,
+      "menu1" : component_footer.menu1,
+      "menu2" : component_footer.menu2,
+      "menu3" : component_footer.menu3,
+      "logoUrl" : "#home-url",
+      "logoTitle" : "Logo title here",
+      "logo2Url" : "#logo2-url",
+      "logo2Title" : "Logo title here"
+  }%}
+
+  {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+  {# Creates new arrays for manipulation) #}
+  {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+  {# Pushes every variation into class attribute (prepending the base class) #}
+  {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+      {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+  {% endfor %}
+
+  <footer class="{{_className | join(" ") | trim}}">
+    <div class="{{componentClassName}}__inner">
+      <div class="{{componentClassName}}__row {{componentClassName}}__row--1 py-8">
+        <div class="container-l">
+          <div class="row g-4 g-sm-2">
+            <div class="col-12 col-sm-3 d-flex flex-column gap-6 gap-sm-8 justify-content-between pb-6 pb-sm-0">
+              <div class="d-flex gap-5 flex-column">
+                <a href="{{obj.logoUrl}}" title="{{obj.logoTitle}}">
+                  {{ Img.content(
+                    {
+                      "mainSrc" : zaux_config.properties.assetsDistURL + "/img/logo-negative.svg",
+                      "imgHeight" : "54",
+                      "imgWidth" : "200"
+                    }
+                  )}}
+                </a>
+                <a href="{{obj.netZeroURL}}" title="Net zero website">
+                  {{
+                    Img.content(
+                      {
+                        "mainSrc" : zaux_config.properties.assetsDistURL + "/img/netzero.svg"
+                      }
+                    )
+                  }}
+                </a>
+              </div>
+              <div class="d-flex flex-column gap-4">
+                {% if obj.socialList %}
+                  <ul class="{{componentClassName}}__social d-flex gap-5">
+                    {% for social in obj.socialList %}
+                      <li>
+                        <a href="{{social.url}}" title="{{social.label}}">
+                          {{
+                            Icon.content(
+                              {
+                                "variations" : ["size-2"],
+                                "iconName" : social.icon
+                              }
+                            )
+                          }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+                {% if obj.textInfo1 %}
+                  <p class="fs-1 lh-1">
+                    {{ obj.textInfo1 | safe }}
+                  </p>
+                {% endif %}
+              </div>
+            </div>
+            {% if obj.menu1 %}
+              {% set menus = obj.menu1 %}
+              <div class="col-12 col-sm-3 d-flex flex-column gap-6 gap-sm-8">
+                {% for menu in menus %}
+                  <ul class="{{componentClassName}}__menulist d-flex flex-column gap-3 ps-4">
+                    {% if menu.title %}
+                      <li class="fs-1 lh-1 pb-3 zaux-color-set1-color1">
+                        {% if menu.title.link %}
+                          <a href="{{menu.title.link}}" title="{{menu.title.label}}">
+                        {% endif %}
+                          {{menu.title.label}}
+                        {% if menu.title.link %}
+                          </a>
+                        {% endif %}
+                      </li>
+                    {% endif %}
+                    {% for item in menu.items %}
+                      <li class="fs-2 lh-1 fw-bold">
+                        {% if item.url %}
+                          <a href="{{item.url}}" title="{{item.label}}">
+                        {% endif %}
+                          {{item.label}}
+                        {% if item.url %}
+                          </a>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endfor %}
+              </div>
+            {% endif %}
+            {% if obj.menu2 %}
+              {% set menus = obj.menu2 %}
+              <div class="col-12 col-sm-3 d-flex flex-column gap-6 gap-sm-8">
+                {% for menu in menus %}
+                  <ul class="{{componentClassName}}__menulist d-flex flex-column gap-3 ps-4">
+                    {% if menu.title %}
+                      <li class="fs-1 lh-1 pb-3 zaux-color-set1-color1">
+                        {% if menu.title.link %}
+                          <a href="{{menu.title.link}}" title="{{menu.title.label}}">
+                        {% endif %}
+                          {{menu.title.label}}
+                        {% if menu.title.link %}
+                          </a>
+                        {% endif %}
+                      </li>
+                    {% endif %}
+                    {% for item in menu.items %}
+                      <li class="fs-2 lh-1 fw-bold">
+                        {% if item.url %}
+                          <a href="{{item.url}}" title="{{item.label}}">
+                        {% endif %}
+                          {{item.label}}
+                        {% if item.url %}
+                          </a>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endfor %}
+              </div>
+            {% endif %}
+            {% if obj.menu3 %}
+              {% set menus = obj.menu3 %}
+              <div class="col-12 col-sm-3 d-flex flex-column gap-6 gap-sm-8">
+                {% for menu in menus %}
+                  <ul class="{{componentClassName}}__menulist d-flex flex-column gap-3 ps-4">
+                    {% if menu.title %}
+                      <li class="fs-1 lh-1 pb-3 zaux-color-set1-color1">
+                        {% if menu.title.link %}
+                          <a href="{{menu.title.link}}" title="{{menu.title.label}}">
+                        {% endif %}
+                          {{menu.title.label}}
+                        {% if menu.title.link %}
+                          </a>
+                        {% endif %}
+                      </li>
+                    {% endif %}
+                    {% for item in menu.items %}
+                      <li class="fs-2 lh-1 fw-bold">
+                        {% if item.url %}
+                          <a href="{{item.url}}" title="{{item.label}}">
+                        {% endif %}
+                          {{item.label}}
+                        {% if item.url %}
+                          </a>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="{{componentClassName}}__row {{componentClassName}}__row--2">
+        <div class="container-l d-flex gap-4 pb-9 pb-md-0 justify-content-md-between flex-wrap justify-content-center">
+          <p class="c-typo-style1-size-text-s py-4 text-center text-md-start">{{obj.copyRightSign}}</p>
+          <div>
+            <a href="https://zaki.it" title="Zaki - Creative Digital Agency" target="_blank">
+              {{
+                Img.content(
+                  {
+                    "variations" : ["fluid-y"],
+                    "mainSrc" : zaux_config.properties.assetsDistURL + "/img/madeinzaki.svg",
+                    "imgHeight" : 48,
+                    "imgWidth" : 77
+                  }
+                )
+              }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- .{{componentClassName}} -->
+{% endmacro %}

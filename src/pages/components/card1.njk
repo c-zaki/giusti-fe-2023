@@ -1,0 +1,65 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Card 1"
+} %}
+
+{# Imports components #}
+{% import 'components/card1/card1.njk' as Card1 %}
+{% import 'components/bulletlist/bulletlist.njk' as BulletList %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+    <div class="zaux-theme--light1">
+        {% set sampleContent %}
+            {{
+                BulletList.content(
+                    {
+                      "variations" : ["theme-2"],
+                      "list" : [
+                          {
+                              "title" : "Title here",
+                              "subTitle" : "Lorem ipsum dolor sit amet",
+                              "cta" : {
+                                "link" : "#link-cta"
+                              }
+                          },
+                          {
+                              "subTitle" : "Lorem ipsum dolor sit amet"
+                          },
+                          {
+                              "subTitle" : "Lorem ipsum dolor sit amet"
+                          }
+                      ]
+                    }
+                )
+            }}
+        {% endset %}
+        <div class="d-inline-block">
+            {{ 
+              Card1.content({ 
+                "logo" : {
+                  "mainSrc" : zaux_config.properties.mediaDistURL + "/img/nike-crm-logo.svg"
+                },
+                "subTitle" : "Un connettore personalizzabile e modulare per l’ottimizzazione della Customer Relationship Management",
+                "htmlContent" : sampleContent,
+                "cta" : {
+                  "label" : "Scopri di più",
+                  "link" : "#scopri-di-piu"
+                }
+              }) 
+            }}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+$component: componentClass("bulletlist");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    border-top-style:solid;
+    border-top-color:tokenColor("set1","color3");
+    border-top-width:1px;
+    li{
+        border-bottom-style:solid;
+        border-bottom-color:tokenColor("set1","color3");
+        border-bottom-width:1px;
+    }
+    &--theme-2{
+        color:tokenColor("set1","white1");
+        border-top-style:solid;
+        border-top-color:tokenColor("set1","color5");
+        border-top-width:1px;
+        li{
+            border-bottom-style:solid;
+            border-bottom-color:tokenColor("set1","color5");
+            border-bottom-width:1px;
+        }
+    }
+}

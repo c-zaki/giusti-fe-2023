@@ -1,0 +1,389 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+    "data": page_component,
+    "title": "Forms"
+} %}
+
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/form/input/checkboxbtn/checkboxbtn.njk' as inputCheckboxBtn %}
+{% import 'components/form/input/text/text.njk' as inputText %}
+{% import 'components/form/input/checkbox/checkbox.njk' as inputCheckbox %}
+{% import 'components/form/input/radio/radio.njk' as inputRadio %}
+{% import 'components/form/input/textarea/textarea.njk' as inputTextArea %}
+{% import 'components/form/input/select/select.njk' as inputSelect %}
+{% import 'components/form/input/file/file.njk' as inputFile %}
+{% import 'components/btn/btn.njk' as Button %}
+{% import 'components/toast/toast.njk' as Toast %}
+
+{% block head_css %}
+    <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="zaux-theme--light1">
+        {{ Toast.content() }}
+        <h3 class="mb-5">Form with validation</h3>
+        <form style="max-width:600px;" data-js-component="Form" class="c-form" method="POST" action="">
+            <div class="row g-2">
+                <div class="col-6">
+                    {{ inputText.content( { "label" : "Name", "required" : true, "placeHolder" : "Name", "name" : "first-name" } ) }}
+                </div>
+                <div class="col-6">
+                    {{ inputText.content( { "label" : "Last name", "required" : true, "placeHolder" : "Lastname", "name" : "last-name" } ) }}
+                </div>
+                <div class="col-12">
+                    {{ inputText.content( { "label" : "Indirizzo email", "customAttr" : "data-format-msg='Email is not good' data-required-msg='You really need to put an email here'", "type" : "email", "required" : true, "placeHolder" : "Email", "name" : "email"  }  ) }}
+                </div>
+                <div class="col-12">
+                    {{ inputTextArea.content( { "label" : "Messaggio", "required" : true, "name" : "message" } ) }}
+                </div>  
+                <div class="col-12">
+                    {{inputCheckboxBtn.content(
+                        {
+                            "required" : true,
+                            "icon" : {
+                                "iconName" : "search"
+                            },
+                            "label" : "Option name"
+                        }
+                    )}}
+                </div>
+                <div class="col-12">
+                    {{ inputCheckbox.content({ "wrapClasses" : ["size-m"], "required" : true, "label" : "Yet another policy acceptance checkbox"}) }}
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-6 pt-3 text-right">
+                    <input class="c-btn c-btn--primary" type="submit" value="Submit" />
+                </div>
+            </div>
+        </form>
+
+        <h3 class="my-5">Async form</h3>
+        <form data-config='{"sendMode" : "async", "messages" : { "sendSuccess" : "Custom success message" } }' style="max-width:600px;" data-js-component="Form" class="c-form" method="POST" action="http://localhost/tests/ajaxmocks/formsent.php">
+            <div class="row g-2">
+                <div class="col-6">
+                    {{ inputText.content( { "required" : true, "placeHolder" : "Name", "name" : "first-name" } ) }}
+                </div>
+                <div class="col-6">
+                    {{ inputText.content( { "required" : true, "placeHolder" : "Lastname", "name" : "last-name" } ) }}
+                </div>
+                <div class="col-12">
+                    {{ inputText.content( { "type" : "email", "required" : true, "placeHolder" : "Email", "name" : "email"  }  ) }}
+                </div>
+                <div class="col-12">
+                    {{ inputTextArea.content( { "name" : "message" } ) }}
+                </div>  
+                <div class="col-12">
+                    {{ inputCheckbox.content({ "wrapClasses" : ["size-m"], "required" : true, "label" : "Yet another policy acceptance checkbox"}) }}
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-6 pt-3 text-right d-flex justify-content-end align-items-center">
+                    <span data-loader class="c-form__loader mx-2"></span>
+                    <input class="c-btn c-btn--primary" type="submit" value="Submit" />
+                </div>
+            </div>
+        </form>
+
+        <h3 class="zaux-color-set1-black1 mb-5 mt-5">Form controls</h3>
+        
+        <form class="c-form d-inline-block w-100">
+
+            <div class="row">
+                <div class="col-12">
+                    {{ inputText.content() }}
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-12">
+                    {{ inputSelect.content() }}
+                </div>
+            </div>
+            <br/>
+            <div class="row pb-2">
+                <div class="col-12">
+                    {{ inputTextArea.content() }}
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col-12">
+                    {{ inputFile.content() }}
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col-12">
+                    {{ inputRadio.content() }}
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col-12">
+                    {{ inputCheckbox.content() }}
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col-12">
+                    {{ inputCheckbox.content({"label" : "Checkbox with label on the side"})}}
+                </div>
+            </div>
+            <div class="row pb-2">
+                <div class="col-12">
+                    <div class="c-form__field-wrap c-form__field-wrap--sidelabel">
+                        {{ inputRadio.content({"label" : "Radio with label on the side"})}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    {{ inputText.content({"placeHolder" : "Input with icon", "hasIcon" : true, "icon" : "search"}) }}
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-12">
+                    <div class="c-form__field-wrap">
+                        <label class="c-form__label mb-2">Input with label</label>
+                        {{ inputText.content({"placeHolder" : "Input with label", "hasIcon" : true, "icon" : "search"}) }}
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="my-5">Additional non-standard & 3rd party controls</h3>
+
+            <div class="row my-2">
+                <div class="col-12">
+                    {{inputCheckboxBtn.content(
+                        {
+                            "icon" : {
+                                "iconName" : "search"
+                            },
+                            "label" : "Option name"
+                        }
+                    )}}
+                </div>
+            </div>
+
+            <div class="row my-2">
+                <div class="col-12">
+                    <input class="w-100" data-airpicker name="date" value="" type="text" placeholder="Select date"/>
+                </div>
+                <div class="col-12 py-3">
+                    <input placeholder="Select date" data-picker-options='{"range":"true", "multipleDatesSeparator" : " - " }' class="w-100" data-airpicker value="" type="text"/>
+                </div>
+            </div>
+
+        </form>
+        
+        <br/><br/>
+
+        <h3 class="zaux-color-set1-black1 pt-5 mb-5">Input sizes</h3>
+        <form class="c-form d-inline-block w-100">
+
+            <input placeHolder="Small size input" type="text" class="c-form__field c-form__field--size-s w-100"/>
+            <br/><br/>
+            <input placeHolder="Default/Medium size input" type="text" class="c-form__field c-form__field--size-m w-100"/>
+            <br/><br/>
+            <input placeHolder="Large size input" type="text" class="c-form__field c-form__field--size-l w-100"/>
+            <br/><br/>
+
+            {{ inputSelect.content({"variations" : ["size-s"]}) }}
+            <br/>
+            {{ inputSelect.content({"variations" : ["size-m"]}) }}
+            <br/>
+            {{ inputSelect.content({"variations" : ["size-l"]}) }}
+            <br/>
+
+            {{ inputText.content({"variations" : ["size-s"], "placeHolder" : "Input with icon small", "hasIcon" : true, "icon" : "search"}) }}
+            <br/>
+            {{ inputText.content({"variations" : ["size-m"], "placeHolder" : "Input with icon medium", "hasIcon" : true, "icon" : "search"}) }}
+            <br/>
+            {{ inputText.content({"variations" : ["size-l"], "placeHolder" : "Input with icon large", "hasIcon" : true, "icon" : "search"}) }}
+            <br/>
+            
+            {{ inputText.content({"className" : ["rounded-pill"], "variations" : ["size-s", "pill"], "placeHolder" : "Input with button", "hasBtn" : true, "btn" : { "variations" : ["primary", "size-s"], "label" : "Send"} }) }}
+            <br/>
+            {{ inputText.content({"className" : ["rounded-pill"], "variations" : ["size-m", "pill"], "placeHolder" : "Input with button medium", "hasBtn" : true, "btn" : { "variations" : ["primary", "size-m"], "label" : "Send"} }) }}
+            <br/>
+            {{ inputText.content({"className" : ["rounded-pill"], "variations" : ["size-l", "pill"], "placeHolder" : "Input with button large", "hasBtn" : true, "btn" : { "variations" : ["primary", "size-l"], "label" : "Send"} }) }}
+
+            <br/>
+            {{ inputFile.content({"variations" : ["size-s"]}) }}
+            <br/>
+            {{ inputFile.content({"variations" : ["size-m"]}) }}
+            <br/>
+            {{ inputFile.content({"variations" : ["size-l"]}) }}
+            <br/>
+            
+            <input type="radio" class="c-form__field"/>
+            <br/>
+            <br/>
+            <input type="radio" class="c-form__field c-form__field--size-m"/>
+            <br/>
+            <br/>
+            <input type="radio" class="c-form__field c-form__field--size-l"/>
+            <br/>
+            <br/>
+            <input type="checkbox" class="c-form__field"/>
+            <br/>
+            <br/>
+            <input type="checkbox" class="c-form__field c-form__field--size-m"/>
+            <br/>
+            <br/>
+            <input type="checkbox" class="c-form__field c-form__field--size-l"/>
+            <br/>
+            <br/>
+
+            <div class="row my-2">
+                <div class="col-12">
+                    {{inputCheckboxBtn.content(
+                        {
+                            "variations" : ["size-s"],
+                            "icon" : {
+                                "iconName" : "search"
+                            },
+                            "label" : "Option name"
+                        }
+                    )}}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-12">
+                    {{inputCheckboxBtn.content(
+                        {
+                            "icon" : {
+                                "iconName" : "search"
+                            },
+                            "label" : "Option name"
+                        }
+                    )}}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-12">
+                    {{inputCheckboxBtn.content(
+                        {
+                            "variations" : ["size-l"],
+                            "icon" : {
+                                "iconName" : "search"
+                            },
+                            "label" : "Option name"
+                        }
+                    )}}
+                </div>
+            </div>
+
+            <div class="c-form__field-wrap c-form__field-wrap--sidelabel mb-2">
+                <label>
+                    <input type="checkbox" class="c-form__field"/>
+                    <span class="c-form__field-label">With label on the side small</span>
+                </label>
+            </div>
+            <div class="c-form__field-wrap c-form__field-wrap--sidelabel mb-2">
+                <label>
+                    <input type="checkbox" class="c-form__field c-form__field--size-m"/>
+                    <span class="c-form__field-label c-form__field-label--size-m">With label on the side medium</span>
+                </label>
+            </div>
+            <div class="c-form__field-wrap c-form__field-wrap--sidelabel">
+                <label>
+                    <input type="checkbox" class="c-form__field c-form__field--size-l"/>
+                    <span class="c-form__field-label c-form__field-label--size-l">With label on the side large</span>
+                </label>
+            </div>
+
+            <h3 class="zaux-color-set1-black1 py-5">Statuses</h3>
+            <div class="c-form__field-wrap c-form__field-wrap--error">
+                <input type="text" placeHolder="Error status" class="c-form__field"/>
+            </div>
+            <br/>
+            <div class="c-form__field-wrap c-form__field-wrap--warning">
+                <input type="text" placeHolder="Warning status" class="c-form__field"/>
+            </div>
+            <br/>
+            <div class="c-form__field-wrap c-form__field-wrap--success">
+                <input type="text" placeHolder="Success status" class="c-form__field"/>
+            </div>
+            <br/>
+            <div class="c-form__field-wrap c-form__field-wrap--success">
+                <input type="checkbox" class="c-form__field"/>
+            </div>
+            <br/>
+            <div class="c-form__field-wrap c-form__field-wrap--warning">
+                <input type="checkbox" class="c-form__field"/>
+            </div>
+            <br/>
+            <div class="c-form__field-wrap c-form__field-wrap--error">
+                <input type="checkbox" class="c-form__field"/>
+            </div>
+            <br/>
+            <div class="c-form__field-wrap c-form__field-wrap--success">
+                <input type="radio" class="c-form__field"/>
+            </div>
+            <br/>
+            <div class="c-form__field-wrap c-form__field-wrap--warning">
+                <input type="radio" class="c-form__field"/>
+            </div>
+            <br/>
+            <div class="c-form__field-wrap c-form__field-wrap--error">
+                <input type="radio" class="c-form__field"/>
+            </div>
+
+        </form>
+        
+        <div class="p-5 zaux-bg-set1-color3 my-5">
+            <h3 class="zaux-color-set1-white1">Theme variant 1</h3>
+            {{ inputText.content({ "variations" : ["theme-alt2"] }) }}
+            <br/>
+            {{ inputSelect.content({ "variations" : ["theme-alt2"] }) }}
+            <br/>
+            {{ inputFile.content({ "variations" : ["theme-alt2"] }) }}
+            <br/>
+            {{ inputRadio.content({ "variations" : ["theme-alt2"], "label" : "Radio with label on the side"})}}
+            <br/>
+            {{ inputCheckbox.content({ "variations" : ["theme-alt2"], "label" : "Checkbox with label on the side"})}}
+        </div>
+
+        <div class="p-5 zaux-bg-set1-black1 my-5">
+            <h3 class="zaux-color-set1-white1">Theme variant 2</h3>
+            {{ inputText.content({ "variations" : ["theme-alt3"] }) }}
+            <br/>
+            {{ inputSelect.content({ "variations" : ["theme-alt3"] }) }}
+            <br/>
+            {{ inputText.content({"variations" : ["size-m", "theme-alt3"], "placeHolder" : "Input with icon medium", "hasIcon" : true, "icon" : "search"}) }}
+            <br/>
+            {{ inputFile.content({ "variations" : ["theme-alt3"] }) }}
+            <br/>
+            {{ inputRadio.content({ "variations" : ["theme-alt3"], "label" : "Radio with label on the side"})}}
+            <br/>
+            {{ inputCheckbox.content({ "variations" : ["theme-alt3"], "label" : "Checkbox with label on the side"})}}
+        </div>
+
+        <h3 class="zaux-color-set1-black1 py-5">Free structure</h3>
+        <div class="c-form">
+            <select class="w-100"><option>Select</option></select>
+            <br/><br/>
+            <input class="w-100" type="text" placeHolder="Input"/>
+            <br/><br/>
+            <input class="w-100" type="file" placeHolder="Input"/>
+            <br/><br/>
+            <textarea class="w-100" placeHolder="Textarea"></textarea>
+            <br/><br/>
+            <input type="checkbox"/>
+            <input type="radio"/>
+            <input type="checkbox" class="c-form__field--size-l"/>
+        </div>
+
+    </div>
+    
+
+
+{% endblock %}
+
+{% block foot_js %}
+    <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

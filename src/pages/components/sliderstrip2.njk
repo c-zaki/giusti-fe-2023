@@ -1,0 +1,99 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Slider Strip 1",
+  "noSidePad" : true
+} %}
+
+{# Imports components #}
+{# import 'components/herovideo/herovideo.njk' as HeroVideo #}
+{% import 'components/sliderstrip2/sliderstrip2.njk' as SliderStrip2 %}
+{% import 'components/card2/card2.njk' as Card2 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+    <div class="zaux-theme--light1">
+      {% set sliderStripContentSample %}
+        {{ Card2.content({ 
+              "title" : "Event name",
+              "className" : ["w-100"],
+              "date" : "15 Agosto 2023",
+              "time" : "20:00 - 21:00",
+              "excerpt" : "Lorem ipsum dolor sit amet",
+              "infoLink" : {
+                "url" : "#info-link-here",
+                "title" : "Info link"
+              },
+              "externalLink" : {
+                "url" : "#external-link-here",
+                "title" : "External link here"
+              },
+              "categories" : [
+                {
+                  "link" : {
+                    "title" : "Arte e cultura title link",
+                    "url" : "#arte-e-cultura-cat"
+                  },
+                  "label" : "Arte e cultura"
+                },
+                {
+                  "link" : {
+                    "title" : "Arte e cultura title link",
+                    "url" : "#arte-e-cultura-cat"
+                  },
+                  "label" : "Musica"
+                }
+              ]
+            }) }}
+      {% endset %}
+      {{ SliderStrip2.content({
+        "title" : "Da non perdere",
+        "cta" : {
+          "label" : "Vedi tutti",
+          "link" : "#see-all-link"
+        },
+        "slides" : [
+          {
+            "content" : sliderStripContentSample
+          },
+          {
+            "content" : sliderStripContentSample
+          },
+          {
+            "content" : sliderStripContentSample
+          },
+          {
+            "content" : sliderStripContentSample
+          },
+          {
+            "content" : sliderStripContentSample
+          },
+          {
+            "content" : sliderStripContentSample
+          },
+          {
+            "content" : sliderStripContentSample
+          },
+          {
+            "content" : sliderStripContentSample
+          },
+          {
+            "content" : sliderStripContentSample
+          },
+          {
+            "content" : sliderStripContentSample
+          }
+        ]
+      }) }}
+    </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

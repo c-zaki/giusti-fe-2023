@@ -1,0 +1,930 @@
+@charset "UTF-8";
+
+// Add here CSS animations rules
+
+$easing-type-1 : $zaux-ease-outcubic;
+
+.zaux-ani{
+
+    &--upDownLoop{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'upDownLoop';
+        $animation-easing: infinite;
+        $animation-initial-duration: 2s;
+
+        transition: transform $animation-initial-duration ease-out, opacity $animation-initial-duration ease-out;
+
+        &.starting{
+            //@include slide(0.8);
+            opacity:1;
+            @include translate( 0px, 20px );
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing} alternate-reverse;
+        }
+
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes($animation-name){
+                0%{ 
+                    //@include slide(0.8);
+                    position:relative;
+                    @include translate( 0px, 20px );
+                }
+            
+                100%{
+                    //@include slide(1);
+                    position:relative;
+                    top:0px;
+                    @include translate( 0px, 0px );
+                }
+            }
+        }
+
+    }
+
+    &--slideToTopOpaque{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToTopOpaque';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform $animation-initial-duration ease-out, opacity $animation-initial-duration ease-out;
+
+        &.starting{
+            //@include slide(0.8);
+            opacity:1;
+            @include translate( 0px, 50px );
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+        }
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation: #{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        @each $bp, $val in tokenBreakpoints(){
+            @include media-breakpoint-up($bp){
+                @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+                    &.zaux-ani--slowdown-#{$multiplier}-#{$bp}{
+                        &.animated{
+                            animation: #{$animation-name} #{$duration} #{$animation-easing};
+                        }
+                    }
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes($animation-name){
+                0%{ 
+                    //@include slide(0.8);
+                    position:relative;
+                    @include translate( 0px, 50px );
+                }
+            
+                100%{
+                    //@include slide(1);
+                    position:relative;
+                    top:0px;
+                    @include translate( 0px, 0px );
+                }
+            }
+        }
+
+        @each $bp, $val in tokenBreakpoints(){
+            &-#{$bp}{
+                @include media-breakpoint-up($bp){
+                    &.starting{
+                        //@include slide(0.8);
+                        opacity:1;
+                        @include translate( 0px, 50px );
+                        position:relative;
+                    }
+
+                    &.animated{
+                        animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+                    }
+                }
+            }
+        }
+
+    }
+    
+    &--slideToTop{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToTop';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform $animation-initial-duration ease-out, opacity $animation-initial-duration ease-out;
+
+        &.starting{
+            //@include slide(0.8);
+            opacity:0.1;
+            @include translate( 0px, 50px );
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+        }
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes($animation-name){
+                0%{ 
+                    //@include slide(0.8);
+                    opacity:0.0;
+                    position:relative;
+                    @include translate( 0px, 50px );
+                }
+            
+                100%{
+                    //@include slide(1);
+                    opacity:1;
+                    position:relative;
+                    top:0px;
+                    @include translate( 0px, 0px );
+                }
+            }
+        }
+
+
+    }
+
+    &--slideToBottomOpaque{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToBottomOpaque';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform $animation-initial-duration $animation-easing, opacity $animation-initial-duration $animation-easing;
+
+        &.starting{
+            //@include slide(0.8);
+            @include translate( 0px, -50px );
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+            &.ease-out{
+                animation: #{$animation-name} #{$animation-initial-duration} ease-out;
+            }
+        }
+
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                    &.ease-out{
+                        animation: #{$animation-name} #{$duration} ease-out;
+                    }
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes($animation-name){
+                0%{ 
+                    position:relative;
+                    @include translate( 0px, -50px );
+                }
+            
+                100%{
+                    position:relative;
+                    top:0px;
+                    @include translate( 0px, 0px );
+                }
+            }
+        }
+
+    }
+
+
+    &--slideToBottomSlight{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToBottomSlight';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform $animation-initial-duration $animation-easing, opacity $animation-initial-duration $animation-easing;
+        
+        &.starting{
+            //@include slide(0.8);
+            opacity:0.2;
+            @include translate( 0px, -10px );
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+            &.ease-out{
+                animation: #{$animation-name} #{$animation-initial-duration} ease-out;
+            }
+        }
+
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                    &.ease-out{
+                        animation: #{$animation-name} #{$duration} ease-out;
+                    }
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes($animation-name){
+                0%{ 
+                    //@include slide(0.8);
+                    opacity:0.2;
+                    position:relative;
+                    @include translate( 0px, -10px );
+                }
+            
+                100%{
+                    //@include slide(1);
+                    opacity:1;
+                    position:relative;
+                    top:0px;
+                    @include translate( 0px, 0px );
+                }
+            }
+        }
+
+    }
+
+    &--slideToBottom{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToBottom';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform $animation-initial-duration $animation-easing, opacity $animation-initial-duration $animation-easing;
+        
+        &.starting{
+            //@include slide(0.8);
+            opacity:0.2;
+            @include translate( 0px, -50px );
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+            &.ease-out{
+                animation: #{$animation-name} #{$animation-initial-duration} ease-out;
+            }
+        }
+
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                    &.ease-out{
+                        animation: #{$animation-name} #{$duration} ease-out;
+                    }
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes($animation-name){
+                0%{ 
+                    //@include slide(0.8);
+                    opacity:0.0;
+                    position:relative;
+                    @include translate( 0px, -50px );
+                }
+            
+                100%{
+                    //@include slide(1);
+                    opacity:1;
+                    position:relative;
+                    top:0px;
+                    @include translate( 0px, 0px );
+                }
+            }
+        }
+
+    }
+
+    &--fadeIn{
+
+        $zaki-animation-slowdown-timings : (
+            "0.5x" : "1s",
+            "1x" : "3.2s",
+            "2x" : "5.2s",
+            "3x" : "8.2s",
+            "4x" : "13.2s",
+            "5x" : "6.0s",
+        );
+
+        $animation-name: 'fadeIn';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 1.2s;
+
+        transition: opacity $animation-initial-duration ease-out;
+
+        &.starting{
+            opacity:0.2;
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+        }
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes($animation-name){
+                0%{ 
+                    opacity:0;
+                }
+            
+                100%{
+                    opacity:1;
+                }
+            }
+        }
+
+    }
+
+    &--slideToLeft{
+        
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToLeft';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform 0.5s $animation-easing;
+
+        &.starting{
+            //@include slide(0.8);
+            opacity:0.4;
+            @include translate( 50px, 0px );
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+        }
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes($animation-name){
+                0%{ 
+                    opacity:0.4;
+                    position:relative;
+                    @include translate( 50px, 0 );
+                }
+            
+                100%{
+                    //@include slide(1);
+                    opacity:1;
+                    position:relative;
+                    top:0px;
+                    @include translate( 0px, 0px );
+                }
+            }            
+        }
+
+    }
+
+    &--slideToLeftOpaque{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToLeftOpaque';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform 0.5s $animation-easing;
+
+        &.starting{
+            //@include slide(0.8);
+            opacity:1;
+            @include translate( 50px, 0px );
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+        }
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes($animation-name){
+                0%{ 
+                    //@include slide(0.8);
+                    position:relative;
+                    @include translate( 50px, 0 );
+                }
+            
+                100%{
+                    //@include slide(1);
+                    position:relative;
+                    top:0px;
+                    @include translate( 0px, 0px );
+                }
+            }
+        }
+
+    }
+    
+    &--slideToRight{
+        
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "1.2s",
+            "3x" : "1.5s",
+            "4x" : "1.8s",
+            "5x" : "2s",
+        );
+
+        $animation-name: 'slideToRight';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.8s;
+
+        transition: transform 0.5s $animation-easing;
+
+        //Keyframe
+        @at-root{
+            @include keyframes($animation-name){
+                0%{ 
+                    opacity:0.4;
+                    position:relative;
+                    @include translate( -50px, 0 );
+                }
+            
+                100%{
+                    //@include slide(1);
+                    opacity:1;
+                    position:relative;
+                    top:0px;
+                    @include translate( 0px, 0px );
+                }
+            }            
+        }
+
+         &.starting{
+            //@include slide(0.8);
+            opacity:0.4;
+            @include translate( -50px, 0px );
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+        }
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation: #{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        @each $bp, $val in tokenBreakpoints(){
+            @include media-breakpoint-up($bp){
+                @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+                    &.zaux-ani--slowdown-#{$multiplier}-#{$bp}{
+                        &.animated{
+                            animation: #{$animation-name} #{$duration} #{$animation-easing};
+                        }
+                    }
+                }
+            }
+        }
+
+        @each $bp, $val in tokenBreakpoints(){
+            &-#{$bp}{
+                @include media-breakpoint-up($bp){
+                    &.starting{
+                    //@include slide(0.8);
+                    opacity:0.4;
+                    @include translate( -50px, 0px );
+                        position:relative;
+                    }
+
+                    &.animated{
+                        animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+                    }
+                }
+            }
+        }
+
+    }
+
+    &--slideToRightOpaque{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToRightOpaque';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform 0.5s $animation-easing;
+
+        &.starting{
+            //@include slide(0.8);
+            opacity:1;
+            @include translate( -50px, 0px );
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+        }
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes(#{$animation-name}){
+                0%{ 
+                    //@include slide(0.8);
+                    position:relative;
+                    @include translate( -50px, 0 );
+                }
+            
+                100%{
+                    //@include slide(1);
+                    position:relative;
+                    top:0px;
+                    @include translate( 0px, 0px );
+                }
+            }            
+        }
+
+    }
+
+    &--slideToRightAbsolute{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToRightAbsolute';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform 0.5s $animation-easing;
+
+        &.starting{
+            //@include slide(0.8);
+            opacity:0.4;
+            @include translate( 50px, 0px );
+            position:relative;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+        }
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes(#{$animation-name}){
+                0%{ 
+                    //@include slide(0.8);
+                    opacity:0.4;
+                    position:relative;
+                    left:-50px;
+                }
+            
+                100%{
+                    //@include slide(1);
+                    opacity:1;
+                    position:relative;
+                    left:0px;
+                }
+            }            
+        }
+
+    }
+
+    &--slideToRightAbsoluteOpaque{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToRightAbsoluteOpaque';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform 0.5s $animation-easing;
+
+        &.starting{
+            //@include slide(0.8);
+            opacity:1;
+            left:-50px;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+        }
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes(#{$animation-name}){
+                0%{ 
+                    //@include slide(0.8);
+                    left:-50px;
+                }
+            
+                100%{
+                    //@include slide(1);
+                    left:0px;
+                }
+            }            
+        }
+
+    }
+
+
+    &--slideToLeftAbsolute{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToLeftAbsolute';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform 0.5s $animation-easing;
+
+        &.starting{
+            //@include slide(0.8);
+            opacity:0.4;
+            @include translate( 50px, 0px );
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+        }
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:#{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes(#{$animation-name}){
+                0%{ 
+                    //@include slide(0.8);
+                    opacity:0.4;
+                    right:-50px;
+                }
+            
+                100%{
+                    //@include slide(1);
+                    opacity:1;
+                    right:0px;
+                }
+            }            
+        }
+
+    }
+
+    &--slideToLeftAbsoluteOpaque{
+
+        $zaki-animation-slowdown-timings : (
+            "1x" : "1s",
+            "2x" : "2s",
+            "3x" : "2.5s",
+            "4x" : "3s",
+            "5x" : "3.5s",
+        );
+
+        $animation-name: 'slideToLeftAbsoluteOpaque';
+        $animation-easing: $easing-type-1;
+        $animation-initial-duration: 0.7s;
+
+        transition: transform 0.5s $animation-easing;
+
+        &.starting{
+            //@include slide(0.8);
+            opacity:1;
+            right:-50px;
+        }
+
+        &.animated{
+            animation: #{$animation-name} #{$animation-initial-duration} #{$animation-easing};
+        }
+
+        @each $multiplier, $duration in $zaki-animation-slowdown-timings {
+            &.zaux-ani--slowdown-#{$multiplier}{
+                &.animated{
+                    animation:   #{$animation-name} #{$duration} #{$animation-easing};
+                }
+            }
+        }
+
+        //Keyframe
+
+        @at-root{
+            @include keyframes(#{$animation-name}){
+                0%{ 
+                    //@include slide(0.8);
+                    right:-50px;
+                }
+            
+                100%{
+                    //@include slide(1);
+                    right:0px;
+                }
+            }            
+        }
+
+    }
+
+
+
+}
+
+/*-- Animation keyframes --*/
+
+@include keyframes(rotate){
+    0%    { transform: rotate(0deg); }
+    100%  { transform: rotate(360deg); }
+}

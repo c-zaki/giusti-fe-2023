@@ -1,0 +1,19 @@
+{
+  "type1": {
+    "className": "",
+    "config": {
+      "freeMode": true,
+      "loop": false,
+      "centeredSlides": false,
+      "speed": 600,
+      "spaceBetween": 30,
+      "slidesPerView": 1.15,
+      "allowTouchMove": true,
+      "pagination": {
+        "el": ".swiper-pagination",
+        "type": "bullets",
+        "clickable": true
+      }
+    }
+  }
+}

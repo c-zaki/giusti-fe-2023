@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+$component: componentClass("navbar1");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+
+.zaux-theme--light1 .#{$component}{
+
+    &__list{
+        .#{$component}__list-item{
+            &[class*=--active]{
+                a{
+                    position:relative;
+                    &:after{
+                        content:"";
+                        width:100%;
+                        position:absolute;
+                        bottom:0;
+                        left:0;
+                        height:tokenSpacer(1);
+                        background-color:tokenColor("set1","color1");
+                    }
+                }
+            }
+        }
+    }
+    &__scroll{
+        &:before{
+            //background: linear-gradient(90deg, rgba(tokenColor("set1","color6"), 0.8) 30%, rgba(255,255,255,0) 80%);
+        }
+        &:after{
+            //background: linear-gradient(260deg, rgba(tokenColor("set1","color6"), 0.8) 30%, rgba(255,255,255,0) 80%);
+        }
+        &:before, &:after{
+            @include media-breakpoint-down("md"){
+                display: none;
+            }
+        }
+
+        border-bottom-width:1px;
+        border-bottom-color:tokenColor("set1","color3");
+        border-bottom-style:solid;
+    }
+    &__btn{
+        color:tokenColor("set1","color1");
+    }
+    &--theme2{
+        .#{$component}__scroll{
+            border-bottom-color:tokenColor("set1","white1");
+        }
+        .#{$component}__list-item{
+            color:tokenColor("set1","white1");
+            &[class*=--active]{
+                a:after{
+                    background-color:tokenColor("set1","white1");
+                }
+            }
+        }
+        .#{$component}__navigation .#{$component}__btn{
+            color:tokenColor("set1","white1");
+        }
+    }
+}

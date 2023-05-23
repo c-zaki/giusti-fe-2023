@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+$component: componentClass("treenav");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+
+    &__head{
+        background-color:tokenColor("set1","color1");
+        color:tokenColor("set1","color3");
+    }
+
+    [class*=--highlight]{
+        color:tokenColor("set1","color1");
+    }
+
+    &__body{
+        background-color:tokenColor("set1","color3");
+        color:tokenColor("set1","white1");
+        border-top-color:tokenColor("set1","color1");
+        border-top-width:tokenSpacer(4);
+        border-top-style:solid;
+    }
+
+    ul{
+        li{
+            border-top-style:solid;
+            border-top-color:tokenColor("set1", "color5");
+        }
+    }
+
+    &__list{
+        border-bottom-color: tokenColor("set1","color5");
+        border-bottom-style:solid;
+    }
+
+    &__list--sub1{
+        > li{
+            border-top-style:solid;
+            border-top-color:tokenColor("set1","color5");
+            &:last-child{
+                border-bottom:none;
+            }
+        }
+    }
+    &__list--sub2{
+        > li{
+            border-top-style:solid;
+            border-top-color:tokenColor("set1","color5");
+            &:last-child{
+                border-bottom:none;
+            }
+        }
+    }
+
+}   

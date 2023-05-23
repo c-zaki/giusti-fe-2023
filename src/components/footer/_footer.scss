@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+$component: componentClass("footer");
+$cmp-tokens: ();
+
+.#{$component} {
+    
+    &__language-selector{
+        position:relative;
+        padding-right:2.3rem;
+        font-weight:$zaux-typo-fw-semibold;
+        .#{$component-prefix}icon{
+            position:relative;
+            z-index:tokenZindex(3);
+            pointer-events:none;
+        }
+        select{
+            left:0;
+            width:100%;
+            position:absolute;
+            background-position:right !important;
+            line-height:1.2rem !important;
+            font-weight:$zaux-typo-fw-semibold;
+        }
+    }
+
+    &__menulist{
+        border-left-width:1px;
+    }
+
+    &__row--2{
+        border-top-width:1px;
+    }
+
+
+}

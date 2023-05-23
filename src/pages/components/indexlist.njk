@@ -1,0 +1,54 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Index List"
+} %}
+
+{# Imports components #}
+{% import 'components/indexlist/indexlist.njk' as IndexList %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {{IndexList.content(
+        {
+            "items" : [
+                {"title" : "Title sample 1", "anchor" : "#anchor1"},
+                {"title" : "Title sample 2", "anchor" : "#anchor1"},
+                {"title" : "Title sample 3", "anchor" : "#anchor1"},
+                {"title" : "Title sample 4", "anchor" : "#anchor1"},
+                {"title" : "Title sample 5", "anchor" : "#anchor1"},
+                {"title" : "Title sample 6", "anchor" : "#anchor1"}
+            ]
+        }
+    )}}
+    <h3 class="my-6">Index list theme variant 1</h3>
+    <div class="zaux-bg-set1-color1 p-6">
+        {{IndexList.content(
+            {
+                "variations" : ["theme-alt2"],
+                "items" : [
+                    {"title" : "Title sample 1", "anchor" : "#anchor1"},
+                    {"title" : "Title sample 2", "anchor" : "#anchor1"},
+                    {"title" : "Title sample 3", "anchor" : "#anchor1"},
+                    {"title" : "Title sample 4", "anchor" : "#anchor1"},
+                    {"title" : "Title sample 5", "anchor" : "#anchor1"},
+                    {"title" : "Title sample 6", "anchor" : "#anchor1"}
+                ]
+            }
+        )}}
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

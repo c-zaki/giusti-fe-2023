@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+$component: componentClass("herocomp1");
+$cmp-tokens: ();
+
+@mixin herocomp1Height{
+    //min-height:100vh;
+    max-height:1080px;
+}
+
+.#{$component} {
+    @include herocomp1Height;
+    &__inner, &__content{
+        @include herocomp1Height;
+    }
+    &__bg{
+        position:absolute;
+        height:100%;
+        width:100%;
+    }
+}

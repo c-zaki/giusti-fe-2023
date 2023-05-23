@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+$component: componentClass("stepindex");
+$cmp-tokens: ();
+
+.#{$component}{
+    border-top-width:1px;
+}

@@ -1,0 +1,23 @@
+{
+    "imgPlaceHolder" : {
+        "mainSrc" : "https://placehold.co/1920x1080",
+        "sourceList" : [
+            {
+                "customMediaQuery" : "(min-width:0px) and (max-width:991px)",
+                "url" : "https://placehold.co/320x480",
+                "url2x" : "https://placehold.co/640x960"
+            },
+            {
+                "customMediaQuery" : "(min-width:992px)",
+                "url" : "https://placehold.co/1920x1080",
+                "url2x" : "https://placehold.co/2880x1620"
+            }
+        ]
+    },
+    "video" : {
+        "srcList" : [
+            { "url" : "/media/video/placeholder1.mp4", "type" : "mp4" }
+        ],
+        "options" : { "autoplay" : true, "loop" : true }
+    }
+}

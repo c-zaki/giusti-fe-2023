@@ -1,0 +1,62 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Card Link"
+} %}
+
+{# Imports components #}
+{% import 'components/cardlink/cardlink.njk' as CardLink %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+  <div class="zaux-theme--light1">
+    <div class="d-flex flex-column gap-6" style="max-width:400px";>
+        {{
+          CardLink.content(
+            {
+              "title" : "Standard title"
+            }
+          )
+        }}
+        {{
+          CardLink.content(
+            {
+              "preTitle" : "Eyelet",
+              "title" : "With eyelet"
+            }
+          )
+        }}
+
+        {{
+          CardLink.content(
+            {
+              "title" : "With media",
+              "media" : {
+                "mainSrc" : "https://placehold.co/336x190"
+              }
+            }
+          )
+        }}
+
+        {{
+          CardLink.content(
+            {
+              "title" : "Free HTML Content",
+              "subTitle" : false,
+              "freeHTML" : "[FREE_HTML_HERE]"
+            }
+          )
+        }}
+    </div>
+  </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

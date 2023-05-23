@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+$component: componentClass("imgstrip1");
+$cmp-tokens: ();
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    border-bottom-color:tokenColor("set1","color1");
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+}

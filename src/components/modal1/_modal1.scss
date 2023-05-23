@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+$component: componentClass("modal1");
+$cmp-tokens: ();
+
+.#{$component} {
+
+    height:100%;
+    width:100%;
+    position:fixed;
+    z-index:tokenZindex(6);
+    display:none;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0; 
+
+    &__content{
+        .#{$component}__close{
+            position:absolute;
+            top:0;
+            right:0;
+        }
+    }
+
+    &__dialog{
+        height:100%;
+        width:100%;
+    }
+
+    &__header{
+        position:relative;
+    }
+
+}

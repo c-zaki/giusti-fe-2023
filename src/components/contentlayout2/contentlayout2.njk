@@ -1,0 +1,63 @@
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-contentlayout2' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : [],
+        "pullMiddleUp" : true
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+    {% set label = obj.label or configDefault.label %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    {# Containts classes for the content sections #}
+    {% set contentClasses = {
+        "side1" : "pt-10",
+        "side2" : "pt-10"
+    } %}
+
+    {# Pulls middle content up in case pullMiddleUp has been set #}
+    {% if obj.pullMiddleUp %}
+        {% set contentClasses = contentClasses | setAttribute("middle", "mt-n14") %}
+    {% endif %}
+    
+    <div class="{{_className | join(" ") | trim}}">
+        <div class="{{componentClassName}}__inner px-4 px-md-8 pb-0 pb-md-7">
+            <div class="d-flex">
+                <div class="{{componentClassName}}__content {{componentClassName}}__content--side1 flex-grow-1 text-right {{contentClasses.side1 or ''}}">
+                    <div class="{{componentClassName}}__content-inner w-320px w-xl-424px gap-6 d-none d-lg-flex flex-column ms-auto">
+                        {% for element in obj.col1Content %}
+                            {{ element.content | safe}}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="{{componentClassName}}__content container-lg-m2 px-0 {{componentClassName}}__content--center {{contentClasses.middle or ''}}">
+                    <div class="{{componentClassName}}__content-inner d-flex flex-column gap-2 px-0">
+                        {% for element in obj.col2Content %}
+                            {{ element.content | safe}}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="{{componentClassName}}__content {{componentClassName}}__content--side2 flex-grow-1 text-left {{contentClasses.side2 or ''}}">
+                    <div class="{{componentClassName}}__content-inner w-320px w-xl-424px d-none d-lg-flex flex-column gap-6">
+                        {% for element in obj.col3Content %}
+                            {{ element.content | safe }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}

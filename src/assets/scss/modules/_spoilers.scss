@@ -1,0 +1,16 @@
+$attribute-prefix : tokenDef("app-prefix");
+
+[data-#{$attribute-prefix}-spoiler]{
+    [data-preview]{
+        cursor:pointer;
+        &[class*=--hide],.hide{
+            display:none;
+        }
+    }
+    [data-full-content]{
+        display:none;
+        &[class*=--show],.show{
+            display:block;
+        }
+    }
+}

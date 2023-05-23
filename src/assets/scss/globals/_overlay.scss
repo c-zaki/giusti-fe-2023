@@ -1,0 +1,18 @@
+$global-style-name: globalStyleClass("overlay");
+
+.#{$global-style-name}{
+    @each $key, $overlay in $zaux-styles-overlay{
+        &-#{$key}{
+            background: map-get($overlay, "background");
+        }
+    }
+    @each $key, $overlay in $zaux-styles-overlay{
+        @each $bpName, $bpVal in tokenBreakpoints(){
+            @include media-breakpoint-up($bpName){
+                &-#{$bpName}-#{$key}{
+                    background: map-get($overlay, "background");
+                }
+            }
+        }
+    }
+}

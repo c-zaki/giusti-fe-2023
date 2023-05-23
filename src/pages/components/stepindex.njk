@@ -1,0 +1,60 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Step Index"
+} %}
+
+{# Imports components #}
+{% import 'components/stepindex/stepindex.njk' as StepIndex %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    {% set sampleContent %}
+        <p>
+            Il core del progetto <strong>Nikè</strong> va oltre la presa dell’ordine, rendendo disponibili un’ampia gamma di App verticali, che assicurano la copertura di gran parte delle attività deputate all’area commerciale. Una struttura modulabile e flessibile che consente di iniziare a lavorare in configurazione ottimale scegliendo le App di maggiore interesse, con la consapevolezza che – al momento opportuno – sarà possibile aggiungere altre App e funzionalità.
+        </p>
+    {% endset %}
+    {{ StepIndex.content(
+        {
+          "stepIndex" : 1,
+          "title" : "Title step index",
+          "content" : sampleContent,
+          "imgStrip" : [
+            {
+              "mainSrc" : "https://placehold.co/200x100"
+            },
+            {
+              "mainSrc" : "https://placehold.co/200x100"
+            },
+            {
+              "mainSrc" : "https://placehold.co/200x100"
+            },
+            {
+              "mainSrc" : "https://placehold.co/200x100"
+            }
+          ]
+        }
+    ) }}
+    <br/><br/>
+    {{ StepIndex.content(
+        {
+          "stepIndex" : 2,
+          "title" : "Title step index no images",
+          "content" : sampleContent
+        }
+    ) }}
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

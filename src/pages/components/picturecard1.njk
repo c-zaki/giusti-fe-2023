@@ -1,0 +1,51 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Picture card"
+} %}
+
+{# Imports components #}
+{% import 'components/picturecard1/picturecard1.njk' as PictureCard1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+  <div class="zaux-theme--light1">
+    <div style="max-width:1000px;">
+        {{ PictureCard1.content({
+            "icon" : {
+              "iconName" : "headphones"
+            },
+            "title" : "Default/Square picture card",
+            "cta" : {
+                "label" : "Test label",
+                "url" : "#test-url"
+            }
+        }) }}
+        <br/><br/>
+        {{ PictureCard1.content({
+            "icon" : {
+              "iconName" : "headphones"
+            },
+            "cardType" : "wide",
+            "mainSrc" : component_picturecard1.defaultWideImg,
+            "title" : "Wide picture card",
+            "cta" : {
+                "label" : "Test label",
+                "url" : "#test-url"
+            }
+        }) }}
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

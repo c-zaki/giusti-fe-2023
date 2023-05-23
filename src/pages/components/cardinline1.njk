@@ -1,0 +1,41 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": page_component,
+  "title": "Card Inline 1"
+} %}
+
+{# Imports components #}
+{% import 'components/cardinline1/cardinline1.njk' as CardInline1 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+    <div class="zaux-theme--light1">
+        <div class="inline-block">
+            {{ CardInline1.content(
+                { 
+                    "img" : { "mainSrc" : "https://placehold.co/512x512?text=1:1" },
+                    "date": {
+                        "dateTime" : "1984-02-14 00:00:00",
+                        "formatted" : "29/11/2022"
+                    },
+                    "title" : "Inline card title",
+                    "content" : "Giusti Software: ergonomia digitale, un nuovo modo di concepire lo sviluppo delle App. Articolo all’interno della sezione “Aziende & Territorio: Le tecnologie digitali guidano l’imprenditoria verso la crescita”.",
+                    "cta" : {
+                        "link" : "#read-more",
+                        "title" : "Leggi tutto"
+                    }                
+                }
+            ) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

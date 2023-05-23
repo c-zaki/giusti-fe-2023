@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+$component: componentClass("bulletlist");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.#{$component}{
+    &[data-js-component]{
+        [data-tpl-entry]{
+            @include visually-hidden;
+        }
+    }
+}

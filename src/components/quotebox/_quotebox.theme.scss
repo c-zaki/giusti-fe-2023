@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+
+$component: componentClass("quotebox");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    &__author{
+        color:tokenColor("set1","color1");
+    }
+    &__content{
+        background-color:tokenColor("set1","color2");
+    }
+}

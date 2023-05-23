@@ -1,0 +1,14 @@
+.wpcf7-not-valid-tip{
+    padding-top:tokenSpacer(2);
+}
+
+.wpcf7-response-output{
+    border:none !important;
+    padding: tokenSpacer(3) !important;
+    background-color: tokenColor("default", "warning");
+    color: tokenColor("default","white") !important;
+}
+
+.wpcf7-list-item{
+    margin:0 !important;
+}

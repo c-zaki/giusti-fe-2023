@@ -1,0 +1,109 @@
+{# Sets the layout to be extended #}
+{% extends "layouts/component.njk" %}
+
+{# Sets page-specific variables #}
+{% set page = {
+  "data": template_component,
+  "title": "Navbar 2"
+} %}
+
+{# Imports components #}
+{% import 'components/navbar2/navbar2.njk' as NavBar2 %}
+
+{% block head_css %}
+  <link rel="stylesheet" href="../assets/css/general.bundle.css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="zaux-theme--light1">
+
+        {{NavBar2.content(
+            {
+                "tabs" : [
+                    {
+                    "active" : true,
+                    "id" : "" | randomString(),
+                    "title" : "Martedì 15 agosto",
+                    "content" : "Test content"
+                    },
+                    {
+                    "id" : "" | randomString(),
+                    "title" : "Mercoledì 16 agosto",
+                    "content" : "Test content"
+                    },
+                    {
+                    "id" : "" | randomString(),
+                    "title" : "Martedì 15 agosto",
+                    "content" : "Test content"
+                    },
+                    {
+                    "id" : "" | randomString(),
+                    "title" : "Martedì 15 agosto",
+                    "content" : "Test content"
+                    },
+                    {
+                    "id" : "" | randomString(),
+                    "title" : "Martedì 15 agosto",
+                    "content" : "Test content"
+                    },
+                    {
+                    "id" : "" | randomString(),
+                    "title" : "Martedì 15 agosto",
+                    "content" : "Test content"
+                    }
+                ]
+            }
+        )}}
+
+        <div class="p-5 zaux-bg-set1-color7 my-5">
+            <h3 class="mb-5 zaux-color-set1-white1">Theme variant 1</h3>
+            {{  
+                NavBar2.content(
+                    {
+                        "variations" : ["theme2"],
+                        "tabs" : [
+                            {
+                            "active" : true,
+                            "id" : "" | randomString(),
+                            "title" : "Martedì 15 agosto",
+                            "content" : "Test content"
+                            },
+                            {
+                            "id" : "" | randomString(),
+                            "title" : "Mercoledì 16 agosto",
+                            "content" : "Test content"
+                            },
+                            {
+                            "id" : "" | randomString(),
+                            "title" : "Martedì 15 agosto",
+                            "content" : "Test content"
+                            },
+                            {
+                            "id" : "" | randomString(),
+                            "title" : "Martedì 15 agosto",
+                            "content" : "Test content"
+                            },
+                            {
+                            "id" : "" | randomString(),
+                            "title" : "Martedì 15 agosto",
+                            "content" : "Test content"
+                            },
+                            {
+                            "id" : "" | randomString(),
+                            "title" : "Martedì 15 agosto",
+                            "content" : "Test content"
+                            }
+                        ]
+                    }
+                )
+            }}
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block foot_js %}
+  <script defer src="../assets/js/general.bundle.js"></script>
+{% endblock %}

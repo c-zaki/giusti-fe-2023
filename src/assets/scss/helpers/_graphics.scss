@@ -1,0 +1,13 @@
+@mixin comicFlap($colorVal){
+    //$color : #{$colorVal};
+    //background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='37.555' height='33.932' viewBox='0 0 37.555 33.932'%3E%3Cg data-name='zaki_comic_flap' transform='translate(1.199 -15.034)'%3E%3Cpath data-name='tracciato_1' d='M60.8 48.966 98.356 15.034H60.8Z' transform='translate(-62)' fill='#{str-replace($color, '#', '%23')}'/%3E%3C/g%3E%3C/svg%3E");
+    //background-repeat:no-repeat;
+    width: 0;
+	height: 0;
+	border-color: transparent $colorVal transparent transparent;
+	border-style: solid;
+}
+
+@mixin comicClipPath1{
+    clip-path: polygon(100% 0, 100% 65%, 72% 65%, 72% 100%, 22% 65%, 0 65%, 0 0);
+}

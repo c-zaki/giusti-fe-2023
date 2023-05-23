@@ -1,0 +1,90 @@
+{# Imports components #}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/btn/btn.njk' as Button %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-card3' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : [],
+        "titleTag" : "h3",
+        "tag" : "article",
+        "title" : component_card3.title,
+        "authInfo" : component_card3.authInfo,
+        "subTitle" : component_card3.subTitle,
+        "mainTag" : component_card3.mainTag,
+        "media" : component_card3.media,
+        "url" : "#"
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+    {% set theme = "" %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+        {% if "theme" in variation %}
+            {% set theme = variation %}
+        {% endif %}
+    {% endfor %}
+
+    {# Theme options #}
+    {% set themeOpts = {
+        "buttonType" : "secondary"
+    }
+    %}
+
+    {% if theme == "theme-2" %}
+        {% set themeOpts = themeOpts | setAttribute("buttonType", "primary") %}
+    {% endif %}
+
+    <{{obj.tag}} class="{{_className | join(" ")}} position-relative">
+        <div class="{{componentClassName}}__inner h-100 d-flex flex-column justify-content-between text-left">
+            <div class="{{componentClassName}}__top">
+                <a href="{{obj.url}}" title="{{obj.title}}">
+                    <div class="{{componentClassName}}__head">
+                        {% if obj.media %}
+                            <div class="{{componentClassName}}__media zaux-ratio--5">
+                                {% set imgParams = {"variations" : ["ratio-5", "fluid"]} %}
+                                {% set imgParams = imgParams | overwriteMerge(obj.media) %}
+                                {{
+                                    Img.content(imgParams)
+                                }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="{{componentClassName}}__body p-5 p-sm-6">
+                        {% if obj.authInfo %}
+                            <div class="{{componentClassName}}__post-meta d-flex c-typo-style1-text-s pb-2 fw-bold">
+                                <span>{{obj.authInfo.name}}</span>
+                                <span class="px-2">&middot;</span>
+                                <time class="{{componentClassName}}__date">{{obj.authInfo.date}}</time>
+                            </div>
+                        {% endif %}
+                        <{{obj.titleTag}} class="{{componentClassName}}__title c-typo-style1-text-l fw-bold pb-3">{{obj.title | safe}}</{{obj.titleTag}}>
+                        <p class="c-typo-style1-text-m">{{obj.subTitle | safe }}</p>
+                    </div>
+                </a>
+            </div>
+            <div class="{{componentClassName}}__bottom">
+                <div class="{{componentClassName}}__foot">
+                    {% if obj.mainTag %}
+                        <a href="{{obj.mainTag.url}}" title="{{obj.mainTag.label}}" class="{{componentClassName}}__tag p-3 c-typo-style1-text-s d-inline-block">
+                            <span>
+                                {{obj.mainTag.label}}
+                            </span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </{{obj.tag}}>
+    
+{% endmacro %}

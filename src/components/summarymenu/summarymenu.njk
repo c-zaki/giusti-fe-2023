@@ -1,0 +1,40 @@
+{# Imports components #}
+{% import 'components/img/img.njk' as Img %}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/btn/btn.njk' as Button %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-summarymenu' %}
+
+    {% set configDefault = {
+        "className": [],
+        "variations" : [],
+        "title" : component_summarymenu.title,
+        "entries" : component_summarymenu.entries
+    }%}
+ 
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    <ul class="{{_className | join(" ")}} border-start border-1 ps-4 d-flex flex-column gap-4">
+        <li class="{{componentClassName}}__title c-typo-style1-text-s">{{obj.title}}</li>
+        {% if obj.entries %}
+            {% for entry in obj.entries %}
+                <li class="c-typo-style1-text-m fw-bold">
+                    <a href="{{entry.url}}" title="{{entry.title}}">
+                        {{entry.title}}
+                    </a>
+                </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+
+{% endmacro %}

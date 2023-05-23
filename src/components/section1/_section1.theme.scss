@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+$component: componentClass("section1");
+$cmp-tokens: ();
+
+////////////////////////////////////////////////////
+// Theme: Light1
+////////////////////////////////////////////////////
+
+.zaux-theme--#{$zaux-theme-light1} .#{$component}{
+    background-color:tokenColor("set1","white1");
+    color:tokenColor("set1","black1");
+    &__title{
+        color:tokenColor("set1","color1");
+    }
+    &--theme{
+        &-2{
+            background-color:tokenColor("set1","color2");
+        }
+        &-3{
+            background-color:tokenColor("set1","color3");
+            color:tokenColor("set1","white1");
+        }
+    }
+}

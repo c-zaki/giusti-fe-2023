@@ -1,0 +1,68 @@
+{# Imports components #}
+{% import 'components/icon/icon.njk' as Icon %}
+{% import 'components/img/img.njk' as img%}
+{% import 'components/btn2/btn2.njk' as Button2 %}
+{% import 'components/badge/badge.njk' as Badge %}
+{% import 'components/hero1/hero1.njk' as Hero1 %}
+
+{% macro content(obj) %}
+
+    {% set componentClassName = 'c-heroslider2' %}
+
+    {% set configDefault = {
+        "className": [""],
+        "variations" : [],
+        "titleTag" : "h3",
+        "eyeletTag" : "h5",
+        "badgeLabel" : "Label badge",
+        "slides" : component_heroslider.slides
+    }%}
+
+    {% set obj = configDefault | overwriteMerge(obj or {}) %}
+
+    {# Creates new arrays for manipulation) #}
+    {% set _className = [componentClassName] | mergeArray(obj.className or configDefault.className) %}
+    {% set titleTag = obj.titleTag or configDefault.titleTag %}
+    {% set eyeletTag = obj.eyeletTag or configDefault.eyeletTag %}
+
+    {# Pushes every variation into class attribute (prepending the base class) #}
+    {% for variation in ([] | mergeArray(obj.variations or configDefault.variations)) %}
+        {% set _className = (_className.push(componentClassName +"--" + variation), _className) %}
+    {% endfor %}
+
+    <div class="{{_className | join(" ") | trim}}">
+        <div class="{{componentClassName}}__inner">
+            <div class="{{componentClassName}}__slider-container">
+                <div data-js-component="Slider" class="{{componentClassName}}__slider c-slider swiper-container" 
+                    data-config='{
+                        "centeredSlides":false,
+                        "speed":600,
+                        "spaceBetween":0,
+                        "slidesPerView":1,
+                        "effect" : "fade",
+                        "pagination":{
+                            "el":".swiper-pagination",
+                            "type":"bullets",
+                            "clickable":true
+                        }
+                    }'>
+                    <div class="c-slider__wrapper">
+                        <div class="c-slider__instance swiper-container">
+                            <div class="swiper-wrapper">
+                                {% for element in obj.slides %}
+                                    <div class="{{componentClassName}}__slide swiper-slide">
+                                        <div class="{{componentClassName}}__slide-inner d-flex justify-content-between justify-content-md-end flex-column">
+                                           {{ element.content | safe }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="{{componentClassName}}__pagination c-slider__pagination c-slider__pagination--themestyle1 swiper-pagination"></div>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}

@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+@import "../../assets/scss/components/base";
+
+$component: componentClass("toast");
+
+.#{$component} {
+
+    position:fixed;
+    left:0;
+    right:0;
+    width:100%;
+    z-index:tokenZindex(6);
+    pointer-events:none;
+    display:none;
+    bottom:-250px;
+    transition:bottom $zaux-transition-1, opacity $zaux-transition-0;
+    opacity:0;
+
+    &__inner{
+        text-align:center;
+        position:relative;
+        bottom:-#{tokenSpacer(10)};
+        transition: all $zaux-transition-2;
+        opacity:0.5;
+    }
+    &__content{
+        position:relative;
+        &:after{
+            content:"";
+            position:absolute;
+            border-width: 0 tokenSpacer(6) tokenSpacer(6) 0;
+            bottom:-#{tokenSpacer(6) - 0.1};
+            left:50%;
+            transform:translateX(-50%) rotate(360deg);
+        }
+    }
+    &[class*=--active]{
+        display:block;
+    }
+    &[class*=--show]{
+        bottom:0;
+        opacity:1;
+        .#{$component}__inner{
+            bottom:0;
+            opacity:1;
+        }
+    }
+    &[class*=--hiding]{
+        .#{$component}__inner{
+            bottom:-#{tokenSpacer(14)};
+            opacity:0;
+        }
+    }
+
+}

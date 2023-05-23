@@ -1,0 +1,17 @@
+{
+    "img" : {
+        "mainUrl" : "https://placehold.co/1920x1080",
+        "sourceList" : [
+            {
+                "breakpoint" : "md",
+                "url" : "https://placehold.co/1920x1080",
+                "url2x" : "https://placehold.co/2880x1620"
+            }
+        ]
+    },
+    "video" : {
+        "srcList" : [
+            { "url" : "../media/video/placeholder1.mp4", "type" : "mp4" }
+        ]
+    }
+}

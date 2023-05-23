@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+.border-none{
+    border:none;
+}
+
+//Last child helpers
+
+.lc-no-mb{
+    > *:last-child{
+        margin-bottom:0 !important;
+    }
+}
+
+.lc-no-me{
+    > *:last-child{
+        margin-right:0 !important;
+    }
+}
+
+.lc-no-ms{
+    > * :last-child{
+        margin-left:0 !important;
+    }
+}
+
+@each $k in tokenTypoBreakpoints() {
+    @include media-breakpoint-up(#{$k}) {
+        .lc-#{$k}-no-mb {
+            > *:last-child{
+                margin-bottom:0 !important;
+            }
+        }
+        .lc-#{$k}-no-me{
+            > *:last-child{
+                margin-right:0 !important;
+            }
+        }
+        .lc-#{$k}-no-ms{
+            > * :last-child{
+                margin-left:0 !important;
+            }
+        }
+    }
+}
+
+//Scrollbar helpers
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrolltrack::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrolltrack {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+@each $k in tokenTypoBreakpoints() {
+    @include media-breakpoint-up(#{$k}) {
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .hide-#{$k}-scrolltrack::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .hide-#{$k}-scrolltrack {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    }
+}
+
+//Cursors
+.cursor{
+    &-pointer{
+        cursor:pointer;
+    }
+}
